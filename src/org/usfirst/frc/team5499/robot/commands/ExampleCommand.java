@@ -22,7 +22,7 @@ public class ExampleCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrainSubsystem.move(0, 1, 0);
+    	Robot.driveTrainSubsystem.move(Math.PI * 7 /4, 1.0, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

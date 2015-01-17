@@ -15,15 +15,21 @@ public class DrivetrainSubsystem extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	CANTalon motorFrontLeft = new CANTalon(RobotMap.motorFrontLeftnum);
-	CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightnum);
-	CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftnum);
-	CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightnum);
+	CANTalon motorFrontLeft = new CANTalon(RobotMap.motorFrontLeftid);
+	CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
+	CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
+	CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
 	
 	
     public void initDefaultCommand() {}
     
     public void move(double direction, double magnitude, double rotation){
+    	System.out.print("Direction:");
+    	System.out.print(direction);
+    	System.out.print("Magnitude:");
+    	System.out.print(magnitude);
+    	System.out.print("Rotation:");
+    	System.out.println(rotation);
     	double[] motorspeeds = motorspeeds(direction, magnitude, rotation);
     	motorFrontLeft.set(motorspeeds[RobotMap.frontLeftWheelnum]);
     	motorFrontRight.set(motorspeeds[RobotMap.frontRightWheelnum]);
