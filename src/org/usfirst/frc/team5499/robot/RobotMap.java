@@ -16,6 +16,8 @@ public class RobotMap {
 	public static int backLeftWheelnum = 0;
 	public static int backRightWheelnum = 0;
 	
+	public static int broomServoChannel = 1;
+	
 	/*
 	 * ID nums for motors (CAN)
 	 */
