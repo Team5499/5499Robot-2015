@@ -1,24 +1,19 @@
-
 package org.usfirst.frc.team5499.robot.commands;
 
-import org.usfirst.frc.team5499.robot.OI;
 import org.usfirst.frc.team5499.robot.Robot;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
-	
-	
-    public ExampleCommand() {
+public class TeleOpDrive extends Command {
+
+    public TeleOpDrive() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
-        requires(Robot.driveTrainSubsystem);
-        
+        // eg. requires(chassis);
+    	requires(Robot.driveTrainSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -30,20 +25,15 @@ public class ExampleCommand extends Command {
     	double X = Robot.oi.stick.getX();
     	double Y = Robot.oi.stick.getY();
     	double Z = Robot.oi.stick.getZ();
-    	
-    	double volts = Robot.pdp.getVoltage();
-    	double current = Robot.pdp.getCurrent(1);
-    	System.out.println(current);
-    	System.out.println(volts);
-    		
-    	Robot.driveTrainSubsystem.motorBackLeft.set(1);
-    	
-    	//Robot.driveTrainSubsystem.motorFrontRight.set(1);
-    	//Robot.driveTrainSubsystem.motorBackRight.set(1);
+    	if(Robot.oi.stick.getRawButton(RobotMap.rotateButton)){
+    		Z = -1 * Z;
+    	}else{
+    		Z = 0;
+    	}
+    	X = -1 * X;
+    	Y = -1 * Y;
 
-    	//
-    	//Robot.driveTrainSubsystem.motorBackRight.set(0.1);
-    	//Robot.driveTrainSubsystem.move(-.5,-.5,0);
+    	Robot.driveTrainSubsystem.move(X, Y, Z);
     }
 
     // Make this return true when this Command no longer needs to run execute()

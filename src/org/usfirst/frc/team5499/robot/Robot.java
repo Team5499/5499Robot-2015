@@ -2,10 +2,12 @@
 package org.usfirst.frc.team5499.robot;
 
 import org.usfirst.frc.team5499.robot.commands.ExampleCommand;
+import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -22,9 +24,12 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DrivetrainSubsystem driveTrainSubsystem = new DrivetrainSubsystem();
 	public static OI oi;
-
+	public static PowerDistributionPanel pdp;
+	
     Command autonomousCommand;
+    Command teleopCommand;
     
+
 
     /**
      * This function is run when the robot is first started up and should be
@@ -34,8 +39,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
-        System.out.println("Is this working?");
-        
+        teleopCommand = new TeleOpDrive();
+        pdp = new PowerDistributionPanel();
     }
 	
 	public void disabledPeriodic() {
@@ -44,6 +49,8 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+    	System.out.println("Current");
+    	System.out.println(pdp.getCurrent(RobotMap.motorBackLeftid));
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -60,6 +67,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        if (teleopCommand != null) teleopCommand.start();
     }
 
     /**
