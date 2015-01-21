@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team5499.robot;
 
-import org.usfirst.frc.team5499.robot.commands.ExampleCommand;
+import org.usfirst.frc.team5499.robot.commands.Autonomous;
+import org.usfirst.frc.team5499.robot.commands.RateMotors;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
-import org.usfirst.frc.team5499.robot.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -21,8 +21,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final RateMotors rateMotors= new RateMotors();
 	public static final DrivetrainSubsystem driveTrainSubsystem = new DrivetrainSubsystem();
+	public static final Autonomous autonomous = new Autonomous();
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
 	
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new RateMotors();
         teleopCommand = new TeleOpDrive();
         pdp = new PowerDistributionPanel();
     }
@@ -49,8 +50,8 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-    	System.out.println("Current");
-    	System.out.println(pdp.getCurrent(RobotMap.motorBackLeftid));
+//    	autonomousCommand.start(); 	
+    	
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -68,6 +69,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         if (teleopCommand != null) teleopCommand.start();
+        
     }
 
     /**

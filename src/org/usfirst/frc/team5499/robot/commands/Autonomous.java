@@ -1,19 +1,19 @@
 package org.usfirst.frc.team5499.robot.commands;
 
-import org.usfirst.frc.team5499.robot.Robot;
-import org.usfirst.frc.team5499.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class TeleOpDrive extends Command {
+public class Autonomous extends CommandGroup {
 
-    public TeleOpDrive() {
+    public Autonomous() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.driveTrainSubsystem);
+    	while(isFinished() == false){
+    		addParallel(new GetTote());
+//    		addSequential(new);
+    	}
     }
 
     // Called just before this Command runs the first time
@@ -22,21 +22,7 @@ public class TeleOpDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double X = Robot.oi.stick.getX();
-    	double Y = Robot.oi.stick.getY();
-    	double Z = Robot.oi.stick.getZ();
     	
-    	//Make it so that rotation is deliberate thru making the driver press a button to be able to rotate
-    	if(Robot.oi.stick.getRawButton(RobotMap.rotateButton)){
-    		Z = -1 * Z;
-    	}else{
-    		Z = 0;
-    	}
-    	X = -1 * X;
-    	Y = -1 * Y;
-
-    	//Call the move method to actually set the motors' speeds
-    	Robot.driveTrainSubsystem.move(X, Y, Z);
     }
 
     // Make this return true when this Command no longer needs to run execute()

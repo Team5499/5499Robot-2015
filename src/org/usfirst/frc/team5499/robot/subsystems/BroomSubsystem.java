@@ -18,6 +18,10 @@ public class BroomSubsystem extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    
+    /*
+     * The values on these will have to be calibrated or the servo will have to be positioned accordingly
+     */
     public void close(){
     	broomServo.set(0.0);
     }

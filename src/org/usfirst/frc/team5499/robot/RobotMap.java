@@ -11,31 +11,49 @@ public class RobotMap {
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
     
+	//Used for indicating the axis of the wheel in the move method of the drivetrain subsystem.
 	public static int frontLeftWheelnum = 0;
 	public static int frontRightWheelnum = 1;
 	public static int backLeftWheelnum = 2;
 	public static int backRightWheelnum = 3;
 
-
 	
-	public static int broomServoChannel = 1;
+	//This is the usb camera address
+	public static String cameraAddress = "cam0";
+	
+	//These are the digital inputs ports on the roborio.
+	//As of right now, there is nothing connected to them
+	public static int limit1SwitchPort = 1;
+	public static int limit2SwitchPort = 2;
+	public static int broomServoChannel = 0;
 	
 	/*
 	 * ID nums for motors (CAN)
+	 * The motor controllers of these motors are daisy chained and they don't have a port.
+	 * Rather, you have to assign an id to the motor controllers thru the web interface.
 	 */
-
 	public static int motorFrontLeftid = 1;
 	public static int motorFrontRightid = 2;
 	public static int motorBackLeftid = 3;
 	public static int motorBackRightid = 4;
-
-	public static int joystickPort = 1;
-	public static int rotateButton = 1;
-
 	public static int gripperMotor1id = 5;
 	public static int gripperMotor2id = 6;
 	public static int lifterMotor1id = 7;
 	public static int lifterMotor2id = 8;
+
+
+	/*
+	 * These values are for getting the current. Do not use the motor controller ids for this.
+	 */
+	public static int motorFrontLeftPDPChannel = 15;
+	public static int motorFrontRightPDPChannel = 0;
+	public static int motorBackLeftPDPChannel = 1;
+	public static int motorBackRightPDPChannel = 13; 
+	
+	//This is a usb port on a computer
+	public static int joystickPort = 1;
+	//This is a channel on the joystick
+	public static int rotateButton = 1;
 
 	
     // If you are using multiple modules, make sure to define both the port
