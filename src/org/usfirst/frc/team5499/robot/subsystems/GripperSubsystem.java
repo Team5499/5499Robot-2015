@@ -35,6 +35,7 @@ public class GripperSubsystem extends Subsystem {
 	/*
 	 * Do not allow the load to separate the grippers, but without damaging the load.
 	 * The numbers in this method are arbitrary and will need to be calibrated.
+	 * The 0.3 is arbitrary
 	 */
 	public void hold(){
 		gripperMotor1.set(0.3);

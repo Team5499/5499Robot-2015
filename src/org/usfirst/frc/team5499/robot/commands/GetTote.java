@@ -141,7 +141,7 @@ public class GetTote extends Command {
 			//read file in from disk. For this example to run you need to copy image.jpg from the SampleImages folder to the
 			//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
 
-			//TODO figure out how to use a usb camera in such a way that an image is taken every second or so and analyzed
+			//TODO figure out how to use a usb camera in such a way that an image is taken 50ms or so and analyzed
 			/*			Not sure if this is the right way to do this*/
 			//			server = CameraServer.getInstance();
 			//			server.setQuality(50);

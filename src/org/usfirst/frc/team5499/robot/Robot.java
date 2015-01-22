@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,76 +22,89 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	public static final RateMotors rateMotors= new RateMotors();
-	public static final DrivetrainSubsystem driveTrainSubsystem = new DrivetrainSubsystem();
-	public static final Autonomous autonomous = new Autonomous();
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
-	
-    Command autonomousCommand;
-    Command teleopCommand;
-    
+	public static DrivetrainSubsystem driveTrainSubsystem;
+
+	Command autonomousCommand;
+	Command teleopCommand;
 
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
+
+
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new RateMotors();
-        teleopCommand = new TeleOpDrive();
-        pdp = new PowerDistributionPanel();
-    }
-	
+		// instantiate the command used for the autonomous period
+		driveTrainSubsystem = new DrivetrainSubsystem();
+		autonomousCommand = new RateMotors();
+		teleopCommand = new TeleOpDrive();
+		pdp = new PowerDistributionPanel();
+
+		//The Talons are on break mode, which is ideal for our purpose.
+		//However, sudden breaking is bad for the gears, so this should gradually decrease the speed of the motors at stopping
+		//This is for both up and down
+		//the 17 is somewhat arbitrary -- the ramp up is noticeable, but only tested on full (1.0)
+		System.out.println("Setting the voltage ramp rate");
+		Robot.driveTrainSubsystem.motorFrontLeft.setVoltageRampRate(17);
+		Robot.driveTrainSubsystem.motorFrontRight.setVoltageRampRate(17);
+		Robot.driveTrainSubsystem.motorBackLeft.setVoltageRampRate(17);
+		Robot.driveTrainSubsystem.motorBackRight.setVoltageRampRate(17);
+	}
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-    public void autonomousInit() {
-        // schedule the autonomous command (example)
-//    	autonomousCommand.start(); 	
-    	
-        if (autonomousCommand != null) autonomousCommand.start();
-    }
+	public void autonomousInit() {
+		// schedule the autonomous command (example)
+		// autonomousCommand.start(); 	
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
+		if (autonomousCommand != null){
+			SmartDashboard.putData(autonomousCommand);
+			autonomousCommand.start();
+		}
+	}
 
-    public void teleopInit() {
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-        if (teleopCommand != null) teleopCommand.start();
-        
-    }
+		// teleop starts running. If you want the autonomous to 
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null) autonomousCommand.cancel();
+		if (teleopCommand != null) teleopCommand.start();
 
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    public void disabledInit(){
+	}
 
-    }
+	/**
+	 * This function is called when the disabled button is hit.
+	 * You can use it to reset subsystems before shutting down.
+	 */
+	public void disabledInit(){
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
+	}
+
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }

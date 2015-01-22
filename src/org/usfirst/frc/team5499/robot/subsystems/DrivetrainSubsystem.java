@@ -23,7 +23,9 @@ public class DrivetrainSubsystem extends Subsystem {
 	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
 	
 	
-    public void initDefaultCommand() {}
+    public void initDefaultCommand() {
+    	
+    }
     
     public void move(double X, double Y, double Z){
     	System.out.print("X: ");
@@ -42,14 +44,7 @@ public class DrivetrainSubsystem extends Subsystem {
     	motorBackLeft.set(motorspeeds[RobotMap.backLeftWheelnum]);
     	motorBackRight.set(motorspeeds[RobotMap.backRightWheelnum]);
     	
-    	//The Talons are on break mode, which is ideal for our purpose.
-    	//However, sudden breaking is bad for the gears, so this should gradually decrease the speed of the motors at stopping
-    	//This is for both up and down
-    	//the 6 is arbitrary.
-    	motorFrontLeft.setVoltageRampRate(6);
-    	motorFrontRight.setVoltageRampRate(6);
-    	motorBackLeft.setVoltageRampRate(6);
-    	motorBackRight.setVoltageRampRate(6);
+    
     }
     public double[] motorspeeds_polar(double direction, double magnitude, double rotation){
     	double motorspeeds[] = new double[4];

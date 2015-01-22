@@ -22,6 +22,7 @@ public class RateMotors extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     	counter = 0;
     }
 
@@ -30,6 +31,8 @@ public class RateMotors extends Command {
 //    	double X = Robot.oi.stick.getX();
 //    	double Y = Robot.oi.stick.getY();
 //    	double Z = Robot.oi.stick.getZ();
+    	
+
     	
     	
     	//This gets weird results. Better use the Driverstation. The results there seem to be more accurate.
@@ -42,22 +45,29 @@ public class RateMotors extends Command {
     	double current3 = Robot.pdp.getCurrent(RobotMap.motorFrontRightPDPChannel);	//0
     	
     	
+    	
     	//Print out current on each of the PDPChannels
-    	System.out.println(current0 + " "
+    	System.out.println(" " + current0 + " "
     			+ current1 + " "
     			+ current2 + " "
-    			+ current3 + " ");
+    			+ current3 + "\n");
     	//Print out voltage. This value seems to be incorrect, please use the values presented in the Driverstation
+    	//This might be because of the wiring of the battery to the PDP. The web interface says the same voltage as this method.
     	System.out.println(volts);
     	
     	//Set a particular motor to run					  //Motor controller id for quick reference
-    	Robot.driveTrainSubsystem.motorFrontLeft.set(0);  //1
-    	Robot.driveTrainSubsystem.motorFrontRight.set(0); //2
-    	Robot.driveTrainSubsystem.motorBackLeft.set(0);   //3 this controller is not connected to a motor
+    	Robot.driveTrainSubsystem.motorFrontLeft.set(1);  //1
+    	Robot.driveTrainSubsystem.motorFrontRight.set(1); //2
+    	Robot.driveTrainSubsystem.motorBackLeft.set(1);   //3
     	Robot.driveTrainSubsystem.motorBackRight.set(1);  //4    	
     	
+    	
+
+    	
+
+    	
     	counter++;
-    	System.out.println(counter);
+    	System.out.println("Counter: " + counter);
     	
     	
     	
