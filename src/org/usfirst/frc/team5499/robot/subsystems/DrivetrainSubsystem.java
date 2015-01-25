@@ -22,7 +22,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	public CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
 	public CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
 	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
-	private Encoder encoder = new Encoder(1,2, false); //not tested
 	
 	
     public void initDefaultCommand() {
