@@ -32,8 +32,8 @@ public class RobotMap {
 	 * The motor controllers of these motors are daisy chained and they don't have a port.
 	 * Rather, you have to assign an id to the motor controllers thru the web interface.
 	 */
-	public static int motorFrontLeftid = 1;
-	public static int motorFrontRightid = 2;
+	public static int motorFrontLeftid = 2;
+	public static int motorFrontRightid = 1;
 	public static int motorBackLeftid = 3;
 	public static int motorBackRightid = 4;
 	public static int gripperMotor1id = 5;
@@ -48,7 +48,9 @@ public class RobotMap {
 	public static int motorFrontLeftPDPChannel = 15;
 	public static int motorFrontRightPDPChannel = 0;
 	public static int motorBackLeftPDPChannel = 1;
-	public static int motorBackRightPDPChannel = 13; 
+	public static int motorBackRightPDPChannel = 14; 
+	public static int lifter1PDPChannel = 13;
+	public static int lifter2PDPChannel = 12;
 	
 	//This is a usb port on a computer
 	public static int joystickPort = 1;

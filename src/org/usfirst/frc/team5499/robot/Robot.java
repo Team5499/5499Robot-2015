@@ -1,10 +1,10 @@
 
 package org.usfirst.frc.team5499.robot;
 
-import org.usfirst.frc.team5499.robot.commands.Autonomous;
 import org.usfirst.frc.team5499.robot.commands.RateMotors;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
+import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -25,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
 	public static DrivetrainSubsystem driveTrainSubsystem;
+	public static LifterSubsystem lifterSubsystem;
 
 	Command autonomousCommand;
 	Command teleopCommand;
@@ -43,6 +44,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = new RateMotors();
 		teleopCommand = new TeleOpDrive();
 		pdp = new PowerDistributionPanel();
+		lifterSubsystem = new LifterSubsystem();
 
 		//The Talons are on break mode, which is ideal for our purpose.
 		//However, sudden breaking is bad for the gears, so this should gradually decrease the speed of the motors at stopping

@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LifterSubsystem extends Subsystem {
 	
-	CANTalon lifterMotor1 = new CANTalon(RobotMap.lifterMotor1id);
-	CANTalon lifterMotor2 = new CANTalon(RobotMap.lifterMotor2id);
+	public CANTalon lifterMotor1 = new CANTalon(RobotMap.lifterMotor1id);
+	public CANTalon lifterMotor2 = new CANTalon(RobotMap.lifterMotor2id);
 
     public void initDefaultCommand() {}
 

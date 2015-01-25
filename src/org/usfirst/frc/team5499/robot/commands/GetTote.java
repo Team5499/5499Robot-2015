@@ -3,6 +3,8 @@ package org.usfirst.frc.team5499.robot.commands;
 import java.util.Comparator;
 import java.util.Vector;
 
+import org.usfirst.frc.team5499.robot.RobotMap;
+
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.ImageType;
@@ -58,6 +60,7 @@ public class GetTote extends Command {
 	public NIVision.ParticleFilterCriteria2 criteria[] = new NIVision.ParticleFilterCriteria2[1];
 	public NIVision.ParticleFilterOptions2 filterOptions = new NIVision.ParticleFilterOptions2(0,0,1,1);
 	Scores scores = new Scores();
+	CameraServer server;
 
 	//Comparator function for sorting particles. Returns true if particle 1 is larger
 	static boolean CompareParticleSizes(ParticleReport particle1, ParticleReport particle2)
@@ -145,7 +148,8 @@ public class GetTote extends Command {
 			/*			Not sure if this is the right way to do this*/
 			//			server = CameraServer.getInstance();
 			//			server.setQuality(50);
-			//			server.startAutomaticCapture(RobotMap.cameraAddress);
+//			server.startAutomaticCapture(RobotMap.cameraAddress); /*this method does not allow for processing on the roboRio (useless for our purposes)*/
+			server.getInstance();
 
 			NIVision.imaqReadFile(frame, "/home/lvuser/SampleImages/image.jpg");
 

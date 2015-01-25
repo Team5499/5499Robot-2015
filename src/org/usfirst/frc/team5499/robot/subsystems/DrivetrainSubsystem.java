@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -21,6 +22,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	public CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
 	public CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
 	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
+	private Encoder encoder = new Encoder(1,2, false); //not tested
 	
 	
     public void initDefaultCommand() {
@@ -53,8 +55,8 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     	motorspeeds[RobotMap.frontLeftWheelnum] = magnitude * sinDir + rotation;
     	motorspeeds[RobotMap.frontRightWheelnum] = magnitude * cosDir - rotation;
-    	motorspeeds[RobotMap.backLeftWheelnum] = magnitude * cosDir + rotation;
-    	motorspeeds[RobotMap.backRightWheelnum] = magnitude * sinDir - rotation;
+    	motorspeeds[RobotMap.backLeftWheelnum] = -1 * magnitude * cosDir + rotation;
+    	motorspeeds[RobotMap.backRightWheelnum] = - 1 * magnitude * sinDir - rotation;
     	
     	normalize(motorspeeds);
     	
@@ -74,8 +76,8 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     	motorspeeds[RobotMap.frontLeftWheelnum] = Yprime + Z;
     	motorspeeds[RobotMap.frontRightWheelnum] = Xprime - Z;
-    	motorspeeds[RobotMap.backLeftWheelnum] = Xprime  + Z;
-    	motorspeeds[RobotMap.backRightWheelnum] = Yprime - Z;
+    	motorspeeds[RobotMap.backLeftWheelnum] = -1 * (Xprime  + Z);
+    	motorspeeds[RobotMap.backRightWheelnum] = -1 * (Yprime - Z);
     	
     	normalize(motorspeeds);
     	
