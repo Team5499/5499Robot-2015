@@ -60,10 +60,12 @@ public class DrivetrainSubsystem extends Subsystem {
     	motorBackLeft.reverseOutput(false);
     	motorBackRight.reverseOutput(true); //counter the opposite facing of the motor
     	//Set smooth accel and decel
-    	motorFrontLeft.setVoltageRampRate(17);
-    	motorFrontRight.setVoltageRampRate(17);
-    	motorBackLeft.setVoltageRampRate(17);
-    	motorBackRight.setVoltageRampRate(17);
+    	
+    	// not needed set in setPID
+//    	motorFrontLeft.setVoltageRampRate(17);
+//    	motorFrontRight.setVoltageRampRate(17);
+//    	motorBackLeft.setVoltageRampRate(17);
+//    	motorBackRight.setVoltageRampRate(17);
     }
     
     public void autoMove(){
@@ -72,7 +74,12 @@ public class DrivetrainSubsystem extends Subsystem {
     
     
     /**
-     * TODO comment this to make it easier to understand for others 
+     * Sets motor speeds to the output of {@link #motorspeeds(double, double, double, double) motorspeeds} method.
+     * 
+     * @param X, X-coordinate of desired motion vector, i.e. X-coordinate of joystick
+     * @param Y, Y-coordinate of desired motion vector, i.e. Y-coordinate of joystick
+     * @param Z, desired rotation
+     *
      */
     public void move(double X, double Y, double Z){
     	System.out.print("X: ");
@@ -102,7 +109,14 @@ public class DrivetrainSubsystem extends Subsystem {
      *  and then sets the front left and back right to y and front right and back left to x, 
      *  then adds rotation to left side motors and subtracts it from the right motors.
      *  Then normalizes the resulting speeds.
-     *  wikipedia article on rotation matrices: http://en.wikipedia.org/wiki/Rotation_matrix
+     *  wikipedia article on rotation matrices: <a href=http://en.wikipedia.org/wiki/Rotation_matrix Rotation Matrix> Rotation Matrix </a>.
+     *  
+     *  @param X, X-coordinate of desired movement vector, i.e. X-coordinate of joystick
+     *  @param Y, Y-coordinate of desired movement vector, i.e. Y-coordinate of joystick
+     *  @param Z, desired rotation
+     *  @param gyroAng, rotation of gyroscope
+     *  
+     *  @return array of motor speeds needed in order to get the desired movement
      */
     public double[] motorspeeds(double X, double Y, double Z, double gyroAng){
     	double[] motorspeeds = new double[4];
@@ -129,6 +143,8 @@ public class DrivetrainSubsystem extends Subsystem {
 
     /**
      * This function normalizes the motor speeds, meaning it divides by the max speed so that they are all between -1, and 1.
+     * 
+     * @param motorspeeds, array of motorspeeds to be normalized
      */
 	private void normalize(double[] motorspeeds) {
 		double currentmax = 0;

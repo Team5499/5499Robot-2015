@@ -39,6 +39,7 @@ public class TeleOpDrive extends Command {
     	}else{
     		Z = 0;
     	}
+    	//Joystick X,y and Z are backwards, so all of them are multiplied by -1
     	X = -1 * X;
     	Y = -1 * Y;
 
