@@ -2,6 +2,7 @@ package org.usfirst.frc.team5499.robot.subsystems;
 
 import java.util.Arrays;
 
+import org.usfirst.frc.team5499.robot.Robot;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -25,7 +26,30 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	
     public void initDefaultCommand() {
-    	
+    	Robot.driveTrainSubsystem.motorFrontLeft.setPID(RobotMap.p[RobotMap.frontLeftWheelnum],
+				RobotMap.i[RobotMap.frontLeftWheelnum], 
+				RobotMap.d[RobotMap.frontLeftWheelnum], 
+				RobotMap.f[RobotMap.frontLeftWheelnum], 
+				RobotMap.izone[RobotMap.frontLeftWheelnum], 
+				RobotMap.ramp[RobotMap.frontLeftWheelnum], 0);
+    	Robot.driveTrainSubsystem.motorFrontRight.setPID(RobotMap.p[RobotMap.frontRightWheelnum],
+				RobotMap.i[RobotMap.frontRightWheelnum], 
+				RobotMap.d[RobotMap.frontRightWheelnum], 
+				RobotMap.f[RobotMap.frontRightWheelnum], 
+				RobotMap.izone[RobotMap.frontRightWheelnum], 
+				RobotMap.ramp[RobotMap.frontRightWheelnum], 0);
+    	Robot.driveTrainSubsystem.motorBackLeft.setPID(RobotMap.p[RobotMap.backLeftWheelnum],
+				RobotMap.i[RobotMap.backLeftWheelnum], 
+				RobotMap.d[RobotMap.backLeftWheelnum], 
+				RobotMap.f[RobotMap.backLeftWheelnum], 
+				RobotMap.izone[RobotMap.backLeftWheelnum], 
+				RobotMap.ramp[RobotMap.backLeftWheelnum], 0);
+    	Robot.driveTrainSubsystem.motorFrontLeft.setPID(RobotMap.p[RobotMap.backRightWheelnum],
+				RobotMap.i[RobotMap.backRightWheelnum], 
+				RobotMap.d[RobotMap.backRightWheelnum], 
+				RobotMap.f[RobotMap.backRightWheelnum], 
+				RobotMap.izone[RobotMap.backRightWheelnum], 
+				RobotMap.ramp[RobotMap.backRightWheelnum], 0);
     }
     
     public void move(double X, double Y, double Z){

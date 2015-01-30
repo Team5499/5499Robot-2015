@@ -6,6 +6,7 @@ import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
 
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -55,6 +56,11 @@ public class Robot extends IterativeRobot {
 		Robot.driveTrainSubsystem.motorFrontRight.setVoltageRampRate(17);
 		Robot.driveTrainSubsystem.motorBackLeft.setVoltageRampRate(17);
 		Robot.driveTrainSubsystem.motorBackRight.setVoltageRampRate(17);
+		Robot.driveTrainSubsystem.motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		Robot.driveTrainSubsystem.motorFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		Robot.driveTrainSubsystem.motorBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		Robot.driveTrainSubsystem.motorBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		
 	}
 
 	public void disabledPeriodic() {

@@ -62,4 +62,38 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
+	
+	public static double[] p = new double[4];
+	public static double[] i = new double[4];
+	public static double[] d = new double[4];
+	public static double[] f = new double[4];
+	public static int[] izone = new int[4];
+	public static double[] ramp = new double[4];
+	
+	public void init(){
+		p[frontLeftWheelnum] = 1.0;
+		p[frontRightWheelnum] = 1.0;
+		p[backLeftWheelnum] = 1.0;
+		p[backRightWheelnum] = 1.0;
+		i[frontLeftWheelnum] = 0.1;
+		i[frontRightWheelnum] = 0.1;
+		i[backLeftWheelnum] = 0.1;
+		i[backRightWheelnum] = 0.1;
+		d[frontLeftWheelnum] = 0.1;
+		d[frontRightWheelnum] = 0.1;
+		d[backLeftWheelnum] = 0.1;
+		d[backRightWheelnum] = 0.1;
+		f[frontLeftWheelnum] = 0.0;
+		f[frontRightWheelnum] = 0.0;
+		f[backLeftWheelnum] = 0.0;
+		f[backRightWheelnum] = 0.0;
+		izone[frontLeftWheelnum] = 0;
+		izone[frontRightWheelnum] = 0;
+		izone[backLeftWheelnum] = 0;
+		izone[backRightWheelnum] = 0;
+		ramp[frontLeftWheelnum] = 17.0;
+		ramp[frontRightWheelnum] = 17.0;
+		ramp[backLeftWheelnum] = 17.0;
+		ramp[backRightWheelnum] = 17.0;
+	}
 }
