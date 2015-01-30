@@ -1,12 +1,16 @@
 package org.usfirst.frc.team5499.robot.subsystems;
 
-import java.util.Arrays;
+
 
 import org.usfirst.frc.team5499.robot.Robot;
+
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -14,15 +18,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DrivetrainSubsystem extends Subsystem {
-    
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 	
 	//Create new motors
 	public CANTalon motorFrontLeft = new CANTalon(RobotMap.motorFrontLeftid);
 	public CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
 	public CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
 	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
+	
 	
 	
     public void initDefaultCommand() {
@@ -50,8 +52,29 @@ public class DrivetrainSubsystem extends Subsystem {
 				RobotMap.f[RobotMap.backRightWheelnum], 
 				RobotMap.izone[RobotMap.backRightWheelnum], 
 				RobotMap.ramp[RobotMap.backRightWheelnum], 0);
+    	motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	motorFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	motorBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	motorBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	motorFrontLeft.reverseOutput(false);
+    	motorFrontRight.reverseOutput(true); //counter the opposite facing of the motor
+    	motorBackLeft.reverseOutput(false);
+    	motorBackRight.reverseOutput(true); //counter the opposite facing of the motor
+    	//Set smooth accel and decel
+    	motorFrontLeft.setVoltageRampRate(17);
+    	motorFrontRight.setVoltageRampRate(17);
+    	motorBackLeft.setVoltageRampRate(17);
+    	motorBackRight.setVoltageRampRate(17);
     }
     
+    public void autoMove(){
+    	
+    }
+    
+    
+    /**
+     * TODO comment this to make it easier to understand for others 
+     */
     public void move(double X, double Y, double Z){
     	System.out.print("X: ");
     	System.out.print(X);
@@ -71,6 +94,10 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     
     }
+    
+    /**
+     * TODO comment this to make it easier to understand for others 
+     */
     public double[] motorspeeds_polar(double direction, double magnitude, double rotation){
     	double motorspeeds[] = new double[4];
     	double sinDir = Math.sin(direction + Math.PI/4);
@@ -85,6 +112,10 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     	return motorspeeds;
     }
+    
+    /**
+     * TODO comment this to make it easier to understand for others 
+     */
     public double[] motorspeeds(double X, double Y, double Z, double gyroAng){
     	double[] motorspeeds = new double[4];
     	double cosAng = Math.cos(Math.PI/4);
@@ -108,6 +139,9 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     }
 
+    /**
+     * TODO comment this to make it easier to understand for others 
+     */
 	private void normalize(double[] motorspeeds) {
 		double currentmax = 0;
 		for (int i=0; i<4; i++){
@@ -120,5 +154,29 @@ public class DrivetrainSubsystem extends Subsystem {
 			motorspeeds[i] = motorspeeds[i] / currentmax;
 		}
 	}
+	
+	/**
+	 * Only For Use In Quadrature Mode. Get the number of rotations the encoder disk has completed.
+	 * Since the encoder is connected to the gearbox shaft, which spins about 1/4 as fast as the motor shaft due to the gears, one full rotation of the encoder is about 4 rotations of the motor shaft
+	 * @param
+	 * 		motorController the talonSRX, to which the desired encoder is connected
+	 * @return
+	 * 		The number of rotations the encoder has completed; derived from CANTalon.getPosition();
+	 */
+    public double getEncoderRevs(CANTalon motorController){
+    	return motorController.getPosition()/250; //250 is the number of ticks in a revolution of the encoder that we are using
+    }
+    
+    /**
+     * Only For Use In Quadrature Mode. Get the number of rotations the motor shaft has completed.
+	 * Since the encoder is connected to the gearbox shaft, which spins about 1/4 as fast as the motor shaft due to the gears, one full rotation of the motor shaft is about 1/4 rotations of the motor shaft
+     * @param
+     * 		motorController the talonSRX, to which the desired encoder is connected
+     * @return
+     * 		The number of rotations the motor has completed; derived from CANTalon.getPosition();
+     */
+    public double getMotorRevs(CANTalon motorController){
+    	return motorController.getPosition()/250*4; //250 is the number of ticks in a revolution of the encoder that we are using
+    }
 }
 

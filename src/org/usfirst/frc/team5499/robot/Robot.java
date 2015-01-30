@@ -4,6 +4,7 @@ package org.usfirst.frc.team5499.robot;
 import org.usfirst.frc.team5499.robot.commands.RateMotors;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
+import org.usfirst.frc.team5499.robot.subsystems.GrabberSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
 
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 	public static PowerDistributionPanel pdp;
 	public static DrivetrainSubsystem driveTrainSubsystem;
 	public static LifterSubsystem lifterSubsystem;
+	public static GrabberSubsystem grabberSubsystem;
 
 	Command autonomousCommand;
 	Command teleopCommand;
@@ -51,16 +53,12 @@ public class Robot extends IterativeRobot {
 		//However, sudden breaking is bad for the gears, so this should gradually decrease the speed of the motors at stopping
 		//This is for both up and down
 		//the 17 is somewhat arbitrary -- the ramp up is noticeable, but only tested on full (1.0)
-		System.out.println("Setting the voltage ramp rate");
-		Robot.driveTrainSubsystem.motorFrontLeft.setVoltageRampRate(17);
-		Robot.driveTrainSubsystem.motorFrontRight.setVoltageRampRate(17);
-		Robot.driveTrainSubsystem.motorBackLeft.setVoltageRampRate(17);
-		Robot.driveTrainSubsystem.motorBackRight.setVoltageRampRate(17);
-		Robot.driveTrainSubsystem.motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		Robot.driveTrainSubsystem.motorFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		Robot.driveTrainSubsystem.motorBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		Robot.driveTrainSubsystem.motorBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		
+
+//		System.out.println("Setting the voltage ramp rate");
+//		Robot.driveTrainSubsystem.motorFrontLeft.setVoltageRampRate(17);
+//		Robot.driveTrainSubsystem.motorFrontRight.setVoltageRampRate(17);
+//		Robot.driveTrainSubsystem.motorBackLeft.setVoltageRampRate(17);
+//		Robot.driveTrainSubsystem.motorBackRight.setVoltageRampRate(17);
 	}
 
 	public void disabledPeriodic() {
@@ -71,10 +69,7 @@ public class Robot extends IterativeRobot {
 		// schedule the autonomous command (example)
 		// autonomousCommand.start(); 	
 
-		if (autonomousCommand != null){
-			SmartDashboard.putData(autonomousCommand);
-			autonomousCommand.start();
-		}
+		if (autonomousCommand != null) autonomousCommand.start();
 	}
 
 	/**
