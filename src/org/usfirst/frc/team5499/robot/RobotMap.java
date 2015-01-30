@@ -12,6 +12,7 @@ public class RobotMap {
     // public static int rightMotor = 2;
     
 	//Used for indicating the axis of the wheel in the move method of the drivetrain subsystem.
+	//TODO verify that the above statement is true
 	public static int frontLeftWheelnum = 0;
 	public static int frontRightWheelnum = 1;
 	public static int backLeftWheelnum = 2;
@@ -21,8 +22,11 @@ public class RobotMap {
 	//This is the usb camera address
 	public static String cameraAddress = "cam0";
 	
+	/**
+	 * Create DIO ports
+	 */
 	//These are the digital inputs ports on the roborio.
-	//As of right now, there is nothing connected to them
+	//As of right now, there is nothing physically connected to them
 	public static int limit1SwitchPort = 1;
 	public static int limit2SwitchPort = 2;
 	public static int broomServoChannel = 0;
@@ -42,7 +46,7 @@ public class RobotMap {
 	public static int lifterMotor2id = 8;
 
 
-	/*
+	/**
 	 * These values are for getting the current. Do not use the motor controller ids for this.
 	 */
 	public static int motorFrontLeftPDPChannel = 15;
@@ -52,10 +56,21 @@ public class RobotMap {
 	public static int lifter1PDPChannel = 13;
 	public static int lifter2PDPChannel = 12;
 	
-	//This is a usb port on a computer
+	/**
+	 * Create BUTTONS
+	 */
+	//This is a usb port on a computer. It doesn't seem to have any impedance on anything
 	public static int joystickPort = 1;
 	//This is a channel on the joystick
 	public static int rotateButton = 1;
+	public static int lifterRaiseButton = 2; //TODO check what this button is and adjust accordingly
+	public static int liferLowerButton = 3; //TODO check what this button is and adjust accordingly
+	public static int lifterHoldButton = 4; //TODO check what this button is and adjust accordingly. This will have to be on and off
+	//TODO may want to do this thru the lever thing (the thing that is below the joystick)
+	public static int grabberCloseButton = 5; //TODO check what this button is and adjust accordingly
+	public static int grabberOpenButton = 6; //TODO check what this button is and adjust accordingly
+	public static int grabberHoldButton = 7; //TODO check what this button is and adjust accordingly
+	
 
 	
     // If you are using multiple modules, make sure to define both the port

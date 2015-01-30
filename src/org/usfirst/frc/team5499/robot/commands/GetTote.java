@@ -6,6 +6,8 @@ import java.util.Vector;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.ClassifiedDisparity;
+import com.ni.vision.NIVision.ComputeDistancesReport;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.ImageType;
 
@@ -47,6 +49,8 @@ public class GetTote extends Command {
 	public Image frame;
 	public Image binaryFrame;
 	public int imaqError;
+	
+	int session;
 
 	//Constants
 	public NIVision.Range TOTE_HUE_RANGE = new NIVision.Range(101, 64); 	//Default hue range for yellow tote
@@ -59,8 +63,10 @@ public class GetTote extends Command {
 	double VIEW_ANGLE = 60;		//Value angle of camera, set to Axis m1011 by default, 64 for m1013, 51.7 for 206, 52 for HD3000 square, 60 for HD3000 640x480
 	public NIVision.ParticleFilterCriteria2 criteria[] = new NIVision.ParticleFilterCriteria2[1];
 	public NIVision.ParticleFilterOptions2 filterOptions = new NIVision.ParticleFilterOptions2(0,0,1,1);
-	Scores scores = new Scores();
-	CameraServer server;
+	Scores scores1 = new Scores();
+	Scores scores2 = new Scores();
+
+	
 
 	//Comparator function for sorting particles. Returns true if particle 1 is larger
 	static boolean CompareParticleSizes(ParticleReport particle1, ParticleReport particle2)
@@ -127,6 +133,10 @@ public class GetTote extends Command {
 		frame = NIVision.imaqCreateImage(ImageType.IMAGE_RGB, 0);
 		binaryFrame = NIVision.imaqCreateImage(ImageType.IMAGE_U8, 0);
 		criteria[0] = new NIVision.ParticleFilterCriteria2(NIVision.MeasurementType.MT_AREA_BY_IMAGE_AREA, AREA_MINIMUM, 100.0, 0, 0);
+		
+		session = NIVision.IMAQdxOpenCamera(RobotMap.cameraAddress,
+				NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		NIVision.IMAQdxConfigureGrab(session);
 
 		//Put default values to SmartDashboard so fields will appear
 		SmartDashboard.putNumber("Tote hue min", TOTE_HUE_RANGE.minValue);
@@ -145,13 +155,9 @@ public class GetTote extends Command {
 			//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
 
 			//TODO figure out how to use a usb camera in such a way that an image is taken 50ms or so and analyzed
-			/*			Not sure if this is the right way to do this*/
-			//			server = CameraServer.getInstance();
-			//			server.setQuality(50);
-//			server.startAutomaticCapture(RobotMap.cameraAddress); /*this method does not allow for processing on the roboRio (useless for our purposes)*/
-			server.getInstance();
-
-			NIVision.imaqReadFile(frame, "/home/lvuser/SampleImages/image.jpg");
+			NIVision.IMAQdxStartAcquisition(session);
+			
+			NIVision.IMAQdxGrab(session, frame, 1);
 
 			//Update threshold values from SmartDashboard. For performance reasons it is recommended to remove this after calibration is finished.
 			TOTE_HUE_RANGE.minValue = (int)SmartDashboard.getNumber("Tote hue min", TOTE_HUE_RANGE.minValue);
@@ -195,19 +201,24 @@ public class GetTote extends Command {
 					par.BoundingRectRight = NIVision.imaqMeasureParticle(binaryFrame, particleIndex, 0, NIVision.MeasurementType.MT_BOUNDING_RECT_RIGHT);
 					particles.add(par);
 				}
-				particles.sort(null);
+				particles.sort(null); /**the second L is in particles, presumably at index 1. This may be the place where you sort them **/
 
 				//This example only scores the largest particle. Extending to score all particles and choosing the desired one is left as an exercise
 				//for the reader. Note that this scores and reports information about a single particle (single L shaped target). To get accurate information 
 				//about the location of the tote (not just the distance) you will need to correlate two adjacent targets in order to find the true center of the tote.
-				scores.Aspect = AspectScore(particles.elementAt(0));
-				SmartDashboard.putNumber("Aspect", scores.Aspect);
-				scores.Area = AreaScore(particles.elementAt(0));
-				SmartDashboard.putNumber("Area", scores.Area);
-				boolean isTote = scores.Aspect > SCORE_MIN && scores.Area > SCORE_MIN; //this seems to be the part where only one of the Ls is compared
+				scores1.Aspect = AspectScore(particles.elementAt(0));
+				scores2.Aspect = AspectScore(particles.elementAt(1));
+				SmartDashboard.putNumber("Aspect1", scores1.Aspect);
+				SmartDashboard.putNumber("Aspect2", scores2.Aspect);
+				scores1.Area = AreaScore(particles.elementAt(0));
+				scores2.Area = AreaScore(particles.elementAt(1));
+				SmartDashboard.putNumber("Area1", scores1.Area);
+				SmartDashboard.putNumber("Area2", scores2.Area);
+				boolean isTote = (scores1.Aspect > SCORE_MIN && scores1.Area > SCORE_MIN) && (scores2.Aspect >SCORE_MIN && scores2.Area > SCORE_MIN);
 
 				//Send distance and tote status to dashboard. The bounding rect, particularly the horizontal center (left - right) may be useful for rotating/driving towards a tote
 				SmartDashboard.putBoolean("IsTote", isTote);
+				
 				SmartDashboard.putNumber("Distance", computeDistance(binaryFrame, particles.elementAt(0)));
 			} else {
 				SmartDashboard.putBoolean("IsTote", false);
@@ -215,6 +226,7 @@ public class GetTote extends Command {
 
 			Timer.delay(0.005); 			//wait for a motor update time /*not sure if we need this*/
 		}
+		NIVision.IMAQdxStopAcquisition(session);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
