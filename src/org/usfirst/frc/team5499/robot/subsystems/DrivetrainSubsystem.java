@@ -3,7 +3,6 @@ package org.usfirst.frc.team5499.robot.subsystems;
 
 
 import org.usfirst.frc.team5499.robot.Robot;
-
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -95,26 +94,15 @@ public class DrivetrainSubsystem extends Subsystem {
     
     }
     
-    /**
-     * TODO comment this to make it easier to understand for others 
-     */
-    public double[] motorspeeds_polar(double direction, double magnitude, double rotation){
-    	double motorspeeds[] = new double[4];
-    	double sinDir = Math.sin(direction + Math.PI/4);
-    	double cosDir = Math.cos(direction + Math.PI/4);
-    	
-    	motorspeeds[RobotMap.frontLeftWheelnum] = magnitude * sinDir + rotation;
-    	motorspeeds[RobotMap.frontRightWheelnum] = magnitude * cosDir - rotation;
-    	motorspeeds[RobotMap.backLeftWheelnum] = -1 * magnitude * cosDir + rotation;
-    	motorspeeds[RobotMap.backRightWheelnum] = - 1 * magnitude * sinDir - rotation;
-    	
-    	normalize(motorspeeds);
-    	
-    	return motorspeeds;
-    }
+
     
     /**
-     * TODO comment this to make it easier to understand for others 
+     * Rotates the xy-coordinates of the joystick by 45 degrees using a rotation matrix [ cos -sin][x]
+     * 																					[ sin cos ][y]
+     *  and then sets the front left and back right to y and front right and back left to x, 
+     *  then adds rotation to left side motors and subtracts it from the right motors.
+     *  Then normalizes the resulting speeds.
+     *  wikipedia article on rotation matrices: http://en.wikipedia.org/wiki/Rotation_matrix
      */
     public double[] motorspeeds(double X, double Y, double Z, double gyroAng){
     	double[] motorspeeds = new double[4];
@@ -130,8 +118,8 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     	motorspeeds[RobotMap.frontLeftWheelnum] = Yprime + Z;
     	motorspeeds[RobotMap.frontRightWheelnum] = Xprime - Z;
-    	motorspeeds[RobotMap.backLeftWheelnum] = -1 * (Xprime  + Z);
-    	motorspeeds[RobotMap.backRightWheelnum] = -1 * (Yprime - Z);
+    	motorspeeds[RobotMap.backLeftWheelnum] = Xprime  + Z;
+    	motorspeeds[RobotMap.backRightWheelnum] =Yprime - Z;
     	
     	normalize(motorspeeds);
     	
@@ -140,7 +128,7 @@ public class DrivetrainSubsystem extends Subsystem {
     }
 
     /**
-     * TODO comment this to make it easier to understand for others 
+     * This function normalizes the motor speeds, meaning it divides by the max speed so that they are all between -1, and 1.
      */
 	private void normalize(double[] motorspeeds) {
 		double currentmax = 0;
