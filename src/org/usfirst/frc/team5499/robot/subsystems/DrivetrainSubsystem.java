@@ -154,8 +154,10 @@ public class DrivetrainSubsystem extends Subsystem {
 			}
 		}
 		System.out.println(currentmax);
-		for (int i=0; i<4; i++){
-			motorspeeds[i] = motorspeeds[i] / currentmax;
+		if(currentmax!=0){
+			for (int i=0; i<4; i++){
+				motorspeeds[i] = motorspeeds[i] / currentmax;
+			}
 		}
 	}
 	
