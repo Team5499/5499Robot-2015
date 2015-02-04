@@ -24,10 +24,11 @@ public class GrabberSubsystem extends Subsystem {
 		gripperMotor2.changeControlMode(ControlMode.Follower);
 		gripperMotor2.set(gripperMotor1.getDeviceID());
 		//Set smooth accel and decel
+		//TODO remove after encoders are connected
 		gripperMotor1.setVoltageRampRate(17);
 		//Set limits to not break the system
-		gripperMotor1.setForwardSoftLimit(750); //the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
-		gripperMotor1.setReverseSoftLimit(-750); //-the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
+		gripperMotor1.setForwardSoftLimit(250); //the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
+		gripperMotor1.setReverseSoftLimit(-250); //-the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
 	}
 
 	/**
@@ -37,8 +38,10 @@ public class GrabberSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Close(){
-		gripperMotor1.set(-1.0);
-		gripperMotor2.set(-1.0);
+		if(gripperMotor1.getEncPosition() > 250){
+			gripperMotor1.set(-1.0);
+			gripperMotor2.set(-1.0);
+		}
 	}
 
 	/**
@@ -48,8 +51,10 @@ public class GrabberSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Open(){
-		gripperMotor1.set(1.0);
-		gripperMotor2.set(1.0);
+		if(gripperMotor1.getEncPosition() < -250){
+			gripperMotor1.set(1.0);
+			gripperMotor2.set(1.0);
+		}
 	}
 
 	/**
@@ -63,7 +68,15 @@ public class GrabberSubsystem extends Subsystem {
 		gripperMotor2.enableBrakeMode(true);
 		gripperMotor1.set(0.0);
 		gripperMotor2.set(0.0);
-	}	
+	}
+
+	public void GrabBin(){
+
+	}
+
+	public void GrabTote(){
+
+	}
 
 }
 

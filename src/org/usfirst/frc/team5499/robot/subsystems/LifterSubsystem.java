@@ -22,10 +22,11 @@ public class LifterSubsystem extends Subsystem {
 		lifterMotor2.changeControlMode(ControlMode.Follower);
 		lifterMotor2.set(lifterMotor1.getDeviceID());
 		//Set smooth accel and decel
+		//TODO remove after encoders are connected
 		lifterMotor1.setVoltageRampRate(17);
 		//Set limits to not break the system
-		lifterMotor1.setForwardSoftLimit(1750); //1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
-		lifterMotor1.setReverseSoftLimit(-1750); //-1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
+		lifterMotor1.setForwardSoftLimit(750); //1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
+		lifterMotor1.setReverseSoftLimit(-750); //-1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
 	}
 
 	/**
@@ -35,8 +36,10 @@ public class LifterSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Raise(){
-		lifterMotor1.set(1.0);
-		lifterMotor2.set(1.0);
+		if(lifterMotor1.getEncPosition() < 750){
+			lifterMotor1.set(1.0);
+			lifterMotor2.set(1.0);
+		}
 	}
 
 	/**
@@ -46,8 +49,10 @@ public class LifterSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Lower(){
-		lifterMotor1.set(-1.0);
-		lifterMotor2.set(-1.0);
+		if(lifterMotor1.getEncPosition() > -750){
+			lifterMotor1.set(-1.0);
+			lifterMotor2.set(-1.0);
+		}
 	}
 
 	/**
@@ -61,5 +66,26 @@ public class LifterSubsystem extends Subsystem {
 		lifterMotor1.set(0.0);
 		lifterMotor2.set(0.0);
 	}
+
+	public void GetToBin(){
+
+	}
+
+	public void LowerToFloor(){
+
+	}
+
+	public void GetToTote1(){
+
+	}
+
+	public void GetToTote2(){
+
+	}
+
+	public void GetToTote3(){
+
+	}
+
 }
 

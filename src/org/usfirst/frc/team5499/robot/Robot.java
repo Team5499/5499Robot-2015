@@ -26,15 +26,16 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
-	public static DrivetrainSubsystem driveTrainSubsystem;
-	public static LifterSubsystem lifterSubsystem;
-	public static GrabberSubsystem grabberSubsystem;
+	
 
 	Command autonomousCommand;
 	Command teleopCommand;
 
-
-
+	
+	public static DrivetrainSubsystem driveTrainSubsystem;
+	public static GrabberSubsystem grabberSubsystem;
+	public static LifterSubsystem lifterSubsystem;
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be

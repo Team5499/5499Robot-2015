@@ -7,9 +7,7 @@ import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -23,6 +21,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	public CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
 	public CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
 	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
+	
+	public RobotDrive mecanumDrive = new RobotDrive(motorFrontLeft, motorBackLeft, motorFrontRight, motorBackRight);
 	
 	
 	

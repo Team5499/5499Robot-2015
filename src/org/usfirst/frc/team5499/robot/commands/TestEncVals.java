@@ -1,13 +1,14 @@
 package org.usfirst.frc.team5499.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Autonomous extends CommandGroup {
+public class TestEncVals extends Command {
 
-    public Autonomous() {
+	//TODO run with encoders
+    public TestEncVals() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -18,7 +19,6 @@ public class Autonomous extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

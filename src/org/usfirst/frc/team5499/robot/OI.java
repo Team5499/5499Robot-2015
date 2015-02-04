@@ -10,7 +10,28 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	//Create a new joystick
-	public Joystick stick = new Joystick(RobotMap.joystickPort);
+	public Joystick stick = new Joystick(joystickPort);
+
+	//This is a usb port on a computer. It doesn't seem to have any impedance on anything
+	public static int joystickPort = 1;
+	
+	
+	//These are channels on the joystick
+	public static int rotateButton = 2;
+	public static int lifterHoldButton = 3;
+	public static int grabberCloseButton = 4; 
+	public static int grabberOpenButton = 5; 
+	public static int grabberHoldButton = 6;
+	public static int grabBin = 7;
+	public static int grabTote = 8;
+	public static int lowerToFloor = 9;
+	public static int getToBin = 10;
+	public static int getToTote = 11;
+	
+	//Degress for the POV button
+	public static int lifterRaiseDeg = 90;
+	public static int lifterLowerDeg = 270;
+	
 	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

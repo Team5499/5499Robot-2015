@@ -36,14 +36,15 @@ public class RobotMap {
 	 * The motor controllers of these motors are daisy chained and they don't have a port.
 	 * Rather, you have to assign an id to the motor controllers thru the web interface.
 	 */
-	public static int motorFrontLeftid = 2;
-	public static int motorFrontRightid = 1;
-	public static int motorBackLeftid = 3;
-	public static int motorBackRightid = 4;
+	public static int motorBackRightid = 1;
+	public static int motorBackLeftid = 2;
+	public static int motorFrontLeftid = 3;
+	public static int motorFrontRightid = 4;
 	public static int gripperMotor1id = 5;
 	public static int gripperMotor2id = 6;
 	public static int lifterMotor1id = 7;
 	public static int lifterMotor2id = 8;
+	
 
 
 	/**
@@ -55,21 +56,6 @@ public class RobotMap {
 	public static int motorBackRightPDPChannel = 14; 
 	public static int lifter1PDPChannel = 13;
 	public static int lifter2PDPChannel = 12;
-	
-	/**
-	 * Create BUTTONS
-	 */
-	//This is a usb port on a computer. It doesn't seem to have any impedance on anything
-	public static int joystickPort = 1;
-	//This is a channel on the joystick
-	public static int rotateButton = 1;
-	public static int lifterRaiseButton = 2; //TODO check what this button is and adjust accordingly
-	public static int liferLowerButton = 3; //TODO check what this button is and adjust accordingly
-	public static int lifterHoldButton = 4; //TODO check what this button is and adjust accordingly. This will have to be on and off
-	//TODO may want to do this thru the lever thing (the thing that is below the joystick)
-	public static int grabberCloseButton = 5; //TODO check what this button is and adjust accordingly
-	public static int grabberOpenButton = 6; //TODO check what this button is and adjust accordingly
-	public static int grabberHoldButton = 7; //TODO check what this button is and adjust accordingly
 	
 
 	
