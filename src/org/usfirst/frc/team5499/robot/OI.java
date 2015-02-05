@@ -1,8 +1,6 @@
 package org.usfirst.frc.team5499.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,22 +15,26 @@ public class OI {
 	
 	
 	//These are channels on the joystick
-	public static int grabberCloseButton = 1;
-	public static int rotateButton = 2;
-	public static int lifterHoldButton = 3;
-	public static int grabberOpenButton = 5; 
-	public static int grabberHoldButton = 6;
-	public static int grabBin = 7;
-	public static int grabTote = 8;
-	public static int lowerToFloor = 9;
-	public static int getToBin = 10;
-	public static int getToTote = 11;
+	public int grabberCloseButton = 1;
+	public int rotateButton = 2;
+	public int grabberOpenButton = 3;
+	public int releaseButton = 4;
+	public int lowerToFloorButton = 5;
+	public int grabBinButton = 7;
+	public int getToBinButton = 8;
+	public int grabToteButton = 9;
+	public int getToTote1Button = 10;
+	public int getToTote2Button = 11;
+	public int getToTote3Button = 12;
+	
+	
+	
 	
 	//Degress for the POV button
-	public static int lifterRaiseDeg = 0;
-	public static int grabberOpenDeg1 = 90;
-	public static int lifterLowerDeg = 180;
-	public static int grabberOpenDeg2 = 270;
+	public int lifterRaiseDeg = 0;
+	public int grabberOpenDeg1 = 90;
+	public int lifterLowerDeg = 180;
+	public int grabberOpenDeg2 = 270;
 	
 	
     //// CREATING BUTTONS

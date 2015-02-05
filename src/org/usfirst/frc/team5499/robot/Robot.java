@@ -3,6 +3,7 @@ package org.usfirst.frc.team5499.robot;
 
 import org.usfirst.frc.team5499.robot.commands.RateMotors;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
+import org.usfirst.frc.team5499.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.GrabberSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
 	Command teleopCommand;
 
 	
+	public static CameraSubsystem cameraSubsystem;
 	public static DrivetrainSubsystem driveTrainSubsystem;
 	public static GrabberSubsystem grabberSubsystem;
 	public static LifterSubsystem lifterSubsystem;
@@ -44,6 +46,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		// instantiate the command used for the autonomous period
+		cameraSubsystem = new CameraSubsystem();
 		driveTrainSubsystem = new DrivetrainSubsystem();
 		autonomousCommand = new RateMotors();
 		teleopCommand = new TeleOpDrive();
