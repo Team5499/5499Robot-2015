@@ -1,7 +1,9 @@
 package org.usfirst.frc.team5499.robot.commands;
 
 import org.usfirst.frc.team5499.robot.Robot;
+import org.usfirst.frc.team5499.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -18,14 +20,29 @@ public class Autonomous extends CommandGroup {
     	requires(Robot.lifterSubsystem);
     }
 
+    private DigitalInput startSideSwitch;
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	startSideSwitch = new DigitalInput(RobotMap.startSideSwitchPort);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.cameraSubsystem.Execute();
     	
+    	//starting from the left
+    	if (startSideSwitch.get()){
+    		if (Robot.cameraSubsystem.isTote){
+    			if (Robot.cameraSubsystem.horizCenterOfTote == 0){//FIXME calibrate
+    				
+    			}
+    		} else{
+    			addSequential(Robot.rotateRight);
+    		}
+    	//starting from the right
+    	} else {
+    		
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

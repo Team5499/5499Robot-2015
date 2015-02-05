@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command is for testing purposes only
+ * For testing purposes only
  */
 public class RateMotors extends Command {
 	// counter for counting the number of times the Riolog has been updated

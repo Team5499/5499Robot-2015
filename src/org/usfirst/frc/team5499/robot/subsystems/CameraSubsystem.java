@@ -29,7 +29,8 @@ public class CameraSubsystem extends Subsystem {
 
 	int session;
 	public boolean isTote;
-	public double horizCenter;
+	public double horizCenterOfTote;
+	public double distToTote;
 
 	//Constants
 	public NIVision.Range TOTE_HUE_RANGE = new NIVision.Range(101, 64); 	//Default hue range for yellow tote
@@ -106,9 +107,9 @@ public class CameraSubsystem extends Subsystem {
 		return ratioToScore(((report.BoundingRectRight-report.BoundingRectLeft)/(report.BoundingRectBottom-report.BoundingRectTop)));
 	}
 	
-	void HorizCenter(ParticleReport report, ParticleReport report1){
-		horizCenter = report.BoundingRectLeft - report1.BoundingRectRight;
-		Math.abs(horizCenter);
+	void HorizCenterOfTote(ParticleReport report, ParticleReport report1){
+		horizCenterOfTote = report.BoundingRectLeft - report1.BoundingRectRight;
+		Math.abs(horizCenterOfTote);
 	}
 
 	/**
@@ -156,11 +157,10 @@ public class CameraSubsystem extends Subsystem {
 		SmartDashboard.putNumber("Area min %", AREA_MINIMUM);
 	}
 
-	protected void Execute() {
+	public void Execute() {
 		//read file in from disk. For this example to run you need to copy image.jpg from the SampleImages folder to the
 		//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
-
-		//TODO figure out how to use a usb camera in such a way that an image is taken 50ms or so and analyzed
+		
 		NIVision.IMAQdxStartAcquisition(session);
 
 		NIVision.IMAQdxGrab(session, frame, 1);
@@ -228,8 +228,8 @@ public class CameraSubsystem extends Subsystem {
 			SmartDashboard.putBoolean("IsTote", isTote);
 			
 			//Get the horizontal center of the tote
-			HorizCenter(particles.elementAt(0), particles.elementAt(1));
-			SmartDashboard.putNumber("HorizCenter", horizCenter);
+			HorizCenterOfTote(particles.elementAt(0), particles.elementAt(1));
+			SmartDashboard.putNumber("HorizCenter", horizCenterOfTote);
 			
 
 			SmartDashboard.putNumber("Distance", computeDistance(binaryFrame, particles.elementAt(0)));

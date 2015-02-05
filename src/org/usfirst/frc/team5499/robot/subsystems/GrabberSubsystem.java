@@ -15,8 +15,8 @@ public class GrabberSubsystem extends Subsystem {
 	//These are miniCims?
 	public CANTalon grabberMotor1 = new CANTalon(RobotMap.grabberMotor1id);
 	CANTalon grabberMotor2 = new CANTalon(RobotMap.grabberMotor2id);
-	DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limit1SwitchPort);
-	DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limit2SwitchPort);
+	DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limitSwitch1Port);
+	DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limitSwitch2Port);
 
 
 	public void initDefaultCommand() {

@@ -66,7 +66,7 @@ public class DrivetrainSubsystem extends Subsystem {
     	//Set smooth accel and decel
     	
     	// not needed set in setPID
-    	//TODO remove these after encoders are connected
+    	//TODO remove after encoders are connected
     	motorFrontLeft.setVoltageRampRate(17);
     	motorFrontRight.setVoltageRampRate(17);
     	motorBackLeft.setVoltageRampRate(17);
@@ -177,27 +177,50 @@ public class DrivetrainSubsystem extends Subsystem {
 	double[] rotateLeft = {0, 0, -1.0};
 	
 	
-	
+	/**
+	 * Function for moving forward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
 	public void MoveForward(){
 		mecanumDrive.mecanumDrive_Polar(forward[0], forward[1], forward[2]);		
 	}
 	
+	/**
+	 * Function for moving backward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
 	public void MoveBackward(){
 		mecanumDrive.mecanumDrive_Polar(backward[0], backward[1], backward[2]);		
 	}
 	
+	/**
+	 * Function for moving rightward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
 	public void MoveRightward(){
 		mecanumDrive.mecanumDrive_Polar(rightward[0], rightward[1], rightward[2]);
 	}
 	
+	/**
+	 * Function for moving leftward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
 	public void MoveLeftward(){
 		mecanumDrive.mecanumDrive_Polar(leftward[0], leftward[1], leftward[2]);		
 	}
 	
-	public void MoveRotateRight(){
+	/**
+	 * Function for rotating right for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
+	public void RotateRight(){
 		mecanumDrive.mecanumDrive_Polar(rotateRight[0], rotateRight[1], rotateRight[2]);		
 	}
 	
+	/**
+	 * Function for rotating left for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
 	public void RotateLeft(){
 		mecanumDrive.mecanumDrive_Polar(rotateLeft[0], rotateLeft[1], rotateLeft[2]);
 	}

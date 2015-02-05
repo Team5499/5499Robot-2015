@@ -5,7 +5,7 @@ import org.usfirst.frc.team5499.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This is for testing purposes only
+ * For testing purposes only
  */
 public class TestEncVals extends Command {
 

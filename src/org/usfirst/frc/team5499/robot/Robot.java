@@ -1,20 +1,24 @@
 
 package org.usfirst.frc.team5499.robot;
 
+import org.usfirst.frc.team5499.robot.commands.MoveBackward;
+import org.usfirst.frc.team5499.robot.commands.MoveForward;
+import org.usfirst.frc.team5499.robot.commands.MoveLeftward;
+import org.usfirst.frc.team5499.robot.commands.MoveRightward;
 import org.usfirst.frc.team5499.robot.commands.RateMotors;
+import org.usfirst.frc.team5499.robot.commands.RotateLeft;
+import org.usfirst.frc.team5499.robot.commands.RotateRight;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
 import org.usfirst.frc.team5499.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.GrabberSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
 
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,11 +36,18 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	Command teleopCommand;
 
+	public static Command moveForward;
+	public static Command moveBackward;
+	public static Command moveRightward;
+	public static Command moveLeftward;
+	public static Command rotateRight;
+	public static Command rotateLeft;
 	
 	public static CameraSubsystem cameraSubsystem;
 	public static DrivetrainSubsystem driveTrainSubsystem;
 	public static GrabberSubsystem grabberSubsystem;
 	public static LifterSubsystem lifterSubsystem;
+	
 	
 
 	/**
@@ -48,10 +59,18 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
 		cameraSubsystem = new CameraSubsystem();
 		driveTrainSubsystem = new DrivetrainSubsystem();
-		autonomousCommand = new RateMotors();
-		teleopCommand = new TeleOpDrive();
 		pdp = new PowerDistributionPanel();
 		lifterSubsystem = new LifterSubsystem();
+		//Auto Commands
+		moveForward = new MoveForward();
+		moveBackward = new MoveBackward();
+		moveRightward = new MoveRightward();
+		moveLeftward = new MoveLeftward();
+		rotateRight = new RotateRight();
+		rotateLeft = new RotateLeft();
+		//Commands
+		autonomousCommand = new RateMotors();
+		teleopCommand = new TeleOpDrive();
 
 		//The Talons are on break mode, which is ideal for our purpose.
 		//However, sudden breaking is bad for the gears, so this should gradually decrease the speed of the motors at stopping

@@ -27,8 +27,9 @@ public class RobotMap {
 	 */
 	//These are the digital inputs ports on the roborio.
 	//As of right now, there is nothing physically connected to them
-	public static int limit1SwitchPort = 1;
-	public static int limit2SwitchPort = 2;
+	public static int limitSwitch1Port = 1;
+	public static int limitSwitch2Port = 2;
+	public static int startSideSwitchPort = 3;
 	public static int broomServoChannel = 0;
 	
 	/*
