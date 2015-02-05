@@ -17,9 +17,9 @@ public class OI {
 	
 	
 	//These are channels on the joystick
+	public static int grabberCloseButton = 1;
 	public static int rotateButton = 2;
 	public static int lifterHoldButton = 3;
-	public static int grabberCloseButton = 4; 
 	public static int grabberOpenButton = 5; 
 	public static int grabberHoldButton = 6;
 	public static int grabBin = 7;
@@ -29,8 +29,10 @@ public class OI {
 	public static int getToTote = 11;
 	
 	//Degress for the POV button
-	public static int lifterRaiseDeg = 90;
-	public static int lifterLowerDeg = 270;
+	public static int lifterRaiseDeg = 0;
+	public static int grabberOpenDeg1 = 90;
+	public static int lifterLowerDeg = 180;
+	public static int grabberOpenDeg2 = 270;
 	
 	
     //// CREATING BUTTONS

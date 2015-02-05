@@ -51,21 +51,26 @@ public class DrivetrainSubsystem extends Subsystem {
 				RobotMap.f[RobotMap.backRightWheelnum], 
 				RobotMap.izone[RobotMap.backRightWheelnum], 
 				RobotMap.ramp[RobotMap.backRightWheelnum], 0);
+    	
+    	//Set the feedback device to be the encoder
     	motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	
+    	//The motors are facing each other and some end up having opposite outputs relative to those across
     	motorFrontLeft.reverseOutput(false);
-    	motorFrontRight.reverseOutput(true); //counter the opposite facing of the motor
+    	motorFrontRight.reverseOutput(true); //counter the orientation of the motor
     	motorBackLeft.reverseOutput(false);
-    	motorBackRight.reverseOutput(true); //counter the opposite facing of the motor
+    	motorBackRight.reverseOutput(true); //counter the orientation of the motor
     	//Set smooth accel and decel
     	
     	// not needed set in setPID
-//    	motorFrontLeft.setVoltageRampRate(17);
-//    	motorFrontRight.setVoltageRampRate(17);
-//    	motorBackLeft.setVoltageRampRate(17);
-//    	motorBackRight.setVoltageRampRate(17);
+    	//TODO remove these after encoders are connected
+    	motorFrontLeft.setVoltageRampRate(17);
+    	motorFrontRight.setVoltageRampRate(17);
+    	motorBackLeft.setVoltageRampRate(17);
+    	motorBackRight.setVoltageRampRate(17);
     }
     
     public void autoMove(){
@@ -161,28 +166,41 @@ public class DrivetrainSubsystem extends Subsystem {
 		}
 	}
 	
-	/**
-	 * Only For Use In Quadrature Mode. Get the number of rotations the encoder disk has completed.
-	 * Since the encoder is connected to the gearbox shaft, which spins about 1/4 as fast as the motor shaft due to the gears, one full rotation of the encoder is about 4 rotations of the motor shaft
-	 * @param
-	 * 		motorController the talonSRX, to which the desired encoder is connected
-	 * @return
-	 * 		The number of rotations the encoder has completed; derived from CANTalon.getPosition();
-	 */
-    public double getEncoderRevs(CANTalon motorController){
-    	return motorController.getPosition()/250; //250 is the number of ticks in a revolution of the encoder that we are using
-    }
-    
-    /**
-     * Only For Use In Quadrature Mode. Get the number of rotations the motor shaft has completed.
-	 * Since the encoder is connected to the gearbox shaft, which spins about 1/4 as fast as the motor shaft due to the gears, one full rotation of the motor shaft is about 1/4 rotations of the motor shaft
-     * @param
-     * 		motorController the talonSRX, to which the desired encoder is connected
-     * @return
-     * 		The number of rotations the motor has completed; derived from CANTalon.getPosition();
-     */
-    public double getMotorRevs(CANTalon motorController){
-    	return motorController.getPosition()/250*4; //250 is the number of ticks in a revolution of the encoder that we are using
-    }
+	
+	//{magnitude(speed), direction(in degrees), rotation(range of rates: -1<-left..1<-right)}
+	//FIXME calibrate degs and speeds/rates
+	double[] forward = {1, 0, 0};
+	double[] backward = {1, 180, 0};
+	double[] rightward = {1, 270, 0};
+	double[] leftward = {1, 90, 0};
+	double[] rotateRight = {0, 0, 1.0};
+	double[] rotateLeft = {0, 0, -1.0};
+	
+	
+	
+	public void MoveForward(){
+		mecanumDrive.mecanumDrive_Polar(forward[0], forward[1], forward[2]);		
+	}
+	
+	public void MoveBackward(){
+		mecanumDrive.mecanumDrive_Polar(backward[0], backward[1], backward[2]);		
+	}
+	
+	public void MoveRightward(){
+		mecanumDrive.mecanumDrive_Polar(rightward[0], rightward[1], rightward[2]);
+	}
+	
+	public void MoveLeftward(){
+		mecanumDrive.mecanumDrive_Polar(leftward[0], leftward[1], leftward[2]);		
+	}
+	
+	public void MoveRotateRight(){
+		mecanumDrive.mecanumDrive_Polar(rotateRight[0], rotateRight[1], rotateRight[2]);		
+	}
+	
+	public void RotateLeft(){
+		mecanumDrive.mecanumDrive_Polar(rotateLeft[0], rotateLeft[1], rotateLeft[2]);
+	}
+
 }
 

@@ -56,7 +56,7 @@ public class TeleOpDrive extends Command {
     	//Grabber binding
     	if (Robot.oi.stick.getRawButton(OI.grabberCloseButton)){
     		Robot.grabberSubsystem.Close();
-    	} else if (Robot.oi.stick.getRawButton(OI.grabberOpenButton)){
+    	} else if (Robot.oi.stick.getPOV() == OI.grabberOpenDeg1 || Robot.oi.stick.getPOV() == OI.grabberOpenDeg2){
     		Robot.grabberSubsystem.Open();
     	} else if (Robot.oi.stick.getRawButton(OI.grabberHoldButton)){
     		Robot.grabberSubsystem.Hold();

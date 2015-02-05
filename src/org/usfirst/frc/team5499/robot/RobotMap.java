@@ -40,8 +40,8 @@ public class RobotMap {
 	public static int motorBackLeftid = 2;
 	public static int motorFrontLeftid = 3;
 	public static int motorFrontRightid = 4;
-	public static int gripperMotor1id = 5;
-	public static int gripperMotor2id = 6;
+	public static int grabberMotor1id = 5;
+	public static int grabberMotor2id = 6;
 	public static int lifterMotor1id = 7;
 	public static int lifterMotor2id = 8;
 	
@@ -64,6 +64,7 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
+	//TODO documentation
 	public static double[] p = new double[4];
 	public static double[] i = new double[4];
 	public static double[] d = new double[4];
@@ -72,6 +73,7 @@ public class RobotMap {
 	public static double[] ramp = new double[4];
 	
 	public void init(){
+		//TODO documentation
 		p[frontLeftWheelnum] = 1.0;
 		p[frontRightWheelnum] = 1.0;
 		p[backLeftWheelnum] = 1.0;
