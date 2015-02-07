@@ -14,9 +14,14 @@ public class GrabberSubsystem extends Subsystem {
 
 	//These are miniCims?
 	public CANTalon grabberMotor1 = new CANTalon(RobotMap.grabberMotor1id);
-	CANTalon grabberMotor2 = new CANTalon(RobotMap.grabberMotor2id);
-	DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limitSwitch1Port);
-	DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limitSwitch2Port);
+	private CANTalon grabberMotor2 = new CANTalon(RobotMap.grabberMotor2id);
+	public DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limitSwitch1Port);
+	public DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limitSwitch2Port);
+	
+	public final int OPEN_LIMIT = 500; //FIXME calibrate
+	public final int CLOSE_LIMIT = 0; //FIXME calibrate
+	public final int BIN_LIMIT = 125; // FIXME calibrate
+	public final int TOTE_LIMIT = 200; //FIXME calibrate
 
 
 	public void initDefaultCommand() {
@@ -24,11 +29,10 @@ public class GrabberSubsystem extends Subsystem {
 		grabberMotor2.changeControlMode(ControlMode.Follower);
 		grabberMotor2.set(grabberMotor1.getDeviceID());
 		//Set smooth accel and decel
-		//TODO remove after encoders are connected
-		grabberMotor1.setVoltageRampRate(17);
+		grabberMotor1.setVoltageRampRate(17); //FIXME calibrate
 		//Set limits to not break the system
-		grabberMotor1.setForwardSoftLimit(500); //FIXME calibrate
-		grabberMotor1.setReverseSoftLimit(0); //FIXME calibrate
+		grabberMotor1.setForwardSoftLimit(OPEN_LIMIT); 
+		grabberMotor1.setReverseSoftLimit(CLOSE_LIMIT);
 	}
 
 	/**
@@ -38,7 +42,7 @@ public class GrabberSubsystem extends Subsystem {
 	public void Close(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//TODO check if these values need to be negative
-		if(grabberMotor1.getEncPosition() > 500){ //FIXME calibrate
+		if(grabberMotor1.getEncPosition() > OPEN_LIMIT){
 			grabberMotor1.set(-1.0);
 		}
 	}
@@ -51,7 +55,7 @@ public class GrabberSubsystem extends Subsystem {
 	public void Open(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//TODO chek if these values need to be positive
-		if(grabberMotor1.getEncPosition() < 0){ //FIXME calibrate
+		if(grabberMotor1.getEncPosition() < CLOSE_LIMIT){
 			grabberMotor1.set(1.0);
 		}
 	}
@@ -75,9 +79,9 @@ public class GrabberSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */
 	public void GrabBin(){
-		if(grabberMotor1.getEncPosition() < 125 || (!limitSwitchLeft.get() && !limitSwitchRight.get())){ //FIXME calibrate
+		if(grabberMotor1.getEncPosition() < BIN_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Open();		
-		} else if(grabberMotor1.getEncPosition() > 125 || (!limitSwitchLeft.get() && !limitSwitchRight.get())){ //FIXME calibrate
+		} else if(grabberMotor1.getEncPosition() > BIN_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Close();
 		} else{
 			Hold();
@@ -91,9 +95,9 @@ public class GrabberSubsystem extends Subsystem {
 	 * Default is to hold
 	 */
 	public void GrabTote(){
-		if(grabberMotor1.getEncPosition() < 200 || (!limitSwitchLeft.get() && !limitSwitchRight.get())){ //FIXME calibrate
+		if(grabberMotor1.getEncPosition() < TOTE_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Open();		
-		} else if(grabberMotor1.getEncPosition() > 200 || (!limitSwitchLeft.get() && !limitSwitchRight.get())){ //FIXME calibrate
+		} else if(grabberMotor1.getEncPosition() > TOTE_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Close();
 		} else{
 			Hold();

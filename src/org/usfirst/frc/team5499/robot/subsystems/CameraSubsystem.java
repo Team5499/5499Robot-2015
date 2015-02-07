@@ -31,11 +31,15 @@ public class CameraSubsystem extends Subsystem {
 	public boolean isTote;
 	public double horizCenterOfTote;
 	public double distToTote;
+	
+	//autoVars
+	public final int AUTO_FORWARD_LIMIT = 7; //FIXME calibrate
+	public final int AUTO_BACKWARD_LIMIT = 10; //FIXME calibrate
 
 	//Constants
 	public NIVision.Range TOTE_HUE_RANGE = new NIVision.Range(101, 64); 	//Default hue range for yellow tote
 	public NIVision.Range TOTE_SAT_RANGE = new NIVision.Range(55, 255); 	//Default saturation range for yellow tote
-	public NIVision.Range TOTE_VAL_RANGE = new NIVision.Range(134, 255); 	//Default value range for tellow tote
+	public NIVision.Range TOTE_VAL_RANGE = new NIVision.Range(134, 255); 	//Default value range for yellow tote
 	public double AREA_MINIMUM = 0.5; 	//Default Area minimum for particle as a percentage of total image area
 	double LONG_RATIO = 2.22; 	//Tote long side = 26.9 / Tote height = 12.1 = 2.22
 	double SHORT_RATION = 1.4; 	//Tote short side = 16.9 / Tote height = 12.1 = 1.4
@@ -129,6 +133,7 @@ public class CameraSubsystem extends Subsystem {
 		normalizedWidth = 2*(report.BoundingRectRight - report.BoundingRectLeft)/size.width;
 		targetWidth = 7;
 
+		distToTote = targetWidth/(normalizedWidth*12*Math.tan(VIEW_ANGLE*Math.PI/(180*2)));
 		return  targetWidth/(normalizedWidth*12*Math.tan(VIEW_ANGLE*Math.PI/(180*2)));
 	}
 

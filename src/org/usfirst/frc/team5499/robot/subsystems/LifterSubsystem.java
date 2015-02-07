@@ -13,7 +13,14 @@ public class LifterSubsystem extends Subsystem {
 
 	//These are miniCims?
 	public CANTalon lifterMotor1 = new CANTalon(RobotMap.lifterMotor1id);
-	public CANTalon lifterMotor2 = new CANTalon(RobotMap.lifterMotor2id);
+	private CANTalon lifterMotor2 = new CANTalon(RobotMap.lifterMotor2id);
+	
+	public final int TOP_LIMIT = 750; //FIXME calibrate
+	public final int BOTTOM_LIMIT = -750; //FiXME calibrate
+	public final int BIN_LIMIT = 0; //FIXME calibrate
+	public final int TOTE1LIMIT = -550; //FIXME calibrate
+	public final int TOTE2LIMIT = -350; //FIXME calibrate
+	public final int TOTE3LIMIT = -150; //FIXME calibrate
 
 
 
@@ -23,11 +30,10 @@ public class LifterSubsystem extends Subsystem {
 		lifterMotor2.changeControlMode(ControlMode.Follower);
 		lifterMotor2.set(lifterMotor1.getDeviceID());
 		//Set smooth accel and decel
-		//TODO remove after encoders are connected
-		lifterMotor1.setVoltageRampRate(17);
+		lifterMotor1.setVoltageRampRate(17);//FIXME calibrate
 		//Set limits to not break the system
-		lifterMotor1.setForwardSoftLimit(750); //FIXME calibrate
-		lifterMotor1.setReverseSoftLimit(-750); //FIXME calibrate
+		lifterMotor1.setForwardSoftLimit(TOP_LIMIT);
+		lifterMotor1.setReverseSoftLimit(BOTTOM_LIMIT);
 	}
 
 	/**
@@ -37,7 +43,7 @@ public class LifterSubsystem extends Subsystem {
 	 */
 	public void Raise(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
-		if(lifterMotor1.getEncPosition() < 750){ //FIXME calibrate
+		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
 			lifterMotor1.set(1.0);
 		}
 	}
@@ -48,7 +54,7 @@ public class LifterSubsystem extends Subsystem {
 	 */
 	public void Lower(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
-		if(lifterMotor1.getEncPosition() > -750){ //FIXME calibrate
+		if(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
 			lifterMotor1.set(-1.0);
 		}
 	}
@@ -57,7 +63,7 @@ public class LifterSubsystem extends Subsystem {
 	 * Move the lifter all of the way down to the floor
 	 */
 	public void LowerToFloor(){
-		while(lifterMotor1.getEncPosition() > -750){ //FIXME calibrate
+		while(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
 			Lower();
 		}
 	}
@@ -79,9 +85,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */
 	public void GetToBin(){
-		if(lifterMotor1.getEncPosition() < 0){ //FIXME calibrate
+		if(lifterMotor1.getEncPosition() < BIN_LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > 0){ //FIXME calibrate
+		} else if(lifterMotor1.getEncPosition() > BIN_LIMIT){
 			Lower();
 		} else {
 			Hold();
@@ -94,9 +100,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */
 	public void GetToTote1(){
-		if(lifterMotor1.getEncPosition() < -550){ //FIXME calibrate
+		if(lifterMotor1.getEncPosition() < TOTE1LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > -550){ //FIXME calibrate
+		} else if(lifterMotor1.getEncPosition() > TOTE1LIMIT){
 			Lower();
 		} else {
 			Hold();
@@ -109,9 +115,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */	
 	public void GetToTote2(){
-		if(lifterMotor1.getEncPosition() < -350){ //FIXME calibrate
+		if(lifterMotor1.getEncPosition() < TOTE2LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > -350){ //FIXME calibrate
+		} else if(lifterMotor1.getEncPosition() > TOTE2LIMIT){
 			Lower();
 		} else {
 			Hold();
@@ -124,9 +130,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */	
 	public void GetToTote3(){
-		if(lifterMotor1.getEncPosition() < -150){ //FIXME calibrate
+		if(lifterMotor1.getEncPosition() < TOTE3LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > -150){ //FIXME calibrate
+		} else if(lifterMotor1.getEncPosition() > TOTE3LIMIT){
 			Lower();
 		} else {
 			Hold();

@@ -24,8 +24,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	public RobotDrive mecanumDrive = new RobotDrive(motorFrontLeft, motorBackLeft, motorFrontRight, motorBackRight);
 	
-	
-	
     public void initDefaultCommand() {
     	Robot.driveTrainSubsystem.motorFrontLeft.setPID(RobotMap.p[RobotMap.frontLeftWheelnum],
 				RobotMap.i[RobotMap.frontLeftWheelnum], 

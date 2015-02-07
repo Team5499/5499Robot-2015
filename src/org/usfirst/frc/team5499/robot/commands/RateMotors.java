@@ -53,7 +53,6 @@ public class RateMotors extends Command {
 			Robot.driveTrainSubsystem.motorFrontRight.set(-1);  //3
 			Robot.driveTrainSubsystem.motorFrontLeft.set(-1);  	//4
 			Robot.lifterSubsystem.lifterMotor1.set(-1);		  	//7
-			Robot.lifterSubsystem.lifterMotor2.set(-1);		   	//8
 
 		}
 

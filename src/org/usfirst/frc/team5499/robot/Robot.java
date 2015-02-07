@@ -1,14 +1,22 @@
 
 package org.usfirst.frc.team5499.robot;
 
+import org.usfirst.frc.team5499.robot.commands.GetToTote1;
+import org.usfirst.frc.team5499.robot.commands.GetToTote2;
+import org.usfirst.frc.team5499.robot.commands.GetToTote3;
+import org.usfirst.frc.team5499.robot.commands.GrabTote;
+import org.usfirst.frc.team5499.robot.commands.LowerToFloor;
 import org.usfirst.frc.team5499.robot.commands.MoveBackward;
 import org.usfirst.frc.team5499.robot.commands.MoveForward;
 import org.usfirst.frc.team5499.robot.commands.MoveLeftward;
 import org.usfirst.frc.team5499.robot.commands.MoveRightward;
 import org.usfirst.frc.team5499.robot.commands.RateMotors;
+import org.usfirst.frc.team5499.robot.commands.Release;
 import org.usfirst.frc.team5499.robot.commands.RotateLeft;
 import org.usfirst.frc.team5499.robot.commands.RotateRight;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
+import org.usfirst.frc.team5499.robot.commands.TurnAroundLeft;
+import org.usfirst.frc.team5499.robot.commands.TurnAroundRight;
 import org.usfirst.frc.team5499.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.GrabberSubsystem;
@@ -43,6 +51,17 @@ public class Robot extends IterativeRobot {
 	public static Command rotateRight;
 	public static Command rotateLeft;
 	
+	public static Command getToTote1;
+	public static Command getToTote2;
+	public static Command getToTote3;
+	
+	public static Command grabTote;
+	
+	public static Command release;
+	public static Command turnAroundLeft;
+	public static Command turnAroundRight;
+	public static Command lowerToFloor;
+	
 	public static CameraSubsystem cameraSubsystem;
 	public static DrivetrainSubsystem driveTrainSubsystem;
 	public static GrabberSubsystem grabberSubsystem;
@@ -68,6 +87,18 @@ public class Robot extends IterativeRobot {
 		moveLeftward = new MoveLeftward();
 		rotateRight = new RotateRight();
 		rotateLeft = new RotateLeft();
+		
+		getToTote1 = new GetToTote1();
+		getToTote2 = new GetToTote2();
+		getToTote3 = new GetToTote3();
+		
+		grabTote = new GrabTote();
+		
+		release = new Release();
+		turnAroundLeft = new TurnAroundLeft();
+		turnAroundRight = new TurnAroundRight();
+		lowerToFloor = new LowerToFloor();
+		
 		//Commands
 		autonomousCommand = new RateMotors();
 		teleopCommand = new TeleOpDrive();

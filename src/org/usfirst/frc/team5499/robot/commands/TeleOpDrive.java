@@ -34,7 +34,7 @@ public class TeleOpDrive extends Command {
     	
     	//Make it so that rotation is deliberate thru making the driver press a button to be able to rotate
     	if(Robot.oi.stick.getRawButton(Robot.oi.rotateButton)){
-    		Z = Robot.oi.stick.getZ();
+    		Z = Robot.oi.stick.getTwist();
     	}else{
     		Z = 0;
     	}
