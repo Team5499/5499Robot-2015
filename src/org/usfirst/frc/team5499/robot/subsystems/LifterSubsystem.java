@@ -21,6 +21,8 @@ public class LifterSubsystem extends Subsystem {
 	public final int TOTE1LIMIT = -550; //FIXME calibrate
 	public final int TOTE2LIMIT = -350; //FIXME calibrate
 	public final int TOTE3LIMIT = -150; //FIXME calibrate
+	
+	public boolean isLifterSlow;
 
 
 
@@ -32,8 +34,8 @@ public class LifterSubsystem extends Subsystem {
 		//Set smooth accel and decel
 		lifterMotor1.setVoltageRampRate(17);//FIXME calibrate
 		//Set limits to not break the system
-		lifterMotor1.setForwardSoftLimit(TOP_LIMIT);
-		lifterMotor1.setReverseSoftLimit(BOTTOM_LIMIT);
+		//lifterMotor1.setForwardSoftLimit(TOP_LIMIT);
+		//lifterMotor1.setReverseSoftLimit(BOTTOM_LIMIT);
 	}
 
 	/**
@@ -43,9 +45,13 @@ public class LifterSubsystem extends Subsystem {
 	 */
 	public void Raise(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
-		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
+//		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
+		if(isLifterSlow){
+			lifterMotor1.set(0.1);
+		} else{
 			lifterMotor1.set(1.0);
 		}
+//		}
 	}
 
 	/**
@@ -54,9 +60,13 @@ public class LifterSubsystem extends Subsystem {
 	 */
 	public void Lower(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
-		if(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
+//		if(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
+		if(isLifterSlow){
+			lifterMotor1.set(-0.1);
+		} else{
 			lifterMotor1.set(-1.0);
 		}
+//		}
 	}
 	
 	/**

@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 	
 
 	Command autonomousCommand;
-	Command teleopCommand;
+	public Command teleopCommand;
 
 	public static Command moveForward;
 	public static Command moveBackward;

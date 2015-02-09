@@ -16,9 +16,11 @@ public class TeleOpDrive extends Command {
     	requires(Robot.lifterSubsystem);
     	requires(Robot.grabberSubsystem);
     }
+    
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.lifterSubsystem.isLifterSlow = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,6 +39,10 @@ public class TeleOpDrive extends Command {
     		Z = Robot.oi.stick.getTwist();
     	}else{
     		Z = 0;
+    	}
+    	
+    	if (Robot.oi.stick.getPOV() == Robot.oi.slowLifterDeg){
+    		Robot.lifterSubsystem.isLifterSlow = !Robot.lifterSubsystem.isLifterSlow;
     	}
 
     	//Call the move method to actually set the motors' speeds
@@ -64,7 +70,7 @@ public class TeleOpDrive extends Command {
     	//Grabber binding
     	if (Robot.oi.stick.getRawButton(Robot.oi.grabberCloseButton)){
     		Robot.grabberSubsystem.Close();
-    	} else if (Robot.oi.stick.getPOV() == Robot.oi.grabberOpenDeg1 || Robot.oi.stick.getPOV() == Robot.oi.grabberOpenDeg2){
+    	} else if (Robot.oi.stick.getPOV() == Robot.oi.grabberOpenDeg1){
     		Robot.grabberSubsystem.Open();
     	} else if (Robot.oi.stick.getRawButton(Robot.oi.grabBinButton)){
     		Robot.grabberSubsystem.GrabBin();

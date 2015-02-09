@@ -34,7 +34,7 @@ public class OI {
 	public int lifterRaiseDeg = 0;
 	public int grabberOpenDeg1 = 90;
 	public int lifterLowerDeg = 180;
-	public int grabberOpenDeg2 = 270;
+	public int slowLifterDeg = 270;
 	
 	
     //// CREATING BUTTONS
