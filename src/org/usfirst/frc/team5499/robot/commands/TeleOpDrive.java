@@ -41,6 +41,7 @@ public class TeleOpDrive extends Command {
     		Z = 0;
     	}
     	
+    	//slow mode for the lifter
     	if (Robot.oi.stick.getPOV() == Robot.oi.slowLifterDeg){
     		Robot.lifterSubsystem.isLifterSlow = !Robot.lifterSubsystem.isLifterSlow;
     	}

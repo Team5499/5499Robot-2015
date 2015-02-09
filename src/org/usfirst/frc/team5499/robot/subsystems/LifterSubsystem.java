@@ -22,10 +22,9 @@ public class LifterSubsystem extends Subsystem {
 	public final int TOTE2LIMIT = -350; //FIXME calibrate
 	public final int TOTE3LIMIT = -150; //FIXME calibrate
 	
-	public boolean isLifterSlow;
-
-
-
+	
+	public boolean isLifterSlow; //for slow mode
+	
 	public void initDefaultCommand() {
 		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
 		//TODO test
