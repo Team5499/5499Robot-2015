@@ -26,6 +26,7 @@ public class Autonomous extends CommandGroup {
 	protected void initialize() {
 		startSideSwitch = new DigitalInput(RobotMap.startSideSwitchPort);
 		totesPickedUp = 0;
+		Robot.lifterSubsystem.isLifterSlow = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run

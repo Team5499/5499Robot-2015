@@ -3,6 +3,7 @@ package org.usfirst.frc.team5499.robot.commands;
 import org.usfirst.frc.team5499.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,33 +18,36 @@ public class TeleOpDrive extends Command {
     	requires(Robot.grabberSubsystem);
     }
     
+       
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.lifterSubsystem.isLifterSlow = true;
+    	//Set axes using the stick
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	/**
-    	 * Bind buttons to actions
-    	 */
-    	//Set axes using the stick
     	double X = Robot.oi.stick.getX();
     	double Y = Robot.oi.stick.getY();
-    	double Z;
+        double Z; 
+        
+        boolean isZActivated;
     	
     	//Make it so that rotation is deliberate thru making the driver press a button to be able to rotate
     	if(Robot.oi.stick.getRawButton(Robot.oi.rotateButton)){
     		Z = Robot.oi.stick.getTwist();
+    		isZActivated = true;
     	}else{
     		Z = 0;
+    		isZActivated = false;
     	}
     	
-    	//slow mode for the lifter
+    	
+    	//slow mode toggle for the lifter
     	if (Robot.oi.stick.getPOV() == Robot.oi.slowLifterDeg){
-    		Robot.lifterSubsystem.isLifterSlow = !Robot.lifterSubsystem.isLifterSlow;
+    		Robot.lifterSubsystem.isLifterSlow ^= true; //XOR bitwise operation <a>http://en.wikipedia.org/wiki/Exclusive_or</a>
     	}
 
     	//Call the move method to actually set the motors' speeds
@@ -82,6 +86,11 @@ public class TeleOpDrive extends Command {
     	} else{
     		Robot.grabberSubsystem.Hold();
     	}
+    	
+    	
+    	//Inform driver about active modes
+    	SmartDashboard.putBoolean("Z is activated", isZActivated); //is translation activated
+    	SmartDashboard.putBoolean("Lifter on slow", Robot.lifterSubsystem.isLifterSlow); //is lifter on slow mode
     }
 
     // Make this return true when this Command no longer needs to run execute()

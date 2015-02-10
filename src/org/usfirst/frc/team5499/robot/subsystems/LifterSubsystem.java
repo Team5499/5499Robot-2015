@@ -3,7 +3,6 @@ package org.usfirst.frc.team5499.robot.subsystems;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -26,12 +25,25 @@ public class LifterSubsystem extends Subsystem {
 	public boolean isLifterSlow; //for slow mode
 	
 	public void initDefaultCommand() {
-		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
-		//TODO test
-		lifterMotor2.changeControlMode(ControlMode.Follower);
-		lifterMotor2.set(lifterMotor1.getDeviceID());
+		
+		lifterMotor1.setPID(RobotMap.p[RobotMap.lifterMotor1num],
+				RobotMap.i[RobotMap.lifterMotor1num], 
+				RobotMap.d[RobotMap.lifterMotor1num], 
+				RobotMap.f[RobotMap.lifterMotor1num], 
+				RobotMap.izone[RobotMap.lifterMotor1num], 
+				RobotMap.ramp[RobotMap.lifterMotor1num], 0);
+		lifterMotor2.setPID(RobotMap.p[RobotMap.lifterMotor2num],
+				RobotMap.i[RobotMap.lifterMotor2num], 
+				RobotMap.d[RobotMap.lifterMotor2num], 
+				RobotMap.f[RobotMap.lifterMotor2num], 
+				RobotMap.izone[RobotMap.lifterMotor2num], 
+				RobotMap.ramp[RobotMap.lifterMotor2num], 0);
+//		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
+//		//TODO test
+//		lifterMotor2.changeControlMode(ControlMode.Follower);
+//		lifterMotor2.set(lifterMotor1.getDeviceID());
 		//Set smooth accel and decel
-		lifterMotor1.setVoltageRampRate(17);//FIXME calibrate
+//		lifterMotor1.setVoltageRampRate(17);//FIXME calibrate
 		//Set limits to not break the system
 		//lifterMotor1.setForwardSoftLimit(TOP_LIMIT);
 		//lifterMotor1.setReverseSoftLimit(BOTTOM_LIMIT);
@@ -47,8 +59,11 @@ public class LifterSubsystem extends Subsystem {
 //		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
 		if(isLifterSlow){
 			lifterMotor1.set(0.1);
+			lifterMotor2.set(0.1);
 		} else{
 			lifterMotor1.set(1.0);
+			lifterMotor2.set(1.0);
+			
 		}
 //		}
 	}
@@ -62,8 +77,10 @@ public class LifterSubsystem extends Subsystem {
 //		if(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
 		if(isLifterSlow){
 			lifterMotor1.set(-0.1);
+			lifterMotor2.set(-0.1);
 		} else{
 			lifterMotor1.set(-1.0);
+			lifterMotor2.set(-1.0);
 		}
 //		}
 	}
@@ -78,14 +95,13 @@ public class LifterSubsystem extends Subsystem {
 	}
 
 	/**
-	 * When breaking is enabled, the motor controllers should start actively applying opposite torque to stop moving.
-	 * If this doesn't work, try to use changes in the encoder values (this subsystem is controlled by only one gearbox, therefore there is only one encoder)
-	 * and CANTalon.getEncVelocity();, which should be zero when holding
+	 * This doesn't work. Could this be implemented with PID?
 	 */
 	public void Hold(){
 		lifterMotor1.enableBrakeMode(true);
 		lifterMotor2.enableBrakeMode(true);
 		lifterMotor1.set(0.0);
+		lifterMotor2.set(0.0);
 	}
 
 	/**

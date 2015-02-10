@@ -3,7 +3,6 @@ package org.usfirst.frc.team5499.robot.subsystems;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,14 +24,27 @@ public class GrabberSubsystem extends Subsystem {
 
 
 	public void initDefaultCommand() {
-		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
-		grabberMotor2.changeControlMode(ControlMode.Follower);
-		grabberMotor2.set(grabberMotor1.getDeviceID());
+		grabberMotor1.setPID(RobotMap.p[RobotMap.grabberMotor1num],
+				RobotMap.i[RobotMap.grabberMotor1num], 
+				RobotMap.d[RobotMap.grabberMotor1num], 
+				RobotMap.f[RobotMap.grabberMotor1num], 
+				RobotMap.izone[RobotMap.grabberMotor2num], 
+				RobotMap.ramp[RobotMap.grabberMotor2num], 0);
+		grabberMotor2.setPID(RobotMap.p[RobotMap.grabberMotor2num],
+				RobotMap.i[RobotMap.grabberMotor2num], 
+				RobotMap.d[RobotMap.grabberMotor2num], 
+				RobotMap.f[RobotMap.grabberMotor2num], 
+				RobotMap.izone[RobotMap.grabberMotor2num], 
+				RobotMap.ramp[RobotMap.grabberMotor2num], 0);
+		
+//		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
+//		grabberMotor2.changeControlMode(ControlMode.Follower);
+//		grabberMotor2.set(grabberMotor1.getDeviceID());
 		//Set smooth accel and decel
-		grabberMotor1.setVoltageRampRate(17); //FIXME calibrate
+//		grabberMotor1.setVoltageRampRate(17); //FIXME calibrate
 		//Set limits to not break the system
-		grabberMotor1.setForwardSoftLimit(OPEN_LIMIT); 
-		grabberMotor1.setReverseSoftLimit(CLOSE_LIMIT);
+//		grabberMotor1.setForwardSoftLimit(OPEN_LIMIT); 
+//		grabberMotor1.setReverseSoftLimit(CLOSE_LIMIT);
 	}
 
 	/**
@@ -44,6 +56,7 @@ public class GrabberSubsystem extends Subsystem {
 		//TODO check if these values need to be negative
 		if(grabberMotor1.getEncPosition() > OPEN_LIMIT){
 			grabberMotor1.set(-1.0);
+			grabberMotor2.set(-1.0);
 		}
 	}
 
@@ -57,6 +70,7 @@ public class GrabberSubsystem extends Subsystem {
 		//TODO chek if these values need to be positive
 		if(grabberMotor1.getEncPosition() < CLOSE_LIMIT){
 			grabberMotor1.set(1.0);
+			grabberMotor2.set(1.0);
 		}
 	}
 
@@ -70,6 +84,7 @@ public class GrabberSubsystem extends Subsystem {
 		grabberMotor1.enableBrakeMode(true);
 		grabberMotor2.enableBrakeMode(true);
 		grabberMotor1.set(0.0);
+		grabberMotor2.set(0.0);
 	}
 
 	/**
