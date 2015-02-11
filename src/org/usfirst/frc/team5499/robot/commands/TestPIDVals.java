@@ -7,140 +7,24 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * 
  */
-public class TeleOpDrive extends Command {
+public class TestPIDVals extends Command {
 
-    public TeleOpDrive() {
+    public TestPIDVals() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrainSubsystem);
     	requires(Robot.lifterSubsystem);
     	requires(Robot.grabberSubsystem);
     }
-    
-       
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lifterSubsystem.isLifterSlow = true;
-    	//Set axes using the stick
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double X = Robot.oi.stick.getX();
-    	double Y = Robot.oi.stick.getY();
-        double Z; 
-        
-        boolean isZActivated;
-    	
-    	//Make it so that rotation is deliberate thru making the driver press a button to be able to rotate
-    	if(Robot.oi.stick.getRawButton(Robot.oi.rotateButton)){
-    		Z = Robot.oi.stick.getTwist();
-    		isZActivated = true;
-    	}else{
-    		Z = 0;
-    		isZActivated = false;
-    	}
-    	
-    	
-    	//slow mode toggle for the lifter
-    	if (Robot.oi.stick.getPOV() == Robot.oi.slowLifterDeg){
-    		Robot.lifterSubsystem.isLifterSlow ^= true; //XOR bitwise operation <a>http://en.wikipedia.org/wiki/Exclusive_or</a>
-    	}
-
-    	//Call the move method to actually set the motors' speeds
-    	Robot.driveTrainSubsystem.mecanumDrive.mecanumDrive_Cartesian(X, Y, Z, 0.0);
-    	
-    	//Lifter binding
-    	if(Robot.oi.stick.getPOV() == Robot.oi.lifterRaiseDeg){
-    		Robot.lifterSubsystem.Raise();
-    	} else if (Robot.oi.stick.getPOV() == Robot.oi.lifterLowerDeg){
-    		Robot.lifterSubsystem.Lower();
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.getToBinButton)){
-    		Robot.lifterSubsystem.GetToBin();
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.getToTote1Button)){
-    		Robot.lifterSubsystem.GetToTote1();    		
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.getToTote2Button)){
-    		Robot.lifterSubsystem.GetToTote2();
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.getToTote3Button)){
-    		Robot.lifterSubsystem.GetToTote3();    		
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.lowerToFloorButton)){
-    		Robot.lifterSubsystem.LowerToFloor();
-    	} else{
-    		Robot.lifterSubsystem.Hold();
-    	}
-    	
-    	//Grabber binding
-    	if (Robot.oi.stick.getRawButton(Robot.oi.grabberCloseButton)){
-    		Robot.grabberSubsystem.Close();
-    	} else if (Robot.oi.stick.getPOV() == Robot.oi.grabberOpenDeg1){
-    		Robot.grabberSubsystem.Open();
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.grabBinButton)){
-    		Robot.grabberSubsystem.GrabBin();
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.grabToteButton)){
-    		Robot.grabberSubsystem.GrabTote();
-    	} else if (Robot.oi.stick.getRawButton(Robot.oi.releaseButton)){
-    		Robot.grabberSubsystem.Release();
-    	} else{
-    		Robot.grabberSubsystem.Hold();
-    	}
-    	
-    	
-    	//Inform driver about active modes
-    	SmartDashboard.putBoolean("Z is activated", isZActivated); //is translation activated
-    	SmartDashboard.putBoolean("Lifter on slow", Robot.lifterSubsystem.isLifterSlow); //is lifter on slow mode
-    	
-    	
-/*TESTING TESTING TESTING TESTING*/
-    	//Store the encoder values
-    	double[] frontLeftEncVals = {Robot.driveTrainSubsystem.motorFrontLeft.getEncPosition(),
-    			Robot.driveTrainSubsystem.motorFrontLeft.getEncVelocity()};
-    	double[] frontRightEncVals = {Robot.driveTrainSubsystem.motorFrontRight.getEncPosition(),
-    			Robot.driveTrainSubsystem.motorFrontRight.getEncVelocity()};
-    	double[] backLeftEncVals = {Robot.driveTrainSubsystem.motorBackLeft.getEncPosition(),
-    			Robot.driveTrainSubsystem.motorBackLeft.getEncVelocity()};
-    	double[] backRightEncVals = {Robot.driveTrainSubsystem.motorBackRight.getEncPosition(),
-    			Robot.driveTrainSubsystem.motorBackRight.getEncVelocity()};
-    	double[] lifterEncVals = {Robot.lifterSubsystem.lifterMotor1.getEncPosition(),
-    			Robot.lifterSubsystem.lifterMotor1.getEncVelocity()};
-    	double[] grabberEncVals = {Robot.grabberSubsystem.grabberMotor1.getEncPosition(),
-    			Robot.grabberSubsystem.grabberMotor1.getEncVelocity()};
-    	
-    	
-    	//Print encoder values in the riolog
-    	System.out.println("FrontLeft"
-    			+ "\n	position:"+ frontLeftEncVals[0]
-    			+ "\n	velocity:" + frontLeftEncVals[1]);
-    	System.out.println("FrontRight"
-    			+ "\n	position:"+ frontRightEncVals[0]
-    			+ "\n	velocity:" + frontRightEncVals[1]);
-    	System.out.println("BackLeft"
-    			+ "\n	position:"+ backLeftEncVals[0]
-    			+ "\n	velocity:" + backLeftEncVals[1]);
-    	System.out.println("BackRight"
-    			+ "\n	position:"+ backRightEncVals[0]
-    			+ "\n	velocity:" + backRightEncVals[1]);
-    	System.out.println("Lifter"
-    			+ "\n	position:"+ lifterEncVals[0]
-    			+ "\n	velocity:" + lifterEncVals[1]);
-    	System.out.println("Grabber"
-    			+ "\n	position:"+ grabberEncVals[0]
-    			+ "\n	velocity:" + grabberEncVals[1]);
-    	
-    	//print encoder values in the smartDashboard
-    	SmartDashboard.putNumber("FrontLeftPos", frontLeftEncVals[0]);
-    	SmartDashboard.putNumber("FrontRightPos", frontRightEncVals[0]);
-    	SmartDashboard.putNumber("BackLeftPos", backLeftEncVals[0]);
-    	SmartDashboard.putNumber("BackRightPos", backRightEncVals[0]);
-    	SmartDashboard.putNumber("LifterPos", lifterEncVals[0]);
-    	SmartDashboard.putNumber("GrabberPos", grabberEncVals[0]);
-    	
-    	
-    	
-    	
     	int p = 0;
     	int i = 1;
     	int d = 2;
@@ -309,8 +193,6 @@ public class TeleOpDrive extends Command {
     	SmartDashboard.putNumber("grabber2 F", grabber2[f]);
     	SmartDashboard.putNumber("grabber2 IZONE", grabber2[izone]);
     	SmartDashboard.putNumber("grabber2 RAMP", grabber2[ramp]);
-/*TESTING TESTING TESTING TESTING*/
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
