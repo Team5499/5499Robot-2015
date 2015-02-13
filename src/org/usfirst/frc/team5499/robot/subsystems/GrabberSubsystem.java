@@ -37,7 +37,7 @@ public class GrabberSubsystem extends Subsystem {
 				RobotMap.izone[RobotMap.grabberMotor2num], 
 				RobotMap.ramp[RobotMap.grabberMotor2num], 0);
 		
-//		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
+		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
 //		grabberMotor2.changeControlMode(ControlMode.Follower);
 //		grabberMotor2.set(grabberMotor1.getDeviceID());
 		//Set smooth accel and decel

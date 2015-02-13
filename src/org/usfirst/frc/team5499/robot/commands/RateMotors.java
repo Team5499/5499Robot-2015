@@ -58,6 +58,7 @@ public class RateMotors extends Command {
 
 		//update count
 		counter++;
+		
 		//print number of updates
 		System.out.println("Counter: " + counter);
 	}

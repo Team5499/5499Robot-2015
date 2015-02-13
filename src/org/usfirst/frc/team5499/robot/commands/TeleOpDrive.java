@@ -112,23 +112,23 @@ public class TeleOpDrive extends Command {
     	
     	//Print encoder values in the riolog
     	System.out.println("FrontLeft"
-    			+ "\n	position:"+ frontLeftEncVals[0]
-    			+ "\n	velocity:" + frontLeftEncVals[1]);
+    			+ "\n	position: "+ frontLeftEncVals[0]
+    			+ "\n	velocity: " + frontLeftEncVals[1]);
     	System.out.println("FrontRight"
-    			+ "\n	position:"+ frontRightEncVals[0]
-    			+ "\n	velocity:" + frontRightEncVals[1]);
+    			+ "\n	position: "+ frontRightEncVals[0]
+    			+ "\n	velocity: " + frontRightEncVals[1]);
     	System.out.println("BackLeft"
-    			+ "\n	position:"+ backLeftEncVals[0]
-    			+ "\n	velocity:" + backLeftEncVals[1]);
+    			+ "\n	position: "+ backLeftEncVals[0]
+    			+ "\n	velocity: " + backLeftEncVals[1]);
     	System.out.println("BackRight"
-    			+ "\n	position:"+ backRightEncVals[0]
-    			+ "\n	velocity:" + backRightEncVals[1]);
+    			+ "\n	position: "+ backRightEncVals[0]
+    			+ "\n	velocity: " + backRightEncVals[1]);
     	System.out.println("Lifter"
-    			+ "\n	position:"+ lifterEncVals[0]
-    			+ "\n	velocity:" + lifterEncVals[1]);
+    			+ "\n	position: "+ lifterEncVals[0]
+    			+ "\n	velocity: " + lifterEncVals[1]);
     	System.out.println("Grabber"
-    			+ "\n	position:"+ grabberEncVals[0]
-    			+ "\n	velocity:" + grabberEncVals[1]);
+    			+ "\n	position: "+ grabberEncVals[0]
+    			+ "\n	velocity: " + grabberEncVals[1]);
     	
     	//print encoder values in the smartDashboard
     	SmartDashboard.putNumber("FrontLeftPos", frontLeftEncVals[0]);
@@ -198,61 +198,61 @@ public class TeleOpDrive extends Command {
     			RobotMap.ramp[RobotMap.grabberMotor2num]};
     	
     	System.out.println("FrontLeft"
-    			+ "\n	p:" + frontLeft[p]
-    			+ "\n	i:" + frontLeft[i]
-    			+ "\n	d:" + frontLeft[d]
-    			+ "\n	f:" + frontLeft[f]
-    			+ "\n	izone:" + frontLeft[izone]
-    			+ "\n	ramp:" + frontLeft[ramp]);
+    			+ "\n	p: " + frontLeft[p]
+    			+ "\n	i: " + frontLeft[i]
+    			+ "\n	d: " + frontLeft[d]
+    			+ "\n	f: " + frontLeft[f]
+    			+ "\n	izone: " + frontLeft[izone]
+    			+ "\n	ramp: " + frontLeft[ramp]);
     	System.out.println("FrontRight"
-    			+ "\n	p:" + frontRight[p]
-    			+ "\n	i:" + frontRight[i]
-    			+ "\n	d:" + frontRight[d]
-    			+ "\n	f:" + frontRight[f]
-    			+ "\n	izone:" + frontRight[izone]
-    			+ "\n	ramp:" + frontRight[ramp]);
+    			+ "\n	p: " + frontRight[p]
+    			+ "\n	i: " + frontRight[i]
+    			+ "\n	d: " + frontRight[d]
+    			+ "\n	f: " + frontRight[f]
+    			+ "\n	izone: " + frontRight[izone]
+    			+ "\n	ramp: " + frontRight[ramp]);
     	System.out.println("BackLeft"
-    			+ "\n	p:" + backLeft[p]
-    			+ "\n	i:" + backLeft[i]
-    			+ "\n	d:" + backLeft[d]
-    			+ "\n	f:" + backLeft[f]
-    			+ "\n	izone:" + backLeft[izone]
-    			+ "\n	ramp:" + backLeft[ramp]);
+    			+ "\n	p: " + backLeft[p]
+    			+ "\n	i: " + backLeft[i]
+    			+ "\n	d: " + backLeft[d]
+    			+ "\n	f: " + backLeft[f]
+    			+ "\n	izone: " + backLeft[izone]
+    			+ "\n	ramp: " + backLeft[ramp]);
     	System.out.println("BackRight"
-    			+ "\n	p:" + backRight[p]
-    			+ "\n	i:" + backRight[i]
-    			+ "\n	d:" + backRight[d]
-    			+ "\n	f:" + backRight[f]
-    			+ "\n	izone:" + backRight[izone]
-    			+ "\n	ramp:" + backRight[ramp]);
+    			+ "\n	p: " + backRight[p]
+    			+ "\n	i: " + backRight[i]
+    			+ "\n	d: " + backRight[d]
+    			+ "\n	f: " + backRight[f]
+    			+ "\n	izone: " + backRight[izone]
+    			+ "\n	ramp: " + backRight[ramp]);
     	System.out.println("Lifter1"
-    			+ "\n	p:" + lifter1[p]
-    			+ "\n	i:" + lifter1[i]
-    			+ "\n	d:" + lifter1[d]
-    			+ "\n	f:" + lifter1[f]
-    			+ "\n	izone:" + lifter1[izone]
-    			+ "\n	ramp:" + lifter1[ramp]);
+    			+ "\n	p: " + lifter1[p]
+    			+ "\n	i: " + lifter1[i]
+    			+ "\n	d: " + lifter1[d]
+    			+ "\n	f: " + lifter1[f]
+    			+ "\n	izone: " + lifter1[izone]
+    			+ "\n	ramp: " + lifter1[ramp]);
     	System.out.println("Lifter2"
-    			+ "\n	p:" + lifter2[p]
-    			+ "\n	i:" + lifter2[i]
-    			+ "\n	d:" + lifter2[d]
-    			+ "\n	f:" + lifter2[f]
-    			+ "\n	izone:" + lifter2[izone]
-    			+ "\n	ramp:" + lifter2[ramp]);
+    			+ "\n	p: " + lifter2[p]
+    			+ "\n	i: " + lifter2[i]
+    			+ "\n	d: " + lifter2[d]
+    			+ "\n	f: " + lifter2[f]
+    			+ "\n	izone: " + lifter2[izone]
+    			+ "\n	ramp: " + lifter2[ramp]);
     	System.out.println("Grabber1"
-    			+ "\n	p:" + grabber1[p]
-    			+ "\n	i:" + grabber1[i]
-    			+ "\n	d:" + grabber1[d]
-    			+ "\n	f:" + grabber1[f]
-    			+ "\n	izone:" + grabber1[izone]
-    			+ "\n	ramp:" + grabber1[ramp]);
+    			+ "\n	p: " + grabber1[p]
+    			+ "\n	i: " + grabber1[i]
+    			+ "\n	d: " + grabber1[d]
+    			+ "\n	f: " + grabber1[f]
+    			+ "\n	izone: " + grabber1[izone]
+    			+ "\n	ramp: " + grabber1[ramp]);
     	System.out.println("Grabber2"
-    			+ "\n	p:" + grabber2[p]
-    			+ "\n	i:" + grabber2[i]
-    			+ "\n	d:" + grabber2[d]
-    			+ "\n	f:" + grabber2[f]
-    			+ "\n	izone:" + grabber2[izone]
-    			+ "\n	ramp:" + grabber2[ramp]);
+    			+ "\n	p: " + grabber2[p]
+    			+ "\n	i: " + grabber2[i]
+    			+ "\n	d: " + grabber2[d]
+    			+ "\n	f: " + grabber2[f]
+    			+ "\n	izone: " + grabber2[izone]
+    			+ "\n	ramp: " + grabber2[ramp]);
     	
     	SmartDashboard.putNumber("frontLeft P", frontLeft[p]);
     	SmartDashboard.putNumber("frontLeft I", frontLeft[i]);

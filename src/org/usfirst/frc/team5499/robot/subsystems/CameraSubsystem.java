@@ -22,7 +22,7 @@ public class CameraSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	//Images
+	//Images.
 	public Image frame;
 	public Image binaryFrame;
 	public int imaqError;

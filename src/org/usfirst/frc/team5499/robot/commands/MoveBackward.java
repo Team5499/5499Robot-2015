@@ -30,7 +30,7 @@ public class MoveBackward extends Command {
     protected boolean isFinished() {
     	if(Robot.driveTrainSubsystem.motorBackLeft.getEncPosition() - initEncVal >= 500){//FIXME calibrate
     		return true;
-    	} else {
+    	}else {
     		return false;
     	}
     }

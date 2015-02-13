@@ -25,7 +25,6 @@ public class LifterSubsystem extends Subsystem {
 	public boolean isLifterSlow; //for slow mode
 	
 	public void initDefaultCommand() {
-		
 		lifterMotor1.setPID(RobotMap.p[RobotMap.lifterMotor1num],
 				RobotMap.i[RobotMap.lifterMotor1num], 
 				RobotMap.d[RobotMap.lifterMotor1num], 

@@ -27,7 +27,7 @@ public class GrabTote extends Command {
 	protected boolean isFinished() {
 		if (Robot.grabberSubsystem.grabberMotor1.getEncPosition() == Robot.grabberSubsystem.TOTE_LIMIT){
 			return true;
-		} else {
+		}else {
 			return false;
 		}
 	}

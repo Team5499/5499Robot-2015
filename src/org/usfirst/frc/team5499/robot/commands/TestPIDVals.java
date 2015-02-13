@@ -24,7 +24,7 @@ public class TestPIDVals extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute(){
     	int p = 0;
     	int i = 1;
     	int d = 2;

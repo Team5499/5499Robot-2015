@@ -27,7 +27,7 @@ public class Release extends Command {
 	protected boolean isFinished() {
 		if (!Robot.grabberSubsystem.limitSwitchLeft.get() && !Robot.grabberSubsystem.limitSwitchRight.get()){
 			return true;
-		} else {
+		}else {
 			return false;
 		}
 	}

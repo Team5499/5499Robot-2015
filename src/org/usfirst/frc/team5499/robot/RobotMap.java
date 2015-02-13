@@ -24,7 +24,7 @@ public class RobotMap {
 	//This is the usb camera address
 	public static String cameraAddress = "cam0";
 	
-	/**
+	/*
 	 * Create DIO ports
 	 */
 	//These are the digital inputs ports on the roborio.

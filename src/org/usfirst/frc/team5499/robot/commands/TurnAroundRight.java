@@ -28,7 +28,7 @@ public class TurnAroundRight extends Command {
 	protected boolean isFinished() {
 		if (Robot.driveTrainSubsystem.motorBackRight.getEncPosition() == 250 * 2.5){ //FIXME calibrate
 			return true;
-		} else {
+		}else {
 			return false;
 		}
 	}

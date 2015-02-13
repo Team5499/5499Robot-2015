@@ -14,6 +14,7 @@ public class Autonomous extends CommandGroup {
 	public Autonomous() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		
 		requires(Robot.cameraSubsystem);
 		requires(Robot.driveTrainSubsystem);
 		requires(Robot.grabberSubsystem);

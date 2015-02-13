@@ -10,7 +10,7 @@ public class OI {
 	//Create a new joystick
 	public Joystick stick = new Joystick(joystickPort);
 
-	//This is a usb port on a computer. It doesn't seem to have any impedance on anything
+	//This is a usb port on a computer. It doesn't seem to have any impedance on anything.
 	public static int joystickPort = 1;
 	
 	

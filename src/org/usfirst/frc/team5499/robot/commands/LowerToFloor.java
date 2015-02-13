@@ -27,7 +27,7 @@ public class LowerToFloor extends Command {
 	protected boolean isFinished() {
 		if(Robot.lifterSubsystem.lifterMotor1.getEncPosition() < Robot.lifterSubsystem.BOTTOM_LIMIT){
 			return true;
-		}else{
+		} else{
 			return false;
 		}
 	}

@@ -27,7 +27,7 @@ public class GetToTote1 extends Command {
 	protected boolean isFinished() {
 		if(Robot.lifterSubsystem.lifterMotor1.getEncPosition() == Robot.lifterSubsystem.TOTE1LIMIT){
 			return true;
-		} else {
+		}else {
 			return false;
 		}
 	}

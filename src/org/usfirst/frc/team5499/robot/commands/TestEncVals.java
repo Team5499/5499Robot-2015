@@ -24,7 +24,7 @@ public class TestEncVals extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute(){
     	//Store the encoder values
     	double[] frontLeftEncVals = {Robot.driveTrainSubsystem.motorFrontLeft.getEncPosition(),
     			Robot.driveTrainSubsystem.motorFrontLeft.getEncVelocity()};
