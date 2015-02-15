@@ -69,6 +69,11 @@ public class DrivetrainSubsystem extends Subsystem {
     	motorFrontRight.setVoltageRampRate(17);
     	motorBackLeft.setVoltageRampRate(17);
     	motorBackRight.setVoltageRampRate(17);
+    	
+    	motorFrontLeft.changeControlMode(CANTalon.ControlMode.Speed);
+    	motorFrontRight.changeControlMode(CANTalon.ControlMode.Speed);
+    	motorBackLeft.changeControlMode(CANTalon.ControlMode.Speed);
+    	motorBackRight.changeControlMode(CANTalon.ControlMode.Speed);
     }
     
     
