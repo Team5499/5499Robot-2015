@@ -17,9 +17,7 @@ public class RobotMap {
 	public static int backLeftWheelnum = 2;
 	public static int backRightWheelnum = 3;
 	public static int grabberMotor1num = 4;
-	public static int grabberMotor2num = 5;
-	public static int lifterMotor1num = 6;
-	public static int lifterMotor2num  = 7;
+	public static int lifterMotor1num = 5;
 	
 	//This is the usb camera address
 	public static String cameraAddress = "cam0";
@@ -44,9 +42,7 @@ public class RobotMap {
 	public static int motorFrontLeftid = 3;
 	public static int motorFrontRightid = 4;
 	public static int grabberMotor1id = 5;
-	public static int grabberMotor2id = 6;
-	public static int lifterMotor1id = 7;
-	public static int lifterMotor2id = 8;
+	public static int lifterMotor1id = 6;
 	
 
 
@@ -68,12 +64,12 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	
 	//TODO documentation
-	public static double[] p = new double[8];
-	public static double[] i = new double[8];
-	public static double[] d = new double[8];
-	public static double[] f = new double[8];
-	public static int[] izone = new int[8];
-	public static double[] ramp = new double[8];
+	public static double[] p = new double[6];
+	public static double[] i = new double[6];
+	public static double[] d = new double[6];
+	public static double[] f = new double[6];
+	public static int[] izone = new int[6];
+	public static double[] ramp = new double[6];
 	
 	public void init(){
 		//TODO documentation
@@ -83,48 +79,36 @@ public class RobotMap {
 		p[backLeftWheelnum] = 1.0;
 		p[backRightWheelnum] = 1.0;
 		p[grabberMotor1num] = 1.0;
-		p[grabberMotor2num] = 1.0;
 		p[lifterMotor1num] = 1.0;
-		p[lifterMotor2num] = 1.0;
 		i[frontLeftWheelnum] = 0.1;
 		i[frontRightWheelnum] = 0.1;
 		i[backLeftWheelnum] = 0.1;
 		i[backRightWheelnum] = 0.1;
 		i[grabberMotor1num] = 0.1;
-		i[grabberMotor2num] = 0.1;
 		i[lifterMotor1num] = 0.1;
-		i[lifterMotor2num] = 0.1;
 		d[frontLeftWheelnum] = 0.1;
 		d[frontRightWheelnum] = 0.1;
 		d[backLeftWheelnum] = 0.1;
 		d[backRightWheelnum] = 0.1;
 		d[grabberMotor1num] = 0.1;
-		d[grabberMotor2num] = 0.1;
 		d[lifterMotor1num] = 0.1;
-		d[lifterMotor2num] = 0.1;
 		f[frontLeftWheelnum] = 0.0;
 		f[frontRightWheelnum] = 0.0;
 		f[backLeftWheelnum] = 0.0;
 		f[backRightWheelnum] = 0.0;
 		f[grabberMotor1num] = 0.0;
-		f[grabberMotor2num] = 0.0;
 		f[lifterMotor1num] = 0.0;
-		f[lifterMotor2num] = 0.0;
 		izone[frontLeftWheelnum] = 0;
 		izone[frontRightWheelnum] = 0;
 		izone[backLeftWheelnum] = 0;
 		izone[backRightWheelnum] = 0;
 		izone[grabberMotor1num] = 0;
-		izone[grabberMotor2num] = 0;
 		izone[lifterMotor1num] = 0;
-		izone[lifterMotor2num] = 0;
 		ramp[frontLeftWheelnum] = 17.0;
 		ramp[frontRightWheelnum] = 17.0;
 		ramp[backLeftWheelnum] = 17.0;
 		ramp[backRightWheelnum] = 17.0;
 		ramp[grabberMotor1num] = 17.0;
-		ramp[grabberMotor2num] = 17.0;
 		ramp[lifterMotor1num] = 17.0;
-		ramp[lifterMotor2num] = 17.0;
 	}
 }

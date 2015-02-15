@@ -147,9 +147,9 @@ public class CameraSubsystem extends Subsystem {
 		binaryFrame = NIVision.imaqCreateImage(ImageType.IMAGE_U8, 0);
 		criteria[0] = new NIVision.ParticleFilterCriteria2(NIVision.MeasurementType.MT_AREA_BY_IMAGE_AREA, AREA_MINIMUM, 100.0, 0, 0);
 
-		session = NIVision.IMAQdxOpenCamera(RobotMap.cameraAddress,
-				NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		NIVision.IMAQdxConfigureGrab(session);
+//		session = NIVision.IMAQdxOpenCamera(RobotMap.cameraAddress,
+//				NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+//		NIVision.IMAQdxConfigureGrab(session);
 		
 
 		//Put default values to SmartDashboard so fields will appear

@@ -79,6 +79,7 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
 		cameraSubsystem = new CameraSubsystem();
 		driveTrainSubsystem = new DrivetrainSubsystem();
+		grabberSubsystem = new GrabberSubsystem();
 		pdp = new PowerDistributionPanel();
 		lifterSubsystem = new LifterSubsystem();
 		//Auto Commands

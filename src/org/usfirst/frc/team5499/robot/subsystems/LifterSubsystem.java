@@ -12,7 +12,6 @@ public class LifterSubsystem extends Subsystem {
 
 	//These are miniCims?
 	public CANTalon lifterMotor1 = new CANTalon(RobotMap.lifterMotor1id);
-	private CANTalon lifterMotor2 = new CANTalon(RobotMap.lifterMotor2id);
 	
 	public final int TOP_LIMIT = 750; //FIXME calibrate
 	public final int BOTTOM_LIMIT = -750; //FiXME calibrate
@@ -31,12 +30,6 @@ public class LifterSubsystem extends Subsystem {
 				RobotMap.f[RobotMap.lifterMotor1num], 
 				RobotMap.izone[RobotMap.lifterMotor1num], 
 				RobotMap.ramp[RobotMap.lifterMotor1num], 0);
-		lifterMotor2.setPID(RobotMap.p[RobotMap.lifterMotor2num],
-				RobotMap.i[RobotMap.lifterMotor2num], 
-				RobotMap.d[RobotMap.lifterMotor2num], 
-				RobotMap.f[RobotMap.lifterMotor2num], 
-				RobotMap.izone[RobotMap.lifterMotor2num], 
-				RobotMap.ramp[RobotMap.lifterMotor2num], 0);
 //		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
 //		//TODO test
 //		lifterMotor2.changeControlMode(ControlMode.Follower);
@@ -58,10 +51,8 @@ public class LifterSubsystem extends Subsystem {
 //		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
 		if(isLifterSlow){
 			lifterMotor1.set(0.1);
-			lifterMotor2.set(0.1);
 		} else{
 			lifterMotor1.set(1.0);
-			lifterMotor2.set(1.0);
 			
 		}
 //		}
@@ -76,10 +67,8 @@ public class LifterSubsystem extends Subsystem {
 //		if(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
 		if(isLifterSlow){
 			lifterMotor1.set(-0.1);
-			lifterMotor2.set(-0.1);
 		} else{
 			lifterMotor1.set(-1.0);
-			lifterMotor2.set(-1.0);
 		}
 //		}
 	}
@@ -98,9 +87,7 @@ public class LifterSubsystem extends Subsystem {
 	 */
 	public void Hold(){
 		lifterMotor1.enableBrakeMode(true);
-		lifterMotor2.enableBrakeMode(true);
 		lifterMotor1.set(0.0);
-		lifterMotor2.set(0.0);
 	}
 
 	/**

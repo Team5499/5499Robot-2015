@@ -13,7 +13,6 @@ public class GrabberSubsystem extends Subsystem {
 
 	//These are miniCims?
 	public CANTalon grabberMotor1 = new CANTalon(RobotMap.grabberMotor1id);
-	private CANTalon grabberMotor2 = new CANTalon(RobotMap.grabberMotor2id);
 	public DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limitSwitch1Port);
 	public DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limitSwitch2Port);
 	
@@ -28,14 +27,8 @@ public class GrabberSubsystem extends Subsystem {
 				RobotMap.i[RobotMap.grabberMotor1num], 
 				RobotMap.d[RobotMap.grabberMotor1num], 
 				RobotMap.f[RobotMap.grabberMotor1num], 
-				RobotMap.izone[RobotMap.grabberMotor2num], 
-				RobotMap.ramp[RobotMap.grabberMotor2num], 0);
-		grabberMotor2.setPID(RobotMap.p[RobotMap.grabberMotor2num],
-				RobotMap.i[RobotMap.grabberMotor2num], 
-				RobotMap.d[RobotMap.grabberMotor2num], 
-				RobotMap.f[RobotMap.grabberMotor2num], 
-				RobotMap.izone[RobotMap.grabberMotor2num], 
-				RobotMap.ramp[RobotMap.grabberMotor2num], 0);
+				RobotMap.izone[RobotMap.grabberMotor1num], 
+				RobotMap.ramp[RobotMap.grabberMotor1num], 0);
 		
 		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
 //		grabberMotor2.changeControlMode(ControlMode.Follower);
@@ -56,7 +49,6 @@ public class GrabberSubsystem extends Subsystem {
 		//TODO check if these values need to be negative
 		if(grabberMotor1.getEncPosition() > OPEN_LIMIT){
 			grabberMotor1.set(-1.0);
-			grabberMotor2.set(-1.0);
 		}
 	}
 
@@ -70,7 +62,6 @@ public class GrabberSubsystem extends Subsystem {
 		//TODO chek if these values need to be positive
 		if(grabberMotor1.getEncPosition() < CLOSE_LIMIT){
 			grabberMotor1.set(1.0);
-			grabberMotor2.set(1.0);
 		}
 	}
 
@@ -82,9 +73,7 @@ public class GrabberSubsystem extends Subsystem {
 	 */
 	public void Hold(){
 		grabberMotor1.enableBrakeMode(true);
-		grabberMotor2.enableBrakeMode(true);
 		grabberMotor1.set(0.0);
-		grabberMotor2.set(0.0);
 	}
 
 	/**

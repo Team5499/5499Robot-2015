@@ -62,24 +62,12 @@ public class TestPIDVals extends Command {
     			RobotMap.f[RobotMap.lifterMotor1num],
     			RobotMap.izone[RobotMap.lifterMotor1num],
     			RobotMap.ramp[RobotMap.lifterMotor1num]};
-    	double[] lifter2 = {RobotMap.p[RobotMap.lifterMotor2num],
-    			RobotMap.i[RobotMap.lifterMotor2num],
-    			RobotMap.d[RobotMap.lifterMotor2num],
-    			RobotMap.f[RobotMap.lifterMotor2num],
-    			RobotMap.izone[RobotMap.lifterMotor2num],
-    			RobotMap.ramp[RobotMap.lifterMotor2num]};
     	double[] grabber1 = {RobotMap.p[RobotMap.grabberMotor1num],
     			RobotMap.i[RobotMap.grabberMotor1num],
     			RobotMap.d[RobotMap.grabberMotor1num],
     			RobotMap.f[RobotMap.grabberMotor1num],
     			RobotMap.izone[RobotMap.grabberMotor1num],
     			RobotMap.ramp[RobotMap.grabberMotor1num]};
-    	double[] grabber2 = {RobotMap.p[RobotMap.grabberMotor2num],
-    			RobotMap.i[RobotMap.grabberMotor2num],
-    			RobotMap.d[RobotMap.grabberMotor2num],
-    			RobotMap.f[RobotMap.grabberMotor2num],
-    			RobotMap.izone[RobotMap.grabberMotor2num],
-    			RobotMap.ramp[RobotMap.grabberMotor2num]};
     	
     	System.out.println("FrontLeft"
     			+ "\n	p:" + frontLeft[p]
@@ -116,13 +104,6 @@ public class TestPIDVals extends Command {
     			+ "\n	f:" + lifter1[f]
     			+ "\n	izone:" + lifter1[izone]
     			+ "\n	ramp:" + lifter1[ramp]);
-    	System.out.println("Lifter2"
-    			+ "\n	p:" + lifter2[p]
-    			+ "\n	i:" + lifter2[i]
-    			+ "\n	d:" + lifter2[d]
-    			+ "\n	f:" + lifter2[f]
-    			+ "\n	izone:" + lifter2[izone]
-    			+ "\n	ramp:" + lifter2[ramp]);
     	System.out.println("Grabber1"
     			+ "\n	p:" + grabber1[p]
     			+ "\n	i:" + grabber1[i]
@@ -130,13 +111,6 @@ public class TestPIDVals extends Command {
     			+ "\n	f:" + grabber1[f]
     			+ "\n	izone:" + grabber1[izone]
     			+ "\n	ramp:" + grabber1[ramp]);
-    	System.out.println("Grabber2"
-    			+ "\n	p:" + grabber2[p]
-    			+ "\n	i:" + grabber2[i]
-    			+ "\n	d:" + grabber2[d]
-    			+ "\n	f:" + grabber2[f]
-    			+ "\n	izone:" + grabber2[izone]
-    			+ "\n	ramp:" + grabber2[ramp]);
     	
     	SmartDashboard.putNumber("frontLeft P", frontLeft[p]);
     	SmartDashboard.putNumber("frontLeft I", frontLeft[i]);
@@ -173,12 +147,6 @@ public class TestPIDVals extends Command {
     	SmartDashboard.putNumber("lifter1 IZONE", lifter1[izone]);
     	SmartDashboard.putNumber("lifter1 RAMP", lifter1[ramp]);
 
-    	SmartDashboard.putNumber("lifter2 P", lifter2[p]);
-    	SmartDashboard.putNumber("lifter2 I", lifter2[i]);
-    	SmartDashboard.putNumber("lifter2 D", lifter2[d]);
-    	SmartDashboard.putNumber("lifter2 F", lifter2[f]);
-    	SmartDashboard.putNumber("lifter2 IZONE", lifter2[izone]);
-    	SmartDashboard.putNumber("lifter2 RAMP", lifter2[ramp]);
     	
     	SmartDashboard.putNumber("grabber1 P", grabber1[p]);
     	SmartDashboard.putNumber("grabber1 I", grabber1[i]);
@@ -187,12 +155,6 @@ public class TestPIDVals extends Command {
     	SmartDashboard.putNumber("grabber1 IZONE", grabber1[izone]);
     	SmartDashboard.putNumber("grabber1 RAMP", grabber1[ramp]);
 
-    	SmartDashboard.putNumber("grabber2 P", grabber2[p]);
-    	SmartDashboard.putNumber("grabber2 I", grabber2[i]);
-    	SmartDashboard.putNumber("grabber2 D", grabber2[d]);
-    	SmartDashboard.putNumber("grabber2 F", grabber2[f]);
-    	SmartDashboard.putNumber("grabber2 IZONE", grabber2[izone]);
-    	SmartDashboard.putNumber("grabber2 RAMP", grabber2[ramp]);
     }
 
     // Make this return true when this Command no longer needs to run execute()
