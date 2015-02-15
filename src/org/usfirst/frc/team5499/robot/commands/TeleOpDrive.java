@@ -153,7 +153,7 @@ public class TeleOpDrive extends Command {
     				+ "\n	Izone: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getIZone())
     				+ "\n	EncVel: "+ String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getEncVelocity())
     				+ "\n	EncPos: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getEncPosition());
-    		String backRightString = "BackRight"
+    		String backRightString = "\nBackRight"
     				+ "\n	P: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getP())
     				+ "\n	I: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getI())
     				+ "\n	D: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getD())
@@ -161,7 +161,7 @@ public class TeleOpDrive extends Command {
     				+ "\n	Izone: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getIZone())
     				+ "\n	EncVel: "+ String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getEncVelocity())
     				+ "\n	EncPos: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getEncPosition());
-    		String frontLeftString = "FrontLeft"
+    		String frontLeftString = "\nFrontLeft"
     				+ "\n	P: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getP())
     				+ "\n	I: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getI())
     				+ "\n	D: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getD())
@@ -169,7 +169,7 @@ public class TeleOpDrive extends Command {
     				+ "\n	Izone: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getIZone())
     				+ "\n	EncVel: "+ String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getEncVelocity())
     				+ "\n	EncPos: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getEncPosition());
-    		String frontRightString = "FrontRight\n"
+    		String frontRightString = "\nFrontRight\n"
     				+ "\n	P: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getP())
     				+ "\n	I: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getI())
     				+ "\n	D: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getD())
