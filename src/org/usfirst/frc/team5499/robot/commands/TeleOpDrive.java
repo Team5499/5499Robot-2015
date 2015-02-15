@@ -44,7 +44,7 @@ public class TeleOpDrive extends Command {
     	
     	
     	//slow mode toggle for the lifter
-    	if (Robot.oi.stick.getPOV() == Robot.oi.slowLifterDeg){
+    	if (Robot.oi.stick.getRawButton(Robot.oi.slowLifterButton)){
     		Robot.lifterSubsystem.isLifterSlow ^= true; //XOR bitwise operation <a>http://en.wikipedia.org/wiki/Exclusive_or</a>
     	}
 
@@ -84,6 +84,9 @@ public class TeleOpDrive extends Command {
     	} else{
     		Robot.grabberSubsystem.Hold();
     	}
+    	
+//    	if (Robot.oi.stick.getRawButton(5)) Robot.lifterSubsystem.Raise();
+//    	else if (Robot.oi.stick.getRawButton(6)) Robot.lifterSubsystem.Lower();
     	
     	
     	//Inform driver about active modes

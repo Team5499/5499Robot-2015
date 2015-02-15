@@ -19,7 +19,8 @@ public class OI {
 	public int rotateButton = 2;
 	public int grabberOpenButton = 3;
 	public int releaseButton = 4;
-	public int lowerToFloorButton = 5;
+	public int slowLifterButton = 5;
+	public int lowerToFloorButton = 6;
 	public int grabBinButton = 7;
 	public int getToBinButton = 8;
 	public int grabToteButton = 9;
@@ -31,10 +32,10 @@ public class OI {
 	
 	
 	//Degress for the POV button
-	public int lifterRaiseDeg = 0;
+	public int lifterRaiseDeg = 180;
 	public int grabberOpenDeg1 = 90;
-	public int lifterLowerDeg = 180;
-	public int slowLifterDeg = 270;
+	public int lifterLowerDeg = 0;
+
 	
 	
     //// CREATING BUTTONS

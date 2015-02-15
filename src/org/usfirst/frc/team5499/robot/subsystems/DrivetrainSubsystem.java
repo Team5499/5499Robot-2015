@@ -58,9 +58,9 @@ public class DrivetrainSubsystem extends Subsystem {
     	
     	//The motors are facing each other and some end up having opposite outputs relative to those across
     	motorFrontLeft.reverseOutput(false);
-    	motorFrontRight.reverseOutput(true); //counter the orientation of the motor
+    	motorFrontRight.reverseOutput(false); //counter the orientation of the motor
     	motorBackLeft.reverseOutput(false);
-    	motorBackRight.reverseOutput(true); //counter the orientation of the motor
+    	motorBackRight.reverseOutput(false); //counter the orientation of the motor
     	//Set smooth accel and decel
     	
     	// not needed set in setPID
