@@ -7,13 +7,11 @@ import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.GrabberSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
 
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,7 +27,27 @@ public class Robot extends IterativeRobot {
 	public static DrivetrainSubsystem driveTrainSubsystem;
 	public static LifterSubsystem lifterSubsystem;
 	public static GrabberSubsystem grabberSubsystem;
-
+//	public static MotorSubsystem motorFrontLeft= new MotorSubsystem("motorFL",RobotMap.p[RobotMap.frontLeftWheelnum], 
+//			RobotMap.i[RobotMap.frontLeftWheelnum],
+//			RobotMap.d[RobotMap.frontLeftWheelnum],
+//			RobotMap.motorFrontLeftid
+//			);
+//	public static MotorSubsystem motorFrontRight= new MotorSubsystem("motorFR",RobotMap.p[RobotMap.frontRightWheelnum], 
+//			RobotMap.i[RobotMap.frontRightWheelnum],
+//			RobotMap.d[RobotMap.frontRightWheelnum],
+//			RobotMap.motorFrontRightid
+//			);
+//	public static MotorSubsystem motorBackLeft= new MotorSubsystem("motorBL",RobotMap.p[RobotMap.backLeftWheelnum], 
+//			RobotMap.i[RobotMap.backLeftWheelnum],
+//			RobotMap.d[RobotMap.frontRightWheelnum],
+//			RobotMap.motorBackLeftid
+//			);
+//	public static MotorSubsystem motorBackRight= new MotorSubsystem("motorBR",RobotMap.p[RobotMap.backRightWheelnum], 
+//			RobotMap.i[RobotMap.backRightWheelnum],
+//			RobotMap.d[RobotMap.backRightWheelnum],
+//			RobotMap.motorBackRightid
+//			);
+	
 	Command autonomousCommand;
 	Command teleopCommand;
 
@@ -44,10 +62,33 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		// instantiate the command used for the autonomous period
 		driveTrainSubsystem = new DrivetrainSubsystem();
+		//driveTrainSubsystem.init();
 		autonomousCommand = new RateMotors();
 		teleopCommand = new TeleOpDrive();
 		pdp = new PowerDistributionPanel();
 		lifterSubsystem = new LifterSubsystem();
+		grabberSubsystem = new GrabberSubsystem();
+//		motorFrontLeft = new MotorSubsystem("motorFL",RobotMap.p[RobotMap.frontLeftWheelnum], 
+//				RobotMap.i[RobotMap.frontLeftWheelnum],
+//				RobotMap.d[RobotMap.frontLeftWheelnum],
+//				RobotMap.motorFrontLeftid
+//				);
+//		motorFrontRight = new MotorSubsystem("motorFR",RobotMap.p[RobotMap.frontRightWheelnum], 
+//				RobotMap.i[RobotMap.frontRightWheelnum],
+//				RobotMap.d[RobotMap.frontRightWheelnum],
+//				RobotMap.motorFrontRightid
+//				);
+//		motorBackLeft = new MotorSubsystem("motorBL",RobotMap.p[RobotMap.backLeftWheelnum], 
+//				RobotMap.i[RobotMap.backLeftWheelnum],
+//				RobotMap.d[RobotMap.frontRightWheelnum],
+//				RobotMap.motorBackLeftid
+//				);
+//		motorBackRight = new MotorSubsystem("motorBR",RobotMap.p[RobotMap.backRightWheelnum], 
+//				RobotMap.i[RobotMap.backRightWheelnum],
+//				RobotMap.d[RobotMap.backRightWheelnum],
+//				RobotMap.motorBackRightid
+//				);
+
 
 		//The Talons are on break mode, which is ideal for our purpose.
 		//However, sudden breaking is bad for the gears, so this should gradually decrease the speed of the motors at stopping

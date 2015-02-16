@@ -14,20 +14,19 @@ public class GrabberSubsystem extends Subsystem {
 
 	//These are miniCims?
 	CANTalon gripperMotor1 = new CANTalon(RobotMap.gripperMotor1id);
-	CANTalon gripperMotor2 = new CANTalon(RobotMap.gripperMotor2id);
 	DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limit1SwitchPort);
 	DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limit2SwitchPort);
 
 
 	public void initDefaultCommand() {
 		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
-		gripperMotor2.changeControlMode(ControlMode.Follower);
-		gripperMotor2.set(gripperMotor1.getDeviceID());
+		//gripperMotor2.changeControlMode(ControlMode.Follower);
+		//gripperMotor2.set(gripperMotor1.getDeviceID());
 		//Set smooth accel and decel
-		gripperMotor1.setVoltageRampRate(17);
+		//gripperMotor1.setVoltageRampRate(17);
 		//Set limits to not break the system
-		gripperMotor1.setForwardSoftLimit(750); //the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
-		gripperMotor1.setReverseSoftLimit(-750); //-the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
+		//gripperMotor1.setForwardSoftLimit(750); //the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
+		//gripperMotor1.setReverseSoftLimit(-750); //-the 750 is arbitrary (ie needs calibration). The units are presumably in ticks. 750 is 3 revolutions of the encoder disk (1 rev is 250)
 	}
 
 	/**
@@ -37,8 +36,7 @@ public class GrabberSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Close(){
-		gripperMotor1.set(-1.0);
-		gripperMotor2.set(-1.0);
+		gripperMotor1.set(-0.5);
 	}
 
 	/**
@@ -48,8 +46,7 @@ public class GrabberSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Open(){
-		gripperMotor1.set(1.0);
-		gripperMotor2.set(1.0);
+		gripperMotor1.set(0.5);
 	}
 
 	/**
@@ -60,9 +57,7 @@ public class GrabberSubsystem extends Subsystem {
 	 */
 	public void Hold(){
 		gripperMotor1.enableBrakeMode(true);
-		gripperMotor2.enableBrakeMode(true);
 		gripperMotor1.set(0.0);
-		gripperMotor2.set(0.0);
 	}	
 
 }

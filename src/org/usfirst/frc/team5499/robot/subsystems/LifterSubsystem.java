@@ -13,19 +13,18 @@ public class LifterSubsystem extends Subsystem {
 
 	//These are miniCims?
 	public CANTalon lifterMotor1 = new CANTalon(RobotMap.lifterMotor1id);
-	public CANTalon lifterMotor2 = new CANTalon(RobotMap.lifterMotor2id);
 
 
 
 	public void initDefaultCommand() {
 		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
-		lifterMotor2.changeControlMode(ControlMode.Follower);
-		lifterMotor2.set(lifterMotor1.getDeviceID());
+		//lifterMotor2.changeControlMode(ControlMode.Follower);
+		//lifterMotor2.set(lifterMotor1.getDeviceID());
 		//Set smooth accel and decel
-		lifterMotor1.setVoltageRampRate(17);
+		//lifterMotor1.setVoltageRampRate(17);
 		//Set limits to not break the system
-		lifterMotor1.setForwardSoftLimit(1750); //1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
-		lifterMotor1.setReverseSoftLimit(-1750); //-1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
+		//lifterMotor1.setForwardSoftLimit(1750); //1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
+		//lifterMotor1.setReverseSoftLimit(-1750); //-1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
 	}
 
 	/**
@@ -35,8 +34,7 @@ public class LifterSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Raise(){
-		lifterMotor1.set(1.0);
-		lifterMotor2.set(1.0);
+		lifterMotor1.set(0.8);
 	}
 
 	/**
@@ -46,8 +44,7 @@ public class LifterSubsystem extends Subsystem {
 	 * TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 	 */
 	public void Lower(){
-		lifterMotor1.set(-1.0);
-		lifterMotor2.set(-1.0);
+		lifterMotor1.set(-0.3);
 	}
 
 	/**
@@ -57,9 +54,7 @@ public class LifterSubsystem extends Subsystem {
 	 */
 	public void Hold(){
 		lifterMotor1.enableBrakeMode(true);
-		lifterMotor2.enableBrakeMode(true);
 		lifterMotor1.set(0.0);
-		lifterMotor2.set(0.0);
 	}
 }
 

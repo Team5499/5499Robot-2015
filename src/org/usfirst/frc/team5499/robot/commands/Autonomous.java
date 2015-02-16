@@ -1,5 +1,11 @@
 package org.usfirst.frc.team5499.robot.commands;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+import org.usfirst.frc.team5499.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -7,11 +13,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class Autonomous extends CommandGroup {
 
+	
     public Autonomous() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	//requires(Robot.driveTrainSubsystem);
     	while(isFinished() == false){
-    		addParallel(new GetTote());
+    		//addParallel(new GetTote());
 //    		addSequential(new);
     	}
     }
@@ -22,7 +30,6 @@ public class Autonomous extends CommandGroup {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,6 +39,7 @@ public class Autonomous extends CommandGroup {
 
     // Called once after isFinished returns true
     protected void end() {
+    	
     }
 
     // Called when another command which requires one or more of the same
