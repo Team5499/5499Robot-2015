@@ -6,11 +6,11 @@ import org.usfirst.frc.team5499.robot.Robot;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+
 
 
 /**
@@ -23,42 +23,48 @@ public class DrivetrainSubsystem extends Subsystem {
 	public CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
 	public CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
 	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
-	
-	
-	
-    public void initDefaultCommand() {
-    	Robot.driveTrainSubsystem.motorFrontLeft.setPID(RobotMap.p[RobotMap.frontLeftWheelnum],
-				RobotMap.i[RobotMap.frontLeftWheelnum], 
-				RobotMap.d[RobotMap.frontLeftWheelnum], 
-				RobotMap.f[RobotMap.frontLeftWheelnum], 
-				RobotMap.izone[RobotMap.frontLeftWheelnum], 
-				RobotMap.ramp[RobotMap.frontLeftWheelnum], 0);
-    	Robot.driveTrainSubsystem.motorFrontRight.setPID(RobotMap.p[RobotMap.frontRightWheelnum],
-				RobotMap.i[RobotMap.frontRightWheelnum], 
-				RobotMap.d[RobotMap.frontRightWheelnum], 
-				RobotMap.f[RobotMap.frontRightWheelnum], 
-				RobotMap.izone[RobotMap.frontRightWheelnum], 
-				RobotMap.ramp[RobotMap.frontRightWheelnum], 0);
-    	Robot.driveTrainSubsystem.motorBackLeft.setPID(RobotMap.p[RobotMap.backLeftWheelnum],
-				RobotMap.i[RobotMap.backLeftWheelnum], 
-				RobotMap.d[RobotMap.backLeftWheelnum], 
-				RobotMap.f[RobotMap.backLeftWheelnum], 
-				RobotMap.izone[RobotMap.backLeftWheelnum], 
-				RobotMap.ramp[RobotMap.backLeftWheelnum], 0);
-    	Robot.driveTrainSubsystem.motorFrontLeft.setPID(RobotMap.p[RobotMap.backRightWheelnum],
-				RobotMap.i[RobotMap.backRightWheelnum], 
-				RobotMap.d[RobotMap.backRightWheelnum], 
-				RobotMap.f[RobotMap.backRightWheelnum], 
-				RobotMap.izone[RobotMap.backRightWheelnum], 
-				RobotMap.ramp[RobotMap.backRightWheelnum], 0);
-    	motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+
+	public void init(){
+		motorFrontLeft.changeControlMode(ControlMode.Speed);
+		motorBackLeft.changeControlMode(ControlMode.Speed);
+		motorFrontRight.changeControlMode(ControlMode.Speed);
+		motorBackRight.changeControlMode(ControlMode.Speed);
+		motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	motorFrontLeft.reverseOutput(false);
-    	motorFrontRight.reverseOutput(true); //counter the opposite facing of the motor
-    	motorBackLeft.reverseOutput(false);
-    	motorBackRight.reverseOutput(true); //counter the opposite facing of the motor
+		//Robot.driveTrainSubsystem.motorFrontLeft.setPID(1,0,0,1,0,0,0);//RobotMap.p[RobotMap.frontLeftWheelnum],
+				//RobotMap.i[RobotMap.frontLeftWheelnum], 
+				//RobotMap.d[RobotMap.frontLeftWheelnum]);
+				//RobotMap.f[RobotMap.frontLeftWheelnum], 
+				//RobotMap.izone[RobotMap.frontLeftWheelnum], 
+				//RobotMap.ramp[RobotMap.frontLeftWheelnum], 0);
+    	//Robot.driveTrainSubsystem.motorFrontRight.setPID(RobotMap.p[RobotMap.frontRightWheelnum],
+//				RobotMap.i[RobotMap.frontRightWheelnum], 
+//				RobotMap.d[RobotMap.frontRightWheelnum], 
+//				RobotMap.f[RobotMap.frontRightWheelnum], 
+//				RobotMap.izone[RobotMap.frontRightWheelnum], 
+//				RobotMap.ramp[RobotMap.frontRightWheelnum], 0);
+//    	Robot.driveTrainSubsystem.motorBackLeft.setPID(RobotMap.p[RobotMap.backLeftWheelnum],
+//				RobotMap.i[RobotMap.backLeftWheelnum], 
+//				RobotMap.d[RobotMap.backLeftWheelnum], 
+//				RobotMap.f[RobotMap.backLeftWheelnum], 
+//				RobotMap.izone[RobotMap.backLeftWheelnum], 
+//				RobotMap.ramp[RobotMap.backLeftWheelnum], 0);
+//    	Robot.driveTrainSubsystem.motorFrontLeft.setPID(RobotMap.p[RobotMap.backRightWheelnum],
+//				RobotMap.i[RobotMap.backRightWheelnum], 
+//				RobotMap.d[RobotMap.backRightWheelnum], 
+//				RobotMap.f[RobotMap.backRightWheelnum], 
+//				RobotMap.izone[RobotMap.backRightWheelnum], 
+//				RobotMap.ramp[RobotMap.backRightWheelnum], 0);
+	}
+	
+    public void initDefaultCommand() {
+    	
+    	//motorFrontLeft.reverseOutput(false);
+    	//motorFrontRight.reverseOutput(true); //counter the opposite facing of the motor
+    	//motorBackLeft.reverseOutput(false);
+    	//motorBackRight.reverseOutput(true); //counter the opposite facing of the motor
     	//Set smooth accel and decel
     	
     	// not needed set in setPID
@@ -66,10 +72,16 @@ public class DrivetrainSubsystem extends Subsystem {
 //    	motorFrontRight.setVoltageRampRate(17);
 //    	motorBackLeft.setVoltageRampRate(17);
 //    	motorBackRight.setVoltageRampRate(17);
+    	
+
     }
     
-    public void autoMove(){
-    	
+    public void move_polar(double X, double Y, double Z){
+    	double[] motorspeeds = motorspeeds_polar(X,Y,Z);
+    	motorFrontLeft.set(motorspeeds[RobotMap.frontLeftWheelnum]);
+    	motorFrontRight.set(motorspeeds[RobotMap.frontRightWheelnum]);
+    	motorBackLeft.set(motorspeeds[RobotMap.backLeftWheelnum]);
+    	motorBackRight.set(motorspeeds[RobotMap.backRightWheelnum]);
     }
     
     
@@ -82,21 +94,12 @@ public class DrivetrainSubsystem extends Subsystem {
      *
      */
     public void move(double X, double Y, double Z){
-    	System.out.print("X: ");
-    	System.out.print(X);
-    	System.out.print(" Y: ");
-    	System.out.print(Y);
-    	System.out.print(" Z: ");
-    	System.out.println(Z);
     	double[] motorspeeds = motorspeeds(X, Y, Z, 0);
-    	System.out.println(" Motor 1: ");
-    	System.out.println(motorspeeds[0]);
-    	System.out.println(" Motor 2: ");
-    	System.out.println(motorspeeds[1]);
     	motorFrontLeft.set(motorspeeds[RobotMap.frontLeftWheelnum]);
     	motorFrontRight.set(motorspeeds[RobotMap.frontRightWheelnum]);
     	motorBackLeft.set(motorspeeds[RobotMap.backLeftWheelnum]);
     	motorBackRight.set(motorspeeds[RobotMap.backRightWheelnum]);
+    	
     	
     
     }
@@ -123,23 +126,31 @@ public class DrivetrainSubsystem extends Subsystem {
     	double cosAng = Math.cos(Math.PI/4);
     	double sinAng = Math.sin(Math.PI/4);
     	double Xprime = cosAng * X - sinAng * Y;
+    	Xprime = Xprime * -1;
     	double Yprime = sinAng * X + cosAng * Y;
     	
-    	System.out.println("Xprime");
-    	System.out.println(Xprime);
-    	System.out.println("Yprime");
-    	System.out.println(Yprime);
-    	
     	motorspeeds[RobotMap.frontLeftWheelnum] = Yprime + Z;
-    	motorspeeds[RobotMap.frontRightWheelnum] = Xprime - Z;
+    	motorspeeds[RobotMap.frontRightWheelnum] = -1 * ( Xprime - Z);
     	motorspeeds[RobotMap.backLeftWheelnum] = Xprime  + Z;
-    	motorspeeds[RobotMap.backRightWheelnum] =Yprime - Z;
+    	motorspeeds[RobotMap.backRightWheelnum] = -1 * (Yprime - Z);
     	
-    	normalize(motorspeeds);
+    	//normalize(motorspeeds);
     	
     	return motorspeeds;
     	
     }
+    public double[] motorspeeds_polar(double direction, double magnitude, double rotation){
+    	double motorspeeds[] = new double[4];
+    	double sinDir = Math.sin(direction + Math.PI/4);
+    	double cosDir = Math.cos(direction + Math.PI/4);
+    	
+    	motorspeeds[RobotMap.frontLeftWheelnum] = magnitude * sinDir + rotation;
+    	motorspeeds[RobotMap.frontRightWheelnum] = magnitude * cosDir - rotation;
+    	motorspeeds[RobotMap.backLeftWheelnum] = magnitude * cosDir + rotation;
+    	motorspeeds[RobotMap.backRightWheelnum] = magnitude * sinDir - rotation;
+    	
+    	return motorspeeds;
+    	}
 
     /**
      * This function normalizes the motor speeds, meaning it divides by the max speed so that they are all between -1, and 1.
