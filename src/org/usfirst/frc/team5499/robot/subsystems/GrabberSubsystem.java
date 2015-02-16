@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GrabberSubsystem extends Subsystem {
 
 	//These are miniCims?
-	public CANTalon grabberMotor1 = new CANTalon(RobotMap.grabberMotor1id);
+	public CANTalon grabberMotor = new CANTalon(RobotMap.grabberMotor1id);
 	public DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limitSwitch1Port);
 	public DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limitSwitch2Port);
 	
@@ -23,12 +23,6 @@ public class GrabberSubsystem extends Subsystem {
 
 
 	public void initDefaultCommand() {
-		grabberMotor1.setPID(RobotMap.p[RobotMap.grabberMotor1num],
-				RobotMap.i[RobotMap.grabberMotor1num], 
-				RobotMap.d[RobotMap.grabberMotor1num], 
-				RobotMap.f[RobotMap.grabberMotor1num], 
-				RobotMap.izone[RobotMap.grabberMotor1num], 
-				RobotMap.ramp[RobotMap.grabberMotor1num], 0);
 		
 		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
 //		grabberMotor2.changeControlMode(ControlMode.Follower);
@@ -47,8 +41,8 @@ public class GrabberSubsystem extends Subsystem {
 	public void Close(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//TODO check if these values need to be negative
-		if(grabberMotor1.getEncPosition() > OPEN_LIMIT){
-			grabberMotor1.set(-1.0);
+		if(grabberMotor.getEncPosition() > OPEN_LIMIT){
+			grabberMotor.set(-1.0);
 		}
 	}
 
@@ -60,8 +54,8 @@ public class GrabberSubsystem extends Subsystem {
 	public void Open(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//TODO chek if these values need to be positive
-		if(grabberMotor1.getEncPosition() < CLOSE_LIMIT){
-			grabberMotor1.set(1.0);
+		if(grabberMotor.getEncPosition() < CLOSE_LIMIT){
+			grabberMotor.set(1.0);
 		}
 	}
 
@@ -72,8 +66,8 @@ public class GrabberSubsystem extends Subsystem {
 	 * Or set a particular forward/reverse limit, an example of which can be found in initDefaultCommand()
 	 */
 	public void Hold(){
-		grabberMotor1.enableBrakeMode(true);
-		grabberMotor1.set(0.0);
+		grabberMotor.enableBrakeMode(true);
+		grabberMotor.set(0.0);
 	}
 
 	/**
@@ -83,9 +77,9 @@ public class GrabberSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */
 	public void GrabBin(){
-		if(grabberMotor1.getEncPosition() < BIN_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
+		if(grabberMotor.getEncPosition() < BIN_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Open();		
-		} else if(grabberMotor1.getEncPosition() > BIN_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
+		} else if(grabberMotor.getEncPosition() > BIN_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Close();
 		} else{
 			Hold();
@@ -99,9 +93,9 @@ public class GrabberSubsystem extends Subsystem {
 	 * Default is to hold
 	 */
 	public void GrabTote(){
-		if(grabberMotor1.getEncPosition() < TOTE_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
+		if(grabberMotor.getEncPosition() < TOTE_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Open();		
-		} else if(grabberMotor1.getEncPosition() > TOTE_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
+		} else if(grabberMotor.getEncPosition() > TOTE_LIMIT || (!limitSwitchLeft.get() && !limitSwitchRight.get())){
 			Close();
 		} else{
 			Hold();

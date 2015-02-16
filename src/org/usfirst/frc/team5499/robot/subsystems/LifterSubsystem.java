@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class LifterSubsystem extends Subsystem {
 
 	//These are miniCims?
-	public CANTalon lifterMotor1 = new CANTalon(RobotMap.lifterMotor1id);
+	public CANTalon lifterMotor = new CANTalon(RobotMap.lifterMotor1id);
 
 	public final int TOP_LIMIT = 750; //FIXME calibrate
 	public final int BOTTOM_LIMIT = -750; //FiXME calibrate
@@ -24,12 +24,6 @@ public class LifterSubsystem extends Subsystem {
 	public boolean isLifterSlow; //for slow mode
 
 	public void initDefaultCommand() {
-		lifterMotor1.setPID(RobotMap.p[RobotMap.lifterMotor1num],
-				RobotMap.i[RobotMap.lifterMotor1num], 
-				RobotMap.d[RobotMap.lifterMotor1num], 
-				RobotMap.f[RobotMap.lifterMotor1num], 
-				RobotMap.izone[RobotMap.lifterMotor1num], 
-				RobotMap.ramp[RobotMap.lifterMotor1num], 0);
 		//		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
 		//		//TODO test
 		//		lifterMotor2.changeControlMode(ControlMode.Follower);
@@ -50,9 +44,9 @@ public class LifterSubsystem extends Subsystem {
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
 		if(isLifterSlow){
-			lifterMotor1.set(0.5);
+			lifterMotor.set(0.5);
 		} else{
-			lifterMotor1.set(1.0);
+			lifterMotor.set(1.0);
 
 		}
 		//		}
@@ -66,9 +60,9 @@ public class LifterSubsystem extends Subsystem {
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 //		if(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
 			if(isLifterSlow){
-				lifterMotor1.set(-0.3);
+				lifterMotor.set(-0.3);
 			} else{
-				lifterMotor1.set(-0.6);
+				lifterMotor.set(-0.6);
 			}
 		}
 	//}
@@ -77,7 +71,7 @@ public class LifterSubsystem extends Subsystem {
 	 * Move the lifter all of the way down to the floor
 	 */
 	public void LowerToFloor(){
-		while(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
+		while(lifterMotor.getEncPosition() > BOTTOM_LIMIT){
 			Lower();
 		}
 	}
@@ -86,8 +80,8 @@ public class LifterSubsystem extends Subsystem {
 	 * This doesn't work. Could this be implemented with PID?
 	 */
 	public void Hold(){
-		lifterMotor1.enableBrakeMode(true);
-		lifterMotor1.set(0.0);
+		lifterMotor.enableBrakeMode(true);
+		lifterMotor.set(0.0);
 	}
 
 	/**
@@ -96,9 +90,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */
 	public void GetToBin(){
-		if(lifterMotor1.getEncPosition() < BIN_LIMIT){
+		if(lifterMotor.getEncPosition() < BIN_LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > BIN_LIMIT){
+		} else if(lifterMotor.getEncPosition() > BIN_LIMIT){
 			Lower();
 		} else {
 			Hold();
@@ -111,9 +105,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */
 	public void GetToTote1(){
-		if(lifterMotor1.getEncPosition() < TOTE1LIMIT){
+		if(lifterMotor.getEncPosition() < TOTE1LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > TOTE1LIMIT){
+		} else if(lifterMotor.getEncPosition() > TOTE1LIMIT){
 			Lower();
 		} else {
 			Hold();
@@ -126,9 +120,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */	
 	public void GetToTote2(){
-		if(lifterMotor1.getEncPosition() < TOTE2LIMIT){
+		if(lifterMotor.getEncPosition() < TOTE2LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > TOTE2LIMIT){
+		} else if(lifterMotor.getEncPosition() > TOTE2LIMIT){
 			Lower();
 		} else {
 			Hold();
@@ -141,9 +135,9 @@ public class LifterSubsystem extends Subsystem {
 	 * Default is to hold.
 	 */	
 	public void GetToTote3(){
-		if(lifterMotor1.getEncPosition() < TOTE3LIMIT){
+		if(lifterMotor.getEncPosition() < TOTE3LIMIT){
 			Raise();
-		} else if(lifterMotor1.getEncPosition() > TOTE3LIMIT){
+		} else if(lifterMotor.getEncPosition() > TOTE3LIMIT){
 			Lower();
 		} else {
 			Hold();

@@ -54,7 +54,7 @@ public class RobotMap {
 	public static int motorBackLeftPDPChannel = 1;
 	public static int motorBackRightPDPChannel = 14; 
 	public static int lifter1PDPChannel = 13;
-	public static int lifter2PDPChannel = 12;
+	public static int grabber1PDPChannel = 12;
 	
 
 	
@@ -63,52 +63,7 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	
-	//TODO documentation
-	public static double[] p = new double[6];
-	public static double[] i = new double[6];
-	public static double[] d = new double[6];
-	public static double[] f = new double[6];
-	public static int[] izone = new int[6];
-	public static double[] ramp = new double[6];
 	
 	public void init(){
-		//TODO documentation
-		//TODO calibrate
-		p[frontLeftWheelnum] = 1.0;
-		p[frontRightWheelnum] = 1.0;
-		p[backLeftWheelnum] = 1.0;
-		p[backRightWheelnum] = 1.0;
-		p[grabberMotor1num] = 1.0;
-		p[lifterMotor1num] = 1.0;
-		i[frontLeftWheelnum] = 0.1;
-		i[frontRightWheelnum] = 0.1;
-		i[backLeftWheelnum] = 0.1;
-		i[backRightWheelnum] = 0.1;
-		i[grabberMotor1num] = 0.1;
-		i[lifterMotor1num] = 0.1;
-		d[frontLeftWheelnum] = 0.1;
-		d[frontRightWheelnum] = 0.1;
-		d[backLeftWheelnum] = 0.1;
-		d[backRightWheelnum] = 0.1;
-		d[grabberMotor1num] = 0.1;
-		d[lifterMotor1num] = 0.1;
-		f[frontLeftWheelnum] = 1.0;
-		f[frontRightWheelnum] = 1.0;
-		f[backLeftWheelnum] = 1.0;
-		f[backRightWheelnum] = 1.0;
-		f[grabberMotor1num] = 1.0;
-		f[lifterMotor1num] = 1.0;
-		izone[frontLeftWheelnum] = 0;
-		izone[frontRightWheelnum] = 0;
-		izone[backLeftWheelnum] = 0;
-		izone[backRightWheelnum] = 0;
-		izone[grabberMotor1num] = 0;
-		izone[lifterMotor1num] = 0;
-		ramp[frontLeftWheelnum] = 17.0;
-		ramp[frontRightWheelnum] = 17.0;
-		ramp[backLeftWheelnum] = 17.0;
-		ramp[backRightWheelnum] = 17.0;
-		ramp[grabberMotor1num] = 17.0;
-		ramp[lifterMotor1num] = 17.0;
 	}
 }

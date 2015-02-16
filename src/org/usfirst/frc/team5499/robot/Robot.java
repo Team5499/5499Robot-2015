@@ -110,11 +110,12 @@ public class Robot extends IterativeRobot {
 		//This is for both up and down
 		//the 17 is somewhat arbitrary -- the ramp up is noticeable, but only tested on full (1.0)
 
-//		System.out.println("Setting the voltage ramp rate");
-//		Robot.driveTrainSubsystem.motorFrontLeft.setVoltageRampRate(17);
-//		Robot.driveTrainSubsystem.motorFrontRight.setVoltageRampRate(17);
-//		Robot.driveTrainSubsystem.motorBackLeft.setVoltageRampRate(17);
-//		Robot.driveTrainSubsystem.motorBackRight.setVoltageRampRate(17);
+		Robot.driveTrainSubsystem.motorFrontLeft.setCloseLoopRampRate(17);
+		Robot.driveTrainSubsystem.motorFrontRight.setCloseLoopRampRate(17);
+		Robot.driveTrainSubsystem.motorBackLeft.setCloseLoopRampRate(17);
+		Robot.driveTrainSubsystem.motorBackRight.setCloseLoopRampRate(17);
+		Robot.lifterSubsystem.lifterMotor.setCloseLoopRampRate(17);
+		Robot.grabberSubsystem.grabberMotor.setCloseLoopRampRate(17);
 	}
 
 	public void disabledPeriodic() {
