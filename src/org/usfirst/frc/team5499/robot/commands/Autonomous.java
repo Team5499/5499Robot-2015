@@ -42,7 +42,6 @@ public class Autonomous extends CommandGroup {
 					while(Robot.cameraSubsystem.distToTote < Robot.cameraSubsystem.AUTO_FORWARD_LIMIT){
 						addParallel(Robot.moveForward);
 					}
-
 					if (totesPickedUp == 0){
 						addSequential(Robot.getToTote1);
 					} else if (totesPickedUp == 1){

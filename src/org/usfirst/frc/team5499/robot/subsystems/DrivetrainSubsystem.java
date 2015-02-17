@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.CANTalon;
 //github.com/Team5499/5499Robot.gitimport edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -23,8 +22,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	public CANTalon motorFrontLeft = new CANTalon(RobotMap.motorFrontLeftid);
 	public CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
 	public CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
-	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
-
+	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);	
+	
 
 	public void initDefaultCommand() {   	
 		//Set the feedback device to be the encoder

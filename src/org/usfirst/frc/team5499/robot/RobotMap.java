@@ -43,19 +43,20 @@ public class RobotMap {
 	public final static int motorFrontLeftid = 4;
 	public final static int grabberMotorid = 5;
 	public final static int lifterMotorid = 6;
+
 	
-
-
 	/**
-	 * These values are for getting the current. Do not use the motor controller ids for this.
-	 * TODO remove after testing is done
+	 * Create BUTTONS
 	 */
-	public final static int motorFrontLeftPDPChannel = 15;
-	public final static int motorFrontRightPDPChannel = 0;
-	public final static int motorBackLeftPDPChannel = 1;
-	public final static int motorBackRightPDPChannel = 14; 
-	public final static int lifter1PDPChannel = 13;
-	public final static int grabber1PDPChannel = 12;
+	//This is a usb port on a computer. It doesn't seem to have any impedance on anything
+	public static int joystickPort = 1;
+	//This is a channel on the joystick
+	public static int rotateButton = 2;
+	public static int lifterRaiseButton = 3; //TODO check what this button is and adjust accordingly
+	public static int lifterLowerButton = 4; //TODO check what this button is and adjust accordingly //TODO check what this button is and adjust accordingly. This will have to be on and off
+	//TODO may want to do this thru the lever thing (the thing that is below the joystick)
+	public static int grabberCloseButton = 5; //TODO check what this button is and adjust accordingly
+	public static int grabberOpenButton = 6; //TODO check what this button is and adjust accordingly
 	
 
 	
@@ -63,7 +64,6 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	
 	
 	public void init(){
 	}

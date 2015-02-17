@@ -41,7 +41,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
 	
-
 	Command autonomousCommand;
 	public Command teleopCommand;
 
@@ -82,6 +81,7 @@ public class Robot extends IterativeRobot {
 		grabberSubsystem = new GrabberSubsystem();
 		pdp = new PowerDistributionPanel();
 		lifterSubsystem = new LifterSubsystem();
+
 		//Auto Commands
 		moveForward = new MoveForward();
 		moveBackward = new MoveBackward();

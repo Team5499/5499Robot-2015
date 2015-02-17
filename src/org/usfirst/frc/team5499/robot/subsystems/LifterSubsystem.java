@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LifterSubsystem extends Subsystem {
 
-	//These are miniCims?
 	public CANTalon lifterMotor = new CANTalon(RobotMap.lifterMotorid);
 
 	public final int TOP_LIMIT = 750; //FIXME calibrate
@@ -21,16 +20,28 @@ public class LifterSubsystem extends Subsystem {
 	public final int TOTE3LIMIT = -150; //FIXME calibrate
 
 
+
 	public boolean isLifterSlow; //for slow mode
 
 	public void initDefaultCommand() {
+
+		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
+		//lifterMotor2.changeControlMode(ControlMode.Follower);
+		//lifterMotor2.set(lifterMotor1.getDeviceID());
+
 		//		//Set motor2 as the slave motor to motor1, the master motor. This makes for less coding. motor2 will copy everything motor1 does.
 		//		//TODO test
 		//		lifterMotor2.changeControlMode(ControlMode.Follower);
 		//		lifterMotor2.set(lifterMotor1.getDeviceID());
+
 		//Set smooth accel and decel
+
+		//lifterMotor1.setVoltageRampRate(17);
+
 		//		lifterMotor1.setVoltageRampRate(17);//FIXME calibrate
 		//Set limits to not break the system
+		//lifterMotor1.setForwardSoftLimit(1750); //1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
+		//lifterMotor1.setReverseSoftLimit(-1750); //-1750 is arbitrary (ie needs calibration). The units are presumably in ticks. 1750 is 7 revolutions of the encoder disk (1 rev is 250)
 		//lifterMotor1.setForwardSoftLimit(TOP_LIMIT);
 		//lifterMotor1.setReverseSoftLimit(BOTTOM_LIMIT);
 		
