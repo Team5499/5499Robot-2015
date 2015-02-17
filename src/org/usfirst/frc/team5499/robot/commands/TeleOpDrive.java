@@ -1,12 +1,6 @@
 package org.usfirst.frc.team5499.robot.commands;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import org.usfirst.frc.team5499.robot.Robot;
-import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,7 +22,7 @@ public class TeleOpDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lifterSubsystem.isLifterSlow = true;
+    	Robot.lifterSubsystem.isLifterSlow = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -51,11 +45,13 @@ public class TeleOpDrive extends Command {
     	
     	//slow mode toggle for the lifter
     	if (Robot.oi.stick.getRawButton(Robot.oi.slowLifterButton)){
-    		Robot.lifterSubsystem.isLifterSlow ^= true; //XOR bitwise operation <a>http://en.wikipedia.org/wiki/Exclusive_or</a>
+    		Robot.lifterSubsystem.isLifterSlow = !Robot.lifterSubsystem.isLifterSlow; 
+    		System.out.println("IsLifterSlow: " + Robot.lifterSubsystem.isLifterSlow);
     	}
 
     	//Call the move method to actually set the motors' speeds
-    	Robot.driveTrainSubsystem.mecanumDrive.mecanumDrive_Cartesian(X, Y, Z, 0.0);
+//    	Robot.driveTrainSubsystem.mecanumDrive.mecanumDrive_Cartesian(X, Y, Z, 0.0);
+    	
     	
     	//Lifter binding
     	if(Robot.oi.stick.getPOV() == Robot.oi.lifterRaiseDeg){
@@ -79,7 +75,7 @@ public class TeleOpDrive extends Command {
     	//Grabber binding
     	if (Robot.oi.stick.getRawButton(Robot.oi.grabberCloseButton)){
     		Robot.grabberSubsystem.Close();
-    	} else if (Robot.oi.stick.getPOV() == Robot.oi.grabberOpenDeg1){
+    	} else if (Robot.oi.stick.getRawButton(Robot.oi.grabberOpenButton)){
     		Robot.grabberSubsystem.Open();
     	} else if (Robot.oi.stick.getRawButton(Robot.oi.grabBinButton)){
     		Robot.grabberSubsystem.GrabBin();
@@ -135,127 +131,55 @@ public class TeleOpDrive extends Command {
 //    	System.out.println("Grabber"
 //    			+ "\n	position: "+ grabberEncVals[0]
 //    			+ "\n	velocity: " + grabberEncVals[1]);
-//    	
     	
-    	try{
-    		File file = new File("/usr/PIDVals.txt");
-    		String backLeftString = "BackLeft\n"
-    				+ "\n	P: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getP())
-    				+ "\n	I: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getI())
-    				+ "\n	D: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getD())
-    				+ "\n	F: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getF())
-    				+ "\n	IZone: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getIZone())
-    				+ "\n	EncVel: "+ String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getEncVelocity())
-    				+ "\n	EncPos: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.getEncPosition()
-    				+ "\n	Speed: " + String.valueOf(Robot.driveTrainSubsystem.motorBackLeft.get()));
-    		String backRightString = "\nBackRight"
-    				+ "\n	P: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getP())
-    				+ "\n	I: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getI())
-    				+ "\n	D: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getD())
-    				+ "\n	F: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getF())
-    				+ "\n	IZone: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getIZone())
-    				+ "\n	EncVel: "+ String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getEncVelocity())
-    				+ "\n	EncPos: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.getEncPosition()
-    				+ "\n	Speed: " + String.valueOf(Robot.driveTrainSubsystem.motorBackRight.get()));
-    		String frontLeftString = "\nFrontLeft"
-    				+ "\n	P: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getP())
-    				+ "\n	I: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getI())
-    				+ "\n	D: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getD())
-    				+ "\n	F: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getF())
-    				+ "\n	IZone: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getIZone())
-    				+ "\n	EncVel: "+ String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getEncVelocity())
-    				+ "\n	EncPos: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.getEncPosition()
-    				+ "\n	Speed: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontLeft.get()));
-    		String frontRightString = "\nFrontRight\n"
-    				+ "\n	P: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getP())
-    				+ "\n	I: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getI())
-    				+ "\n	D: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getD())
-    				+ "\n	F: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getF())
-    				+ "\n	IZone: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getIZone())
-    				+ "\n	EncVel: "+ String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getEncVelocity())
-    				+ "\n	EncPos: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.getEncPosition()
-    				+ "\n	Speed: " + String.valueOf(Robot.driveTrainSubsystem.motorFrontRight.get()));
-    		String lifterMotorString = "\nLifter\n"
-    				+ "\n	P: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.getP())
-    				+ "\n	I: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.getI())
-    				+ "\n	D: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.getD())
-    				+ "\n	F: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.getF())
-    				+ "\n	IZone: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.getIZone())
-    				+ "\n	EncVel: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.getEncVelocity())
-    				+ "\n	EncPos: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.getEncPosition())
-    				+ "\n	Speed: " + String.valueOf(Robot.lifterSubsystem.lifterMotor.get());
-    		String grabberMotorString = "\nLifter\n"
-    				+ "\n	P: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.getP())
-    				+ "\n	I: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.getI())
-    				+ "\n	D: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.getD())
-    				+ "\n	F: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.getF())
-    				+ "\n	IZone: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.getIZone())
-    				+ "\n	EncVel: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.getEncVelocity())
-    				+ "\n	EncPos: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.getEncPosition())
-    				+ "\n	Speed: " + String.valueOf(Robot.grabberSubsystem.grabberMotor.get());
-    		
-    		FileWriter fw = new FileWriter(file.getAbsoluteFile());
-    		BufferedWriter bw = new BufferedWriter(fw);
-    		bw.write(backLeftString);
-    		bw.write(backRightString);
-    		bw.write(frontLeftString);
-    		bw.write(frontRightString);
-    		bw.write(lifterMotorString);
-    		bw.write(grabberMotorString);
-    		bw.close();
-    		
-    	} catch (IOException e){
-    		e.printStackTrace();
-    	}
-    	
-    	System.out.println("FrontLeft"
-    			+ "\n	p: " + Robot.driveTrainSubsystem.motorFrontLeft.getP()
-    			+ "\n	i: " + Robot.driveTrainSubsystem.motorFrontLeft.getI()
-    			+ "\n	d: " + Robot.driveTrainSubsystem.motorFrontLeft.getD()
-    			+ "\n	f: " + Robot.driveTrainSubsystem.motorFrontLeft.getF()
-    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorFrontLeft.getIZone()
-    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorFrontLeft.getCloseLoopRampRate()
-    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorFrontLeft.get());
-    	System.out.println("FrontRight"
-    			+ "\n	p: " + Robot.driveTrainSubsystem.motorFrontRight.getP()
-    			+ "\n	i: " + Robot.driveTrainSubsystem.motorFrontRight.getI()
-    			+ "\n	d: " + Robot.driveTrainSubsystem.motorFrontRight.getD()
-    			+ "\n	f: " + Robot.driveTrainSubsystem.motorFrontRight.getF()
-    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorFrontRight.getIZone()
-    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorFrontRight.getCloseLoopRampRate()
-    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorFrontRight.get());
-    	System.out.println("BackLeft"
-    			+ "\n	p: " + Robot.driveTrainSubsystem.motorBackLeft.getP()
-    			+ "\n	i: " + Robot.driveTrainSubsystem.motorBackLeft.getI()
-    			+ "\n	d: " + Robot.driveTrainSubsystem.motorBackLeft.getD()
-    			+ "\n	f: " + Robot.driveTrainSubsystem.motorBackLeft.getF()
-    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorBackLeft.getIZone()
-    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorBackLeft.getCloseLoopRampRate()
-    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorBackLeft.get());
-    	System.out.println("BackRight"
-    			+ "\n	p: " + Robot.driveTrainSubsystem.motorBackRight.getP()
-    			+ "\n	i: " + Robot.driveTrainSubsystem.motorBackRight.getI()
-    			+ "\n	d: " + Robot.driveTrainSubsystem.motorBackRight.getD()
-    			+ "\n	f: " + Robot.driveTrainSubsystem.motorBackRight.getF()
-    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorBackRight.getIZone()
-    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorBackRight.getCloseLoopRampRate()
-    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorBackRight.get());
-    	System.out.println("Lifter"
-    			+ "\n	p: " + Robot.lifterSubsystem.lifterMotor.getP()
-    			+ "\n	i: " + Robot.lifterSubsystem.lifterMotor.getI()
-    			+ "\n	d: " + Robot.lifterSubsystem.lifterMotor.getD()
-    			+ "\n	f: " + Robot.lifterSubsystem.lifterMotor.getF()
-    			+ "\n	izone: " + Robot.lifterSubsystem.lifterMotor.getIZone()
-    			+ "\n	ramp: " + Robot.lifterSubsystem.lifterMotor.getCloseLoopRampRate()
-    			+ "\n	speed: " + Robot.lifterSubsystem.lifterMotor.get());
-    	System.out.println("Grabber"
-    			+ "\n	p: " + Robot.grabberSubsystem.grabberMotor.getP()
-    			+ "\n	i: " + Robot.grabberSubsystem.grabberMotor.getI()
-    			+ "\n	d: " + Robot.grabberSubsystem.grabberMotor.getD()
-    			+ "\n	f: " + Robot.grabberSubsystem.grabberMotor.getF()
-    			+ "\n	izone: " + Robot.grabberSubsystem.grabberMotor.getIZone()
-    			+ "\n	ramp: " + Robot.grabberSubsystem.grabberMotor.getCloseLoopRampRate()
-    			+ "\n	speed: " + Robot.grabberSubsystem.grabberMotor.get());
+//    	System.out.println("FrontLeft"
+//    			+ "\n	p: " + Robot.driveTrainSubsystem.motorFrontLeft.getP()
+//    			+ "\n	i: " + Robot.driveTrainSubsystem.motorFrontLeft.getI()
+//    			+ "\n	d: " + Robot.driveTrainSubsystem.motorFrontLeft.getD()
+//    			+ "\n	f: " + Robot.driveTrainSubsystem.motorFrontLeft.getF()
+//    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorFrontLeft.getIZone()
+//    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorFrontLeft.getCloseLoopRampRate()
+//    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorFrontLeft.get());
+//    	System.out.println("FrontRight"
+//    			+ "\n	p: " + Robot.driveTrainSubsystem.motorFrontRight.getP()
+//    			+ "\n	i: " + Robot.driveTrainSubsystem.motorFrontRight.getI()
+//    			+ "\n	d: " + Robot.driveTrainSubsystem.motorFrontRight.getD()
+//    			+ "\n	f: " + Robot.driveTrainSubsystem.motorFrontRight.getF()
+//    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorFrontRight.getIZone()
+//    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorFrontRight.getCloseLoopRampRate()
+//    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorFrontRight.get());
+//    	System.out.println("BackLeft"
+//    			+ "\n	p: " + Robot.driveTrainSubsystem.motorBackLeft.getP()
+//    			+ "\n	i: " + Robot.driveTrainSubsystem.motorBackLeft.getI()
+//    			+ "\n	d: " + Robot.driveTrainSubsystem.motorBackLeft.getD()
+//    			+ "\n	f: " + Robot.driveTrainSubsystem.motorBackLeft.getF()
+//    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorBackLeft.getIZone()
+//    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorBackLeft.getCloseLoopRampRate()
+//    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorBackLeft.get());
+//    	System.out.println("BackRight"
+//    			+ "\n	p: " + Robot.driveTrainSubsystem.motorBackRight.getP()
+//    			+ "\n	i: " + Robot.driveTrainSubsystem.motorBackRight.getI()
+//    			+ "\n	d: " + Robot.driveTrainSubsystem.motorBackRight.getD()
+//    			+ "\n	f: " + Robot.driveTrainSubsystem.motorBackRight.getF()
+//    			+ "\n	izone: " + Robot.driveTrainSubsystem.motorBackRight.getIZone()
+//    			+ "\n	ramp: " + Robot.driveTrainSubsystem.motorBackRight.getCloseLoopRampRate()
+//    			+ "\n	speed: " + Robot.driveTrainSubsystem.motorBackRight.get());
+//    	System.out.println("Lifter"
+//    			+ "\n	p: " + Robot.lifterSubsystem.lifterMotor.getP()
+//    			+ "\n	i: " + Robot.lifterSubsystem.lifterMotor.getI()
+//    			+ "\n	d: " + Robot.lifterSubsystem.lifterMotor.getD()
+//    			+ "\n	f: " + Robot.lifterSubsystem.lifterMotor.getF()
+//    			+ "\n	izone: " + Robot.lifterSubsystem.lifterMotor.getIZone()
+//    			+ "\n	ramp: " + Robot.lifterSubsystem.lifterMotor.getCloseLoopRampRate()
+//    			+ "\n	speed: " + Robot.lifterSubsystem.lifterMotor.get());
+//    	System.out.println("Grabber"
+//    			+ "\n	p: " + Robot.grabberSubsystem.grabberMotor.getP()
+//    			+ "\n	i: " + Robot.grabberSubsystem.grabberMotor.getI()
+//    			+ "\n	d: " + Robot.grabberSubsystem.grabberMotor.getD()
+//    			+ "\n	f: " + Robot.grabberSubsystem.grabberMotor.getF()
+//    			+ "\n	izone: " + Robot.grabberSubsystem.grabberMotor.getIZone()
+//    			+ "\n	ramp: " + Robot.grabberSubsystem.grabberMotor.getCloseLoopRampRate()
+//    			+ "\n	speed: " + Robot.grabberSubsystem.grabberMotor.get());
 /*TESTING TESTING TESTING TESTING*/
     	
     }

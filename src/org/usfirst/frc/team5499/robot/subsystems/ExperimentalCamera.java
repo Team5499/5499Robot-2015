@@ -45,6 +45,9 @@
 //	public static Mat frame, grey, original;
 //	static int counter = 0;
 //	
+//	static final int VIEW_ANGLE = 60; //Don't know how one gets this value. This is what they have in the advanced vision example for our camera in 640x480.
+//	static final int Y_IMAGE_RES = 480;
+//	
 //	
 //	public static void main(String[] args) {
 //		//required for openCV to work -call before any functions of oCV are used
@@ -242,7 +245,7 @@
 //			//gui on the image
 //			Core.line(original, new Point(frame.width()/2,100),new Point(frame.width()/2,frame.height()-100), Blue);
 //			Core.line(original, new Point(150,frame.height()/2),new Point(frame.width()-150,frame.height()/2), Blue);
-//			Core.putText(original, "Team 3019 - Elijah Kaufman", new Point(0,20), 
+//			Core.putText(original, "Team 5499 - BHSRobotics", new Point(0,20), 
 //					Core.FONT_HERSHEY_PLAIN, 1, Red);
 //			//view this file to see the vision tracking
 //			//windows will update the image after every save
@@ -257,6 +260,17 @@
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();	
 //		}
+//	}
+//	
+//	public double getDistToTarget(Rect target){
+//		//vertical height of the target in inches. target = retro-reflective tape;
+//		final double targetHeight = 7;
+//		
+//		//get the height of the found targets in px
+//		int height = target.height;
+//		//d = Tft*FOVpixel/(2*Tpixel*tanPheta)
+//		return Y_IMAGE_RES * targetHeight
+//				/ (height * 12 * 2 * Math.tan(VIEW_ANGLE * Math.PI / (180 * 2)));
 //	}
 //}
 //

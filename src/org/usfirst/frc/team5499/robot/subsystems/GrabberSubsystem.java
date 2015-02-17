@@ -3,6 +3,7 @@ package org.usfirst.frc.team5499.robot.subsystems;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GrabberSubsystem extends Subsystem {
 
 	//These are miniCims?
-	public CANTalon grabberMotor = new CANTalon(RobotMap.grabberMotor1id);
+	public CANTalon grabberMotor = new CANTalon(RobotMap.grabberMotorid);
 	public DigitalInput limitSwitchLeft = new DigitalInput(RobotMap.limitSwitch1Port);
 	public DigitalInput limitSwitchRight = new DigitalInput(RobotMap.limitSwitch2Port);
 	

@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LowerToFloor extends Command {
-
-	public LowerToFloor() {
+public class TestPID extends Command {
+	
+	public TestPID() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
@@ -20,16 +20,13 @@ public class LowerToFloor extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.lifterSubsystem.LowerToFloor();
+		Robot.driveTrainSubsystem.motorFrontRight.set(5);
+		System.out.println(Robot.driveTrainSubsystem.motorFrontRight.getEncVelocity());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if(Robot.lifterSubsystem.lifterMotor.getEncPosition() < Robot.lifterSubsystem.BOTTOM_LIMIT){
-			return true;
-		} else{
-			return false;
-		}
+		return false;
 	}
 
 	// Called once after isFinished returns true

@@ -33,7 +33,6 @@ public class RateMotors extends Command {
 		double current2 = Robot.pdp.getCurrent(RobotMap.motorFrontLeftPDPChannel);
 		double current3 = Robot.pdp.getCurrent(RobotMap.motorFrontRightPDPChannel);
 		double current4 = Robot.pdp.getCurrent(RobotMap.lifter1PDPChannel);
-		double current5 = Robot.pdp.getCurrent(RobotMap.lifter2PDPChannel);
 
 
 		//print out current on each of the PDPChannels
@@ -41,8 +40,7 @@ public class RateMotors extends Command {
 				+ current1 + " "
 				+ current2 + " "
 				+ current3 + " "
-				+ current4 + " "
-				+ current5 + "\n");
+				+ current4 + " ");
 
 		//break motors in
 		while(Timer.getMatchTime() < 1800){
@@ -52,7 +50,7 @@ public class RateMotors extends Command {
 			Robot.driveTrainSubsystem.motorBackLeft.set(-1); 	//2
 			Robot.driveTrainSubsystem.motorFrontRight.set(-1);  //3
 			Robot.driveTrainSubsystem.motorFrontLeft.set(-1);  	//4
-			Robot.lifterSubsystem.lifterMotor1.set(-1);		  	//7
+			Robot.lifterSubsystem.lifterMotor.set(-1);		  	//7
 
 		}
 

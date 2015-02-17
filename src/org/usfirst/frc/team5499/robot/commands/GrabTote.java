@@ -25,7 +25,7 @@ public class GrabTote extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Robot.grabberSubsystem.grabberMotor1.getEncPosition() == Robot.grabberSubsystem.TOTE_LIMIT){
+		if (Robot.grabberSubsystem.grabberMotor.getEncPosition() == Robot.grabberSubsystem.TOTE_LIMIT){
 			return true;
 		}else {
 			return false;

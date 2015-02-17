@@ -39,10 +39,10 @@ public class RobotMap {
 	 */
 	public static int motorBackRightid = 1;
 	public static int motorBackLeftid = 2;
-	public static int motorFrontLeftid = 3;
-	public static int motorFrontRightid = 4;
-	public static int grabberMotor1id = 5;
-	public static int lifterMotor1id = 6;
+	public static int motorFrontRightid = 3;
+	public static int motorFrontLeftid = 4;
+	public static int grabberMotorid = 5;
+	public static int lifterMotorid = 6;
 	
 
 

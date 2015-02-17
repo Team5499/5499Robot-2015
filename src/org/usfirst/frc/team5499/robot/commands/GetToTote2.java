@@ -25,7 +25,7 @@ public class GetToTote2 extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Robot.lifterSubsystem.lifterMotor1.getEncPosition() == Robot.lifterSubsystem.TOTE2LIMIT){
+		if (Robot.lifterSubsystem.lifterMotor.getEncPosition() == Robot.lifterSubsystem.TOTE2LIMIT){
 			return true;
 		}else {
 			return false;

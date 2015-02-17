@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class LifterSubsystem extends Subsystem {
 
 	//These are miniCims?
-	public CANTalon lifterMotor = new CANTalon(RobotMap.lifterMotor1id);
+	public CANTalon lifterMotor = new CANTalon(RobotMap.lifterMotorid);
 
 	public final int TOP_LIMIT = 750; //FIXME calibrate
 	public final int BOTTOM_LIMIT = -750; //FiXME calibrate
@@ -33,6 +33,8 @@ public class LifterSubsystem extends Subsystem {
 		//Set limits to not break the system
 		//lifterMotor1.setForwardSoftLimit(TOP_LIMIT);
 		//lifterMotor1.setReverseSoftLimit(BOTTOM_LIMIT);
+		
+//		lifterMotor.changeControlMode(ControlMode.Speed);
 	}
 
 	/**
@@ -44,9 +46,9 @@ public class LifterSubsystem extends Subsystem {
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
 		if(isLifterSlow){
-			lifterMotor.set(0.5);
+			lifterMotor.set(0.3);
 		} else{
-			lifterMotor.set(1.0);
+			lifterMotor.set(0.8);
 
 		}
 		//		}
@@ -62,7 +64,7 @@ public class LifterSubsystem extends Subsystem {
 			if(isLifterSlow){
 				lifterMotor.set(-0.3);
 			} else{
-				lifterMotor.set(-0.6);
+				lifterMotor.set(-0.5);
 			}
 		}
 	//}

@@ -10,11 +10,11 @@ import org.usfirst.frc.team5499.robot.commands.MoveBackward;
 import org.usfirst.frc.team5499.robot.commands.MoveForward;
 import org.usfirst.frc.team5499.robot.commands.MoveLeftward;
 import org.usfirst.frc.team5499.robot.commands.MoveRightward;
-import org.usfirst.frc.team5499.robot.commands.RateMotors;
 import org.usfirst.frc.team5499.robot.commands.Release;
 import org.usfirst.frc.team5499.robot.commands.RotateLeft;
 import org.usfirst.frc.team5499.robot.commands.RotateRight;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
+import org.usfirst.frc.team5499.robot.commands.TestPID;
 import org.usfirst.frc.team5499.robot.commands.TurnAroundLeft;
 import org.usfirst.frc.team5499.robot.commands.TurnAroundRight;
 import org.usfirst.frc.team5499.robot.subsystems.CameraSubsystem;
@@ -102,7 +102,7 @@ public class Robot extends IterativeRobot {
 		lowerToFloor = new LowerToFloor();
 		
 		//Commands
-		autonomousCommand = new RateMotors();
+		autonomousCommand = new TestPID();
 		teleopCommand = new TeleOpDrive();
 
 		//The Talons are on break mode, which is ideal for our purpose.
@@ -116,6 +116,13 @@ public class Robot extends IterativeRobot {
 		Robot.driveTrainSubsystem.motorBackRight.setCloseLoopRampRate(17);
 		Robot.lifterSubsystem.lifterMotor.setCloseLoopRampRate(17);
 		Robot.grabberSubsystem.grabberMotor.setCloseLoopRampRate(17);
+		
+//		Robot.driveTrainSubsystem.motorFrontLeft.reverseOutput(false);
+//		Robot.driveTrainSubsystem.motorFrontRight.reverseOutput(true);
+//		Robot.driveTrainSubsystem.motorBackLeft.reverseOutput(false);
+//		Robot.driveTrainSubsystem.motorBackRight.reverseOutput(true);
+		
+//		Robot.lifterSubsystem.lifterMotor.reverseSensor(false);
 	}
 
 	public void disabledPeriodic() {
