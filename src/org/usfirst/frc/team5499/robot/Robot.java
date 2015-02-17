@@ -117,10 +117,10 @@ public class Robot extends IterativeRobot {
 		Robot.lifterSubsystem.lifterMotor.setCloseLoopRampRate(17);
 		Robot.grabberSubsystem.grabberMotor.setCloseLoopRampRate(17);
 		
-//		Robot.driveTrainSubsystem.motorFrontLeft.reverseOutput(false);
-//		Robot.driveTrainSubsystem.motorFrontRight.reverseOutput(true);
-//		Robot.driveTrainSubsystem.motorBackLeft.reverseOutput(false);
-//		Robot.driveTrainSubsystem.motorBackRight.reverseOutput(true);
+		Robot.driveTrainSubsystem.motorFrontLeft.reverseOutput(false);
+		Robot.driveTrainSubsystem.motorFrontRight.reverseOutput(true);
+		Robot.driveTrainSubsystem.motorBackLeft.reverseOutput(false);
+		Robot.driveTrainSubsystem.motorBackRight.reverseOutput(true);
 		
 //		Robot.lifterSubsystem.lifterMotor.reverseSensor(false);
 	}

@@ -2,13 +2,14 @@ package org.usfirst.frc.team5499.robot.commands;
 
 import org.usfirst.frc.team5499.robot.Robot;
 
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class TestPID extends Command {
-	
+
 	public TestPID() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -20,8 +21,8 @@ public class TestPID extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrainSubsystem.motorFrontRight.set(5);
-		System.out.println(Robot.driveTrainSubsystem.motorFrontRight.getEncVelocity());
+		Robot.driveTrainSubsystem.motorFrontLeft.set(250);
+		System.out.println(Robot.driveTrainSubsystem.motorFrontLeft.getEncVelocity());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

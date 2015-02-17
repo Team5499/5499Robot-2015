@@ -12,12 +12,12 @@ public class RobotMap {
     // public static int rightMotor = 2;
     
 	//Set index in arrays to be constant for variables
-	public static int frontLeftWheelnum = 0;
-	public static int frontRightWheelnum = 1;
-	public static int backLeftWheelnum = 2;
-	public static int backRightWheelnum = 3;
-	public static int grabberMotor1num = 4;
-	public static int lifterMotor1num = 5;
+	public final static int frontLeftWheelnum = 0;
+	public final static int frontRightWheelnum = 1;
+	public final static int backLeftWheelnum = 2;
+	public final static int backRightWheelnum = 3;
+	public final static int grabberMotor1num = 4;
+	public final static int lifterMotor1num = 5;
 	
 	//This is the usb camera address
 	public static String cameraAddress = "cam0";
@@ -27,34 +27,35 @@ public class RobotMap {
 	 */
 	//These are the digital inputs ports on the roborio.
 	//As of right now, there is nothing physically connected to them
-	public static int limitSwitch1Port = 1;
-	public static int limitSwitch2Port = 2;
-	public static int startSideSwitchPort = 3;
-	public static int broomServoChannel = 0;
+	public final static int limitSwitch1Port = 1;
+	public final static int limitSwitch2Port = 2;
+	public final static int startSideSwitchPort = 3;
+	public final static int broomServoChannel = 0;
 	
 	/*
 	 * ID nums for motors (CAN)
 	 * The motor controllers of these motors are daisy chained and they don't have a port.
 	 * Rather, you have to assign an id to the motor controllers thru the web interface.
 	 */
-	public static int motorBackRightid = 1;
-	public static int motorBackLeftid = 2;
-	public static int motorFrontRightid = 3;
-	public static int motorFrontLeftid = 4;
-	public static int grabberMotorid = 5;
-	public static int lifterMotorid = 6;
+	public final static int motorBackRightid = 1;
+	public final static int motorBackLeftid = 2;
+	public final static int motorFrontRightid = 3;
+	public final static int motorFrontLeftid = 4;
+	public final static int grabberMotorid = 5;
+	public final static int lifterMotorid = 6;
 	
 
 
 	/**
 	 * These values are for getting the current. Do not use the motor controller ids for this.
+	 * TODO remove after testing is done
 	 */
-	public static int motorFrontLeftPDPChannel = 15;
-	public static int motorFrontRightPDPChannel = 0;
-	public static int motorBackLeftPDPChannel = 1;
-	public static int motorBackRightPDPChannel = 14; 
-	public static int lifter1PDPChannel = 13;
-	public static int grabber1PDPChannel = 12;
+	public final static int motorFrontLeftPDPChannel = 15;
+	public final static int motorFrontRightPDPChannel = 0;
+	public final static int motorBackLeftPDPChannel = 1;
+	public final static int motorBackRightPDPChannel = 14; 
+	public final static int lifter1PDPChannel = 13;
+	public final static int grabber1PDPChannel = 12;
 	
 
 	

@@ -2,6 +2,7 @@ package org.usfirst.frc.team5499.robot.commands;
 
 import org.usfirst.frc.team5499.robot.Robot;
 
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -86,9 +87,7 @@ public class TeleOpDrive extends Command {
     	} else{
     		Robot.grabberSubsystem.Hold();
     	}
-    	
-//    	if (Robot.oi.stick.getRawButton(5)) Robot.lifterSubsystem.Raise();
-//    	else if (Robot.oi.stick.getRawButton(6)) Robot.lifterSubsystem.Lower();
+    		
     	
     	
     	//Inform driver about active modes

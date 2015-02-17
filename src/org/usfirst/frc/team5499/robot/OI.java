@@ -8,32 +8,32 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	//Create a new joystick
-	public Joystick stick = new Joystick(joystickPort);
+	public final Joystick stick = new Joystick(joystickPort);
 
 	//This is a usb port on a computer. It doesn't seem to have any impedance on anything.
-	public static int joystickPort = 1;
+	public final static int joystickPort = 1;
 	
 	
 	//These are channels on the joystick
-	public int grabberCloseButton = 1;
-	public int rotateButton = 2;
-	public int grabberOpenButton = 3;
-	public int releaseButton = 4;
-	public int slowLifterButton = 5;
-	public int lowerToFloorButton = 6;
-	public int grabBinButton = 7;
-	public int getToBinButton = 8;
-	public int grabToteButton = 9;
-	public int getToTote1Button = 10;
-	public int getToTote2Button = 11;
-	public int getToTote3Button = 12;
+	public final int grabberCloseButton = 1;
+	public final int rotateButton = 2;
+	public final int grabberOpenButton = 3;
+	public final int releaseButton = 4;
+	public final int slowLifterButton = 5;
+	public final int lowerToFloorButton = 6;
+	public final int grabBinButton = 7;
+	public final int getToBinButton = 8;
+	public final int grabToteButton = 9;
+	public final int getToTote1Button = 10;
+	public final int getToTote2Button = 11;
+	public final int getToTote3Button = 12;
 	
 	
 	
 	
 	//Degress for the POV button
-	public int lifterRaiseDeg = 180;
-	public int lifterLowerDeg = 0;
+	public final int lifterRaiseDeg = 180;
+	public final int lifterLowerDeg = 0;
 
 	
 	
