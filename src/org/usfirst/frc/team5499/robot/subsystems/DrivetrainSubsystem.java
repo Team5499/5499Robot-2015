@@ -2,12 +2,13 @@ package org.usfirst.frc.team5499.robot.subsystems;
 
 
 
-import org.usfirst.frc.team5499.robot.Robot;
 import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
+//github.com/Team5499/5499Robot.gitimport edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -23,23 +24,28 @@ public class DrivetrainSubsystem extends Subsystem {
 	public CANTalon motorFrontRight = new CANTalon(RobotMap.motorFrontRightid);
 	public CANTalon motorBackLeft = new CANTalon(RobotMap.motorBackLeftid);
 	public CANTalon motorBackRight = new CANTalon(RobotMap.motorBackRightid);
-
-	public void init(){
-		motorFrontLeft.changeControlMode(ControlMode.Speed);
-		motorBackLeft.changeControlMode(ControlMode.Speed);
-		motorFrontRight.changeControlMode(ControlMode.Speed);
-		motorBackRight.changeControlMode(ControlMode.Speed);
-		motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+	
+	public RobotDrive mecanumDrive = new RobotDrive(motorFrontLeft, motorBackLeft, motorFrontRight, motorBackRight);
+	
+	
+    public void initDefaultCommand() {   	
+    	//Set the feedback device to be the encoder
+    	motorFrontLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorFrontRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	motorBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		//Robot.driveTrainSubsystem.motorFrontLeft.setPID(1,0,0,1,0,0,0);//RobotMap.p[RobotMap.frontLeftWheelnum],
-				//RobotMap.i[RobotMap.frontLeftWheelnum], 
-				//RobotMap.d[RobotMap.frontLeftWheelnum]);
-				//RobotMap.f[RobotMap.frontLeftWheelnum], 
-				//RobotMap.izone[RobotMap.frontLeftWheelnum], 
-				//RobotMap.ramp[RobotMap.frontLeftWheelnum], 0);
-    	//Robot.driveTrainSubsystem.motorFrontRight.setPID(RobotMap.p[RobotMap.frontRightWheelnum],
+    	
+    	motorFrontLeft.changeControlMode(ControlMode.Speed);
+		motorBackLeft.changeControlMode(ControlMode.Speed);
+		motorFrontRight.changeControlMode(ControlMode.Speed);
+		motorBackRight.changeControlMode(ControlMode.Speed);
+//		Robot.driveTrainSubsystem.motorFrontLeft.setPID(1,0,0,1,0,0,0);//RobotMap.p[RobotMap.frontLeftWheelnum],
+//				RobotMap.i[RobotMap.frontLeftWheelnum], 
+//				RobotMap.d[RobotMap.frontLeftWheelnum]);
+//				RobotMap.f[RobotMap.frontLeftWheelnum], 
+//				RobotMap.izone[RobotMap.frontLeftWheelnum], 
+//				RobotMap.ramp[RobotMap.frontLeftWheelnum], 0);
+//    	Robot.driveTrainSubsystem.motorFrontRight.setPID(RobotMap.p[RobotMap.frontRightWheelnum],
 //				RobotMap.i[RobotMap.frontRightWheelnum], 
 //				RobotMap.d[RobotMap.frontRightWheelnum], 
 //				RobotMap.f[RobotMap.frontRightWheelnum], 
@@ -57,25 +63,18 @@ public class DrivetrainSubsystem extends Subsystem {
 //				RobotMap.f[RobotMap.backRightWheelnum], 
 //				RobotMap.izone[RobotMap.backRightWheelnum], 
 //				RobotMap.ramp[RobotMap.backRightWheelnum], 0);
+		
+//    	//The motors are facing each other and some end up having opposite outputs relative to those across
+//    	motorFrontLeft.reverseOutput(false);
+//    	motorFrontRight.reverseOutput(false); //counter the orientation of the motor
+//    	motorBackLeft.reverseOutput(false);
+//    	motorBackRight.reverseOutput(false); //counter the orientation of the motor
 	}
 	
-    public void initDefaultCommand() {
     	
-    	//motorFrontLeft.reverseOutput(false);
-    	//motorFrontRight.reverseOutput(true); //counter the opposite facing of the motor
-    	//motorBackLeft.reverseOutput(false);
-    	//motorBackRight.reverseOutput(true); //counter the opposite facing of the motor
-    	//Set smooth accel and decel
-    	
-    	// not needed set in setPID
-//    	motorFrontLeft.setVoltageRampRate(17);
-//    	motorFrontRight.setVoltageRampRate(17);
-//    	motorBackLeft.setVoltageRampRate(17);
-//    	motorBackRight.setVoltageRampRate(17);
     	
 
-    }
-    
+
     public void move_polar(double X, double Y, double Z){
     	double[] motorspeeds = motorspeeds_polar(X,Y,Z);
     	motorFrontLeft.set(motorspeeds[RobotMap.frontLeftWheelnum]);
@@ -99,9 +98,6 @@ public class DrivetrainSubsystem extends Subsystem {
     	motorFrontRight.set(motorspeeds[RobotMap.frontRightWheelnum]);
     	motorBackLeft.set(motorspeeds[RobotMap.backLeftWheelnum]);
     	motorBackRight.set(motorspeeds[RobotMap.backRightWheelnum]);
-    	
-    	
-    
     }
     
 
@@ -165,33 +161,71 @@ public class DrivetrainSubsystem extends Subsystem {
 			}
 		}
 		System.out.println(currentmax);
-		for (int i=0; i<4; i++){
-			motorspeeds[i] = motorspeeds[i] / currentmax;
+		if(currentmax!=0){
+			for (int i=0; i<4; i++){
+				motorspeeds[i] = motorspeeds[i] / currentmax;
+			}
 		}
 	}
 	
+	
+	//{magnitude(speed), direction(in degrees), rotation(range of rates: -1<-left..1<-right)}
+	//FIXME calibrate degs and speeds/rates
+	double[] forward = {1, 0, 0};
+	double[] backward = {1, 180, 0};
+	double[] rightward = {1, 270, 0};
+	double[] leftward = {1, 90, 0};
+	double[] rotateRight = {0, 0, 1.0};
+	double[] rotateLeft = {0, 0, -1.0};
+	
+	
 	/**
-	 * Only For Use In Quadrature Mode. Get the number of rotations the encoder disk has completed.
-	 * Since the encoder is connected to the gearbox shaft, which spins about 1/4 as fast as the motor shaft due to the gears, one full rotation of the encoder is about 4 rotations of the motor shaft
-	 * @param
-	 * 		motorController the talonSRX, to which the desired encoder is connected
-	 * @return
-	 * 		The number of rotations the encoder has completed; derived from CANTalon.getPosition();
+	 * Function for moving forward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
 	 */
-    public double getEncoderRevs(CANTalon motorController){
-    	return motorController.getPosition()/250; //250 is the number of ticks in a revolution of the encoder that we are using
-    }
-    
-    /**
-     * Only For Use In Quadrature Mode. Get the number of rotations the motor shaft has completed.
-	 * Since the encoder is connected to the gearbox shaft, which spins about 1/4 as fast as the motor shaft due to the gears, one full rotation of the motor shaft is about 1/4 rotations of the motor shaft
-     * @param
-     * 		motorController the talonSRX, to which the desired encoder is connected
-     * @return
-     * 		The number of rotations the motor has completed; derived from CANTalon.getPosition();
-     */
-    public double getMotorRevs(CANTalon motorController){
-    	return motorController.getPosition()/250*4; //250 is the number of ticks in a revolution of the encoder that we are using
-    }
+	public void MoveForward(){
+		mecanumDrive.mecanumDrive_Polar(forward[0], forward[1], forward[2]);		
+	}
+	
+	/**
+	 * Function for moving backward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
+	public void MoveBackward(){
+		mecanumDrive.mecanumDrive_Polar(backward[0], backward[1], backward[2]);		
+	}
+	
+	/**
+	 * Function for moving rightward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
+	public void MoveRightward(){
+		mecanumDrive.mecanumDrive_Polar(rightward[0], rightward[1], rightward[2]);
+	}
+	
+	/**
+	 * Function for moving leftward for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
+	public void MoveLeftward(){
+		mecanumDrive.mecanumDrive_Polar(leftward[0], leftward[1], leftward[2]);		
+	}
+	
+	/**
+	 * Function for rotating right for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
+	public void RotateRight(){
+		mecanumDrive.mecanumDrive_Polar(rotateRight[0], rotateRight[1], rotateRight[2]);		
+	}
+	
+	/**
+	 * Function for rotating left for use in auto
+	 * The polar function is easier to use when controlling from code, not from joystick
+	 */
+	public void RotateLeft(){
+		mecanumDrive.mecanumDrive_Polar(rotateLeft[0], rotateLeft[1], rotateLeft[2]);
+	}
+
 }
 

@@ -11,24 +11,25 @@ public class RobotMap {
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
     
-	//Used for indicating the axis of the wheel in the move method of the drivetrain subsystem.
-	//TODO verify that the above statement is true
+	//Set index in arrays to be constant for variables
 	public static int frontLeftWheelnum = 0;
 	public static int frontRightWheelnum = 1;
 	public static int backLeftWheelnum = 2;
 	public static int backRightWheelnum = 3;
-
+	public static int grabberMotor1num = 4;
+	public static int lifterMotor1num = 5;
 	
 	//This is the usb camera address
 	public static String cameraAddress = "cam0";
 	
-	/**
+	/*
 	 * Create DIO ports
 	 */
 	//These are the digital inputs ports on the roborio.
 	//As of right now, there is nothing physically connected to them
-	public static int limit1SwitchPort = 1;
-	public static int limit2SwitchPort = 2;
+	public static int limitSwitch1Port = 1;
+	public static int limitSwitch2Port = 2;
+	public static int startSideSwitchPort = 3;
 	public static int broomServoChannel = 0;
 	
 	/*
@@ -36,11 +37,11 @@ public class RobotMap {
 	 * The motor controllers of these motors are daisy chained and they don't have a port.
 	 * Rather, you have to assign an id to the motor controllers thru the web interface.
 	 */
-	public static int motorFrontLeftid = 4;
-	public static int motorFrontRightid = 3;
-	public static int motorBackLeftid = 2;
 	public static int motorBackRightid = 1;
-	public static int gripperMotor1id = 5;
+	public static int motorBackLeftid = 2;
+	public static int motorFrontLeftid = 3;
+	public static int motorFrontRightid = 4;
+	public static int grabberMotor1id = 5;
 	public static int lifterMotor1id = 6;
 
 
@@ -67,6 +68,7 @@ public class RobotMap {
 	public static int grabberCloseButton = 5; //TODO check what this button is and adjust accordingly
 	public static int grabberOpenButton = 6; //TODO check what this button is and adjust accordingly
  //TODO check what this button is and adjust accordingly
+	public static int grabber1PDPChannel = 12;
 	
 
 	
@@ -74,12 +76,11 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	
 	public static double[] p = new double[4];
 	public static double[] i = new double[4];
 	public static double[] d = new double[4];
 	public static double[] f = new double[4];
-	public static int[] izone = new int[4];
+	public static double[] izone = new double[4];
 	public static double[] ramp = new double[4];
 	
 	public void init(){
@@ -99,13 +100,13 @@ public class RobotMap {
 		f[frontRightWheelnum] = 0.0;
 		f[backLeftWheelnum] = 0.0;
 		f[backRightWheelnum] = 0.0;
-		izone[frontLeftWheelnum] = 0;
-		izone[frontRightWheelnum] = 0;
-		izone[backLeftWheelnum] = 0;
-		izone[backRightWheelnum] = 0;
-		ramp[frontLeftWheelnum] = 17.0;
-		ramp[frontRightWheelnum] = 17.0;
-		ramp[backLeftWheelnum] = 17.0;
-		ramp[backRightWheelnum] = 17.0;
+		izone[frontLeftWheelnum] = 0.0;
+		izone[frontRightWheelnum] = 0.0;
+		izone[backLeftWheelnum] = 0.0;
+		izone[backRightWheelnum] = 0.0;
+		ramp[frontLeftWheelnum] = 17;
+		ramp[frontRightWheelnum] = 17;
+		ramp[backLeftWheelnum] = 17;
+		ramp[backRightWheelnum] = 17;
 	}
 }

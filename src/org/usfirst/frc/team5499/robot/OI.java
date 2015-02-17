@@ -1,8 +1,6 @@
 package org.usfirst.frc.team5499.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -10,7 +8,35 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	//Create a new joystick
-	public Joystick stick = new Joystick(RobotMap.joystickPort);
+	public Joystick stick = new Joystick(joystickPort);
+
+	//This is a usb port on a computer. It doesn't seem to have any impedance on anything.
+	public static int joystickPort = 1;
+	
+	
+	//These are channels on the joystick
+	public int grabberCloseButton = 1;
+	public int rotateButton = 2;
+	public int grabberOpenButton = 3;
+	public int releaseButton = 4;
+	public int slowLifterButton = 5;
+	public int lowerToFloorButton = 6;
+	public int grabBinButton = 7;
+	public int getToBinButton = 8;
+	public int grabToteButton = 9;
+	public int getToTote1Button = 10;
+	public int getToTote2Button = 11;
+	public int getToTote3Button = 12;
+	
+	
+	
+	
+	//Degress for the POV button
+	public int lifterRaiseDeg = 180;
+	public int grabberOpenDeg1 = 90;
+	public int lifterLowerDeg = 0;
+
+	
 	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

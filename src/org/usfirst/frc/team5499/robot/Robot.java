@@ -1,8 +1,23 @@
 
 package org.usfirst.frc.team5499.robot;
 
+import org.usfirst.frc.team5499.robot.commands.GetToTote1;
+import org.usfirst.frc.team5499.robot.commands.GetToTote2;
+import org.usfirst.frc.team5499.robot.commands.GetToTote3;
+import org.usfirst.frc.team5499.robot.commands.GrabTote;
+import org.usfirst.frc.team5499.robot.commands.LowerToFloor;
+import org.usfirst.frc.team5499.robot.commands.MoveBackward;
+import org.usfirst.frc.team5499.robot.commands.MoveForward;
+import org.usfirst.frc.team5499.robot.commands.MoveLeftward;
+import org.usfirst.frc.team5499.robot.commands.MoveRightward;
 import org.usfirst.frc.team5499.robot.commands.RateMotors;
+import org.usfirst.frc.team5499.robot.commands.Release;
+import org.usfirst.frc.team5499.robot.commands.RotateLeft;
+import org.usfirst.frc.team5499.robot.commands.RotateRight;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
+import org.usfirst.frc.team5499.robot.commands.TurnAroundLeft;
+import org.usfirst.frc.team5499.robot.commands.TurnAroundRight;
+import org.usfirst.frc.team5499.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.GrabberSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
@@ -19,40 +34,40 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
+ * 
  */
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static PowerDistributionPanel pdp;
-	public static DrivetrainSubsystem driveTrainSubsystem;
-	public static LifterSubsystem lifterSubsystem;
-	public static GrabberSubsystem grabberSubsystem;
-//	public static MotorSubsystem motorFrontLeft= new MotorSubsystem("motorFL",RobotMap.p[RobotMap.frontLeftWheelnum], 
-//			RobotMap.i[RobotMap.frontLeftWheelnum],
-//			RobotMap.d[RobotMap.frontLeftWheelnum],
-//			RobotMap.motorFrontLeftid
-//			);
-//	public static MotorSubsystem motorFrontRight= new MotorSubsystem("motorFR",RobotMap.p[RobotMap.frontRightWheelnum], 
-//			RobotMap.i[RobotMap.frontRightWheelnum],
-//			RobotMap.d[RobotMap.frontRightWheelnum],
-//			RobotMap.motorFrontRightid
-//			);
-//	public static MotorSubsystem motorBackLeft= new MotorSubsystem("motorBL",RobotMap.p[RobotMap.backLeftWheelnum], 
-//			RobotMap.i[RobotMap.backLeftWheelnum],
-//			RobotMap.d[RobotMap.frontRightWheelnum],
-//			RobotMap.motorBackLeftid
-//			);
-//	public static MotorSubsystem motorBackRight= new MotorSubsystem("motorBR",RobotMap.p[RobotMap.backRightWheelnum], 
-//			RobotMap.i[RobotMap.backRightWheelnum],
-//			RobotMap.d[RobotMap.backRightWheelnum],
-//			RobotMap.motorBackRightid
-//			);
 	
 	Command autonomousCommand;
-	Command teleopCommand;
+	public Command teleopCommand;
 
-
-
+	public static Command moveForward;
+	public static Command moveBackward;
+	public static Command moveRightward;
+	public static Command moveLeftward;
+	public static Command rotateRight;
+	public static Command rotateLeft;
+	
+	public static Command getToTote1;
+	public static Command getToTote2;
+	public static Command getToTote3;
+	
+	public static Command grabTote;
+	
+	public static Command release;
+	public static Command turnAroundLeft;
+	public static Command turnAroundRight;
+	public static Command lowerToFloor;
+	
+	public static CameraSubsystem cameraSubsystem;
+	public static DrivetrainSubsystem driveTrainSubsystem;
+	public static GrabberSubsystem grabberSubsystem;
+	public static LifterSubsystem lifterSubsystem;
+	
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -61,45 +76,46 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		// instantiate the command used for the autonomous period
+		cameraSubsystem = new CameraSubsystem();
 		driveTrainSubsystem = new DrivetrainSubsystem();
-		//driveTrainSubsystem.init();
-		autonomousCommand = new RateMotors();
-		teleopCommand = new TeleOpDrive();
+		grabberSubsystem = new GrabberSubsystem();
 		pdp = new PowerDistributionPanel();
 		lifterSubsystem = new LifterSubsystem();
-		grabberSubsystem = new GrabberSubsystem();
-//		motorFrontLeft = new MotorSubsystem("motorFL",RobotMap.p[RobotMap.frontLeftWheelnum], 
-//				RobotMap.i[RobotMap.frontLeftWheelnum],
-//				RobotMap.d[RobotMap.frontLeftWheelnum],
-//				RobotMap.motorFrontLeftid
-//				);
-//		motorFrontRight = new MotorSubsystem("motorFR",RobotMap.p[RobotMap.frontRightWheelnum], 
-//				RobotMap.i[RobotMap.frontRightWheelnum],
-//				RobotMap.d[RobotMap.frontRightWheelnum],
-//				RobotMap.motorFrontRightid
-//				);
-//		motorBackLeft = new MotorSubsystem("motorBL",RobotMap.p[RobotMap.backLeftWheelnum], 
-//				RobotMap.i[RobotMap.backLeftWheelnum],
-//				RobotMap.d[RobotMap.frontRightWheelnum],
-//				RobotMap.motorBackLeftid
-//				);
-//		motorBackRight = new MotorSubsystem("motorBR",RobotMap.p[RobotMap.backRightWheelnum], 
-//				RobotMap.i[RobotMap.backRightWheelnum],
-//				RobotMap.d[RobotMap.backRightWheelnum],
-//				RobotMap.motorBackRightid
-//				);
 
+		//Auto Commands
+		moveForward = new MoveForward();
+		moveBackward = new MoveBackward();
+		moveRightward = new MoveRightward();
+		moveLeftward = new MoveLeftward();
+		rotateRight = new RotateRight();
+		rotateLeft = new RotateLeft();
+		
+		getToTote1 = new GetToTote1();
+		getToTote2 = new GetToTote2();
+		getToTote3 = new GetToTote3();
+		
+		grabTote = new GrabTote();
+		
+		release = new Release();
+		turnAroundLeft = new TurnAroundLeft();
+		turnAroundRight = new TurnAroundRight();
+		lowerToFloor = new LowerToFloor();
+		
+		//Commands
+		autonomousCommand = new RateMotors();
+		teleopCommand = new TeleOpDrive();
 
 		//The Talons are on break mode, which is ideal for our purpose.
 		//However, sudden breaking is bad for the gears, so this should gradually decrease the speed of the motors at stopping
 		//This is for both up and down
 		//the 17 is somewhat arbitrary -- the ramp up is noticeable, but only tested on full (1.0)
 
-//		System.out.println("Setting the voltage ramp rate");
-//		Robot.driveTrainSubsystem.motorFrontLeft.setVoltageRampRate(17);
-//		Robot.driveTrainSubsystem.motorFrontRight.setVoltageRampRate(17);
-//		Robot.driveTrainSubsystem.motorBackLeft.setVoltageRampRate(17);
-//		Robot.driveTrainSubsystem.motorBackRight.setVoltageRampRate(17);
+		Robot.driveTrainSubsystem.motorFrontLeft.setCloseLoopRampRate(17);
+		Robot.driveTrainSubsystem.motorFrontRight.setCloseLoopRampRate(17);
+		Robot.driveTrainSubsystem.motorBackLeft.setCloseLoopRampRate(17);
+		Robot.driveTrainSubsystem.motorBackRight.setCloseLoopRampRate(17);
+		Robot.lifterSubsystem.lifterMotor.setCloseLoopRampRate(17);
+		Robot.grabberSubsystem.grabberMotor.setCloseLoopRampRate(17);
 	}
 
 	public void disabledPeriodic() {
