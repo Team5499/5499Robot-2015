@@ -32,8 +32,8 @@ public class OI {
 	
 	
 	//Degress for the POV button
-	public final int lifterRaiseDeg = 180;
-	public final int lifterLowerDeg = 0;
+	public final int lifterLowerDeg = 180;
+	public final int lifterRaiseDeg = 0;
 
 	
 	

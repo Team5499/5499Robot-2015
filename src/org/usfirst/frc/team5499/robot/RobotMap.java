@@ -20,7 +20,7 @@ public class RobotMap {
 	public final static int lifterMotor1num = 5;
 	
 	//This is the usb camera address
-	public static String cameraAddress = "cam0";
+	public final static String cameraAddress = "cam0";
 	
 	/*
 	 * Create DIO ports
@@ -30,7 +30,6 @@ public class RobotMap {
 	public final static int limitSwitch1Port = 1;
 	public final static int limitSwitch2Port = 2;
 	public final static int startSideSwitchPort = 3;
-	public final static int broomServoChannel = 0;
 	
 	/*
 	 * ID nums for motors (CAN)
@@ -42,29 +41,13 @@ public class RobotMap {
 	public final static int motorFrontRightid = 3;
 	public final static int motorFrontLeftid = 4;
 	public final static int grabberMotorid = 5;
-	public final static int lifterMotorid = 6;
+	public final static int lifterMotor2id = 6;
+	public final static int lifterMotor1id = 8;
 
 	
-	/**
-	 * Create BUTTONS
-	 */
-	//This is a usb port on a computer. It doesn't seem to have any impedance on anything
-	public static int joystickPort = 1;
-	//This is a channel on the joystick
-	public static int rotateButton = 2;
-	public static int lifterRaiseButton = 3; //TODO check what this button is and adjust accordingly
-	public static int lifterLowerButton = 4; //TODO check what this button is and adjust accordingly //TODO check what this button is and adjust accordingly. This will have to be on and off
-	//TODO may want to do this thru the lever thing (the thing that is below the joystick)
-	public static int grabberCloseButton = 5; //TODO check what this button is and adjust accordingly
-	public static int grabberOpenButton = 6; //TODO check what this button is and adjust accordingly
-	
-
 	
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	
-	public void init(){
-	}
 }
