@@ -42,8 +42,8 @@ public class DrivetrainSubsystem extends Subsystem {
 
 
 
-	public void move_polar(double X, double Y, double Z){
-		double[] motorspeeds = motorspeeds_polar(X,Y,Z);
+	public void move_polar(double direction, double magnitude, double rotation){
+		double[] motorspeeds = motorspeeds_polar(direction, magnitude, rotation);
 		motorFrontLeft.set(motorspeeds[RobotMap.frontLeftWheelnum]);
 		motorFrontRight.set(motorspeeds[RobotMap.frontRightWheelnum]);
 		motorBackLeft.set(motorspeeds[RobotMap.backLeftWheelnum]);
@@ -151,7 +151,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * The polar function is easier to use when controlling from code, not from joystick
 	 */
 	public void MoveForward(){
-		//		mecanumDrive.mecanumDrive_Polar(forward[0], forward[1], forward[2]);		
+		move_polar(forward[0], forward[1], forward[2]);		
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * The polar function is easier to use when controlling from code, not from joystick
 	 */
 	public void MoveBackward(){
-		//		mecanumDrive.mecanumDrive_Polar(backward[0], backward[1], backward[2]);	
+		move_polar(backward[0], backward[1], backward[2]);	
 
 	}
 
@@ -168,7 +168,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * The polar function is easier to use when controlling from code, not from joystick
 	 */
 	public void MoveRightward(){
-		//		mecanumDrive.mecanumDrive_Polar(rightward[0], rightward[1], rightward[2]);
+		move_polar(rightward[0], rightward[1], rightward[2]);
 
 	}
 
@@ -177,7 +177,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * The polar function is easier to use when controlling from code, not from joystick
 	 */
 	public void MoveLeftward(){
-		//		mecanumDrive.mecanumDrive_Polar(leftward[0], leftward[1], leftward[2]);	
+		move_polar(leftward[0], leftward[1], leftward[2]);	
 
 	}
 
@@ -186,7 +186,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * The polar function is easier to use when controlling from code, not from joystick
 	 */
 	public void RotateRight(){
-		//		mecanumDrive.mecanumDrive_Polar(rotateRight[0], rotateRight[1], rotateRight[2]);	
+		move_polar(rotateRight[0], rotateRight[1], rotateRight[2]);	
 
 	}
 
@@ -195,7 +195,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * The polar function is easier to use when controlling from code, not from joystick
 	 */
 	public void RotateLeft(){
-		//		mecanumDrive.mecanumDrive_Polar(rotateLeft[0], rotateLeft[1], rotateLeft[2]);
+		move_polar(rotateLeft[0], rotateLeft[1], rotateLeft[2]);
 
 	}
 
