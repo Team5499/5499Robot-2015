@@ -15,7 +15,7 @@ public class AltAuto extends Command {
     	requires(Robot.driveTrainSubsystem);
     }
     double startEncVal;
-    final int ENC_LIMIT = 350;
+    final int ENC_LIMIT = 350; //TODO calibrate
     // Called just before this Command runs the first time
     protected void initialize() {
     	startEncVal = Robot.driveTrainSubsystem.motorFrontRight.getEncPosition();
