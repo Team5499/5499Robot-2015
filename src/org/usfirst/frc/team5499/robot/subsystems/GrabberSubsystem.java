@@ -41,7 +41,7 @@ public class GrabberSubsystem extends Subsystem {
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//TODO check if these values need to be negative
 //		if(grabberMotor.getEncPosition() > OPEN_LIMIT){
-			grabberMotor.set(-1.0);
+			grabberMotor.set(1.0);
 		//}
 	}
 
@@ -54,7 +54,7 @@ public class GrabberSubsystem extends Subsystem {
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//TODO chek if these values need to be positive
 //		if(grabberMotor.getEncPosition() < CLOSE_LIMIT){
-			grabberMotor.set(1.0);
+			grabberMotor.set(-1.0);
 		//}
 	}
 
@@ -65,7 +65,6 @@ public class GrabberSubsystem extends Subsystem {
 	 * Or set a particular forward/reverse limit, an example of which can be found in initDefaultCommand()
 	 */
 	public void Hold(){
-		grabberMotor.enableBrakeMode(true);
 		grabberMotor.set(0.0);
 	}
 

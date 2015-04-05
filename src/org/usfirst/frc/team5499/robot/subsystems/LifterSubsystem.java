@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class LifterSubsystem extends Subsystem {
 
 	public CANTalon lifterMotor1 = new CANTalon(RobotMap.lifterMotor1id);
-	public CANTalon lifterMotor2 = new CANTalong(RobotMap.lifterMotor2id);
+	public CANTalon lifterMotor2 = new CANTalon(RobotMap.lifterMotor2id);
 
 	public final int TOP_LIMIT = 750; //FIXME calibrate
 	public final int BOTTOM_LIMIT = -750; //FiXME calibrate
@@ -27,8 +27,8 @@ public class LifterSubsystem extends Subsystem {
 	public void initDefaultCommand() {
 
 		//TODO remove after PID is implemented
-		lifterMotor1.setVoltageRampRate(17);
-		lifterMotor2.setVoltageRampRate(17);
+//		lifterMotor1.setVoltageRampRate(17);
+//		lifterMotor2.setVoltageRampRate(17);
 		//Set limits to not break the system
 		//lifterMotor1.setForwardSoftLimit(TOP_LIMIT);
 		//lifterMotor1.setReverseSoftLimit(BOTTOM_LIMIT);
@@ -44,13 +44,10 @@ public class LifterSubsystem extends Subsystem {
 	public void Raise(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 		//		if(lifterMotor1.getEncPosition() < TOP_LIMIT){
-		if(isLifterSlow){
-			lifterMotor1.set(0.3);
-		} else{
+		//CANTalon.set(0.3); holds well with no load
 			lifterMotor1.set(1);
 			lifterMotor2.set(1);
 
-		}
 		//		}
 	}
 
@@ -61,7 +58,8 @@ public class LifterSubsystem extends Subsystem {
 	public void Lower(){
 		//TODO may want to reduce speed from full speed, especially if these are CIMs, not miniCims
 //		if(lifterMotor1.getEncPosition() > BOTTOM_LIMIT){
-				lifterMotor1.set(-0.3);
+				lifterMotor1.set(-0.5);
+				lifterMotor2.set(-0.5);
 		}
 	//}
 
@@ -78,8 +76,9 @@ public class LifterSubsystem extends Subsystem {
 	 * This doesn't work. Could this be implemented with PID?
 	 */
 	public void Hold(){
-		lifterMotor1.enableBrakeMode(true);
-		lifterMotor1.set(0.0);
+//		lifterMotor1.enableBrakeMode(true);
+		lifterMotor1.set(0.2);
+		lifterMotor2.set(0.2);
 	}
 
 	/**

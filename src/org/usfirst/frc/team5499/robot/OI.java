@@ -20,13 +20,9 @@ public class OI {
 	public final int grabberOpenButton = 3;
 	public final int releaseButton = 4;
 	public final int slowLifterButton = 5;
-	public final int lowerToFloorButton = 6;
-	public final int grabBinButton = 7;
-	public final int getToBinButton = 8;
-	public final int grabToteButton = 9;
-	public final int getToTote1Button = 10;
-	public final int getToTote2Button = 11;
-	public final int getToTote3Button = 12;
+//	public final int lowerToFloorButton = 6;
+//	public final int slowDriveButton = 7;
+
 	
 	
 	

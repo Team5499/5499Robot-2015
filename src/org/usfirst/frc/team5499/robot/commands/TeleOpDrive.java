@@ -5,8 +5,6 @@ import org.usfirst.frc.team5499.robot.Robot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.hal.PDPJNI;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -24,6 +22,8 @@ public class TeleOpDrive extends Command {
 
 	Timer timer;
 	PowerDistributionPanel pdp;
+	
+	public boolean slow;
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
@@ -34,51 +34,65 @@ public class TeleOpDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		//RoboRio IP: 169.254.36.107
+		//RoboRio Web Interface address: http://roborio-5499.local/
+		
+		
 		double X = Robot.oi.stick.getX();
 		double Y = Robot.oi.stick.getY();
+		double ZRaw;
 		double Z; 
 
-		boolean isZActivated;
+//		boolean isZActivated;
 
 		//Make it so that rotation is deliberate thru making the driver press a button to be able to rotate
 
 		if(Robot.oi.stick.getRawButton(Robot.oi.rotateButton)){
-			Z = Robot.oi.stick.getTwist();
-			isZActivated = true;
+			ZRaw = Robot.oi.stick.getTwist();
+			if(ZRaw > 0){
+				Z = ZRaw*ZRaw;				
+			} else {
+				Z = -1*ZRaw*ZRaw;
+			}
+			
+//			isZActivated = true;
 		}else{
 			Z = 0;
-			isZActivated = false;
+//			isZActivated = false;
 		}
 		//Joystick X,y and Z are backwards, so all of them are multiplied by -1
 		X = -1 * X;
 		Y = -1 * Y;
+		
+		if(X > 0){
+			X = X*X;
+		}else{
+			X = -1 * X * X;
+		}
+		if(Y>0){
+			Y=Y*Y;
+		}else{
+			Y = -1 * Y * Y;
+		}
 
 		//slow mode toggle for the lifter
 		if (Robot.oi.stick.getRawButton(Robot.oi.slowLifterButton)){
 			if(timer.hasPeriodPassed(0.2)){
 				Robot.lifterSubsystem.isLifterSlow = !Robot.lifterSubsystem.isLifterSlow; 
-				System.out.println("IsLifterSlow: " + Robot.lifterSubsystem.isLifterSlow);
+//				System.out.println("IsLifterSlow: " + Robot.lifterSubsystem.isLifterSlow);
 			}
 		}
 
-		System.out.println(pdp.getCurrent(13));
-		Robot.driveTrainSubsystem.move(X, Y, Z);
+		//System.out.println(pdp.getCurrent(13));
+		Robot.driveTrainSubsystem.move(X, Y, Z, Robot.oi.stick.getThrottle());
 
 		//Lifter binding
 		if(Robot.oi.stick.getPOV() == Robot.oi.lifterRaiseDeg){
 			Robot.lifterSubsystem.Raise();
 		} else if (Robot.oi.stick.getPOV() == Robot.oi.lifterLowerDeg){
-			Robot.lifterSubsystem.Lower();
-		} else if (Robot.oi.stick.getRawButton(Robot.oi.getToBinButton)){
-			Robot.lifterSubsystem.GetToBin();
-		} else if (Robot.oi.stick.getRawButton(Robot.oi.getToTote1Button)){
-			Robot.lifterSubsystem.GetToTote1();    		
-		} else if (Robot.oi.stick.getRawButton(Robot.oi.getToTote2Button)){
-			Robot.lifterSubsystem.GetToTote2();
-		} else if (Robot.oi.stick.getRawButton(Robot.oi.getToTote3Button)){
-			Robot.lifterSubsystem.GetToTote3();    		
-		} else if (Robot.oi.stick.getRawButton(Robot.oi.lowerToFloorButton)){
-			Robot.lifterSubsystem.LowerToFloor();
+			Robot.lifterSubsystem.Lower();   		
+//		} else if (Robot.oi.stick.getRawButton(Robot.oi.lowerToFloorButton)){
+//			Robot.lifterSubsystem.LowerToFloor();
 		} else{
 			Robot.lifterSubsystem.Hold();
 		}
@@ -88,20 +102,30 @@ public class TeleOpDrive extends Command {
 			Robot.grabberSubsystem.Close();
 		} else if (Robot.oi.stick.getRawButton(Robot.oi.grabberOpenButton)){
 			Robot.grabberSubsystem.Open();
-		} else if (Robot.oi.stick.getRawButton(Robot.oi.grabBinButton)){
-			Robot.grabberSubsystem.GrabBin();
-		} else if (Robot.oi.stick.getRawButton(Robot.oi.grabToteButton)){
-			Robot.grabberSubsystem.GrabTote();
 		} else if (Robot.oi.stick.getRawButton(Robot.oi.releaseButton)){
 			Robot.grabberSubsystem.Release();
 		} else{
 			Robot.grabberSubsystem.Hold();
-		}   		
+		}
+		
+//		Robot.driveTrainSubsystem.motorBackLeft.changeControlMode(ControlMode.Position);;
+//		Robot.driveTrainSubsystem.motorBackLeft.set(-100);
 
+//		Robot.driveTrainSubsystem.motorBackLeft.enableControl();
+//		Robot.driveTrainSubsystem.motorBackRight.enableControl();
+//		Robot.driveTrainSubsystem.motorFrontLeft.enableControl();
+//		Robot.driveTrainSubsystem.motorFrontRight.enableControl();
+//		System.out.println(Robot.driveTrainSubsystem.motorBackLeft.getEncVelocity());
+//		SmartDashboard.putNumber("EncPos", Robot.driveTrainSubsystem.motorBackLeft.getEncPosition());
+//		if(Robot.oi.stick.getRawButton(Robot.oi.slowDriveButton)){
+//			
+//		}
 
-		//Inform driver about active modes
-		SmartDashboard.putBoolean("Z is activated", isZActivated); //is translation activated
-		SmartDashboard.putBoolean("Lifter on slow", Robot.lifterSubsystem.isLifterSlow); //is lifter on slow mode    	
+//		Robot.driveTrainSubsystem.motorBackLeft.getEncVelocity();
+		
+//		//Inform driver about active modes
+//		SmartDashboard.putBoolean("Z is activated", isZActivated); //is translation activated
+//		SmartDashboard.putBoolean("Lifter on slow", Robot.lifterSubsystem.isLifterSlow); //is lifter on slow mode    	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

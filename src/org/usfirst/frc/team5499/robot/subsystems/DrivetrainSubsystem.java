@@ -6,7 +6,6 @@ import org.usfirst.frc.team5499.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 //github.com/Team5499/5499Robot.gitimport edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -32,10 +31,10 @@ public class DrivetrainSubsystem extends Subsystem {
 		motorBackLeft.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		motorBackRight.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 
-		motorFrontLeft.changeControlMode(ControlMode.Speed);
-		motorBackLeft.changeControlMode(ControlMode.Speed);
-		motorFrontRight.changeControlMode(ControlMode.Speed);
-		motorBackRight.changeControlMode(ControlMode.Speed);
+	//	motorFrontLeft.changeControlMode(ControlMode.Speed);
+		//motorBackLeft.changeControlMode(ControlMode.Speed);
+		//motorFrontRight.changeControlMode(ControlMode.Speed);
+		//motorBackRight.changeControlMode(ControlMode.Speed);
 	}
 
 
@@ -59,12 +58,13 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * @param Z, desired rotation
 	 *
 	 */
-	public void move(double X, double Y, double Z){
+	public void move(double X, double Y, double Z, double gain){
 		double[] motorspeeds = motorspeeds(X, Y, Z, 0);
-		motorFrontLeft.set(motorspeeds[RobotMap.frontLeftWheelnum]);
-		motorFrontRight.set(motorspeeds[RobotMap.frontRightWheelnum]);
-		motorBackLeft.set(motorspeeds[RobotMap.backLeftWheelnum]);
-		motorBackRight.set(motorspeeds[RobotMap.backRightWheelnum]);
+		gain = (gain - 1)/-2;
+		motorFrontLeft.set(gain * motorspeeds[RobotMap.frontLeftWheelnum]);
+		motorFrontRight.set(gain * motorspeeds[RobotMap.frontRightWheelnum]);
+		motorBackLeft.set(gain * motorspeeds[RobotMap.backLeftWheelnum]);
+		motorBackRight.set(gain * motorspeeds[RobotMap.backRightWheelnum]);
 	}
 
 

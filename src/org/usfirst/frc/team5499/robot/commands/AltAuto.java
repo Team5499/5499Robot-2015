@@ -19,23 +19,26 @@ public class AltAuto extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	startEncVal = Robot.driveTrainSubsystem.motorFrontRight.getEncPosition();
+    	setTimeout(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double currEncVal = Robot.driveTrainSubsystem.motorFrontRight.getEncPosition();
-    	while(currEncVal - startEncVal < ENC_LIMIT){
-    		Robot.driveTrainSubsystem.move_polar(180, 0.8, 0);
-    	}
+//    	double currEncVal = Robot.driveTrainSubsystem.motorFrontRight.getEncPosition();
+//    	if(currEncVal - startEncVal < ENC_LIMIT){
+    		Robot.driveTrainSubsystem.move(0, 1, 0, -1);
+//    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
+       
     }
-
+    
     // Called once after isFinished returns true
     protected void end() {
+    	 Robot.driveTrainSubsystem.move(0,0,0, -1);
     }
 
     // Called when another command which requires one or more of the same

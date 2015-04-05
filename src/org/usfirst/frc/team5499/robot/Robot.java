@@ -1,23 +1,8 @@
 
 package org.usfirst.frc.team5499.robot;
 
-import org.usfirst.frc.team5499.robot.commands.GetToTote1;
-import org.usfirst.frc.team5499.robot.commands.GetToTote2;
-import org.usfirst.frc.team5499.robot.commands.GetToTote3;
-import org.usfirst.frc.team5499.robot.commands.GrabTote;
-import org.usfirst.frc.team5499.robot.commands.LowerToFloor;
-import org.usfirst.frc.team5499.robot.commands.MoveBackward;
-import org.usfirst.frc.team5499.robot.commands.MoveForward;
-import org.usfirst.frc.team5499.robot.commands.MoveLeftward;
-import org.usfirst.frc.team5499.robot.commands.MoveRightward;
-import org.usfirst.frc.team5499.robot.commands.Release;
-import org.usfirst.frc.team5499.robot.commands.RotateLeft;
-import org.usfirst.frc.team5499.robot.commands.RotateRight;
+import org.usfirst.frc.team5499.robot.commands.AltAuto;
 import org.usfirst.frc.team5499.robot.commands.TeleOpDrive;
-import org.usfirst.frc.team5499.robot.commands.TestPID;
-import org.usfirst.frc.team5499.robot.commands.TurnAroundLeft;
-import org.usfirst.frc.team5499.robot.commands.TurnAroundRight;
-import org.usfirst.frc.team5499.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.GrabberSubsystem;
 import org.usfirst.frc.team5499.robot.subsystems.LifterSubsystem;
@@ -62,7 +47,7 @@ public class Robot extends IterativeRobot {
 	public static Command turnAroundRight;
 	public static Command lowerToFloor;
 	
-	public static CameraSubsystem cameraSubsystem;
+//	public static CameraSubsystem cameraSubsystem;
 	public static DrivetrainSubsystem driveTrainSubsystem;
 	public static GrabberSubsystem grabberSubsystem;
 	public static LifterSubsystem lifterSubsystem;
@@ -76,33 +61,33 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		// instantiate the command used for the autonomous period
-		cameraSubsystem = new CameraSubsystem();
+//		cameraSubsystem = new CameraSubsystem();
 		driveTrainSubsystem = new DrivetrainSubsystem();
 		grabberSubsystem = new GrabberSubsystem();
 		pdp = new PowerDistributionPanel();
 		lifterSubsystem = new LifterSubsystem();
 
 		//Auto Commands
-		moveForward = new MoveForward();
-		moveBackward = new MoveBackward();
-		moveRightward = new MoveRightward();
-		moveLeftward = new MoveLeftward();
-		rotateRight = new RotateRight();
-		rotateLeft = new RotateLeft();
-		
-		getToTote1 = new GetToTote1();
-		getToTote2 = new GetToTote2();
-		getToTote3 = new GetToTote3();
-		
-		grabTote = new GrabTote();
-		
-		release = new Release();
-		turnAroundLeft = new TurnAroundLeft();
-		turnAroundRight = new TurnAroundRight();
-		lowerToFloor = new LowerToFloor();
+//		moveForward = new MoveForward();
+//		moveBackward = new MoveBackward();
+//		moveRightward = new MoveRightward();
+//		moveLeftward = new MoveLeftward();
+//		rotateRight = new RotateRight();
+//		rotateLeft = new RotateLeft();
+//		
+//		getToTote1 = new GetToTote1();
+//		getToTote2 = new GetToTote2();
+//		getToTote3 = new GetToTote3();
+//		
+//		grabTote = new GrabTote();
+//		
+//		release = new Release();
+//		turnAroundLeft = new TurnAroundLeft();
+//		turnAroundRight = new TurnAroundRight();
+//		lowerToFloor = new LowerToFloor();
 		
 		//Commands
-		autonomousCommand = new TestPID();
+		autonomousCommand = new AltAuto();
 		teleopCommand = new TeleOpDrive();
 
 		//The Talons are on break mode, which is ideal for our purpose.
@@ -114,7 +99,8 @@ public class Robot extends IterativeRobot {
 		Robot.driveTrainSubsystem.motorFrontRight.setCloseLoopRampRate(17);
 		Robot.driveTrainSubsystem.motorBackLeft.setCloseLoopRampRate(17);
 		Robot.driveTrainSubsystem.motorBackRight.setCloseLoopRampRate(17);
-		Robot.lifterSubsystem.lifterMotor.setCloseLoopRampRate(17);
+		Robot.lifterSubsystem.lifterMotor1.setCloseLoopRampRate(17);
+		Robot.lifterSubsystem.lifterMotor2.setCloseLoopRampRate(17);
 		Robot.grabberSubsystem.grabberMotor.setCloseLoopRampRate(17);
 		
 		Robot.driveTrainSubsystem.motorFrontLeft.reverseOutput(false);
