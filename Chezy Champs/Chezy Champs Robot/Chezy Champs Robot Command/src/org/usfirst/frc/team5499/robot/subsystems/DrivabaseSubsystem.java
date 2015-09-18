@@ -18,6 +18,11 @@ public class DrivabaseSubsystem extends Subsystem{
 	private final CANTalon LEFT_MOTOR_F = new CANTalon(RobotMap.LEFT_MOTOR_F_IND);
 	private final CANTalon LEFT_MOTOR_B = new CANTalon(RobotMap.LEFT_MOTOR_B_IND);
 	
+	private final int LEFT_STICK_IND = 0;
+	private final int RIGHT_STICK_IND = 1;
+	
+	private double[] stickVals = getThreshSticks();
+	
 	private Timer timer = new Timer();
 	
 	//private I2C gyroChannel = new I2C(Port.kOnboard, 110101);
@@ -32,19 +37,12 @@ public class DrivabaseSubsystem extends Subsystem{
 	
 	private double Kp = 0.1;
 	private double Ki = 0.001;
-	private double Kd = 0.0;
 	
+	
+	//TODO do we need specify these for each side?
 	private double p;
 	private double i;
-	private double d;	
-	private double f = 0.0;
-	private int izone = 0;
-	private double closeLoopRampRate = 27;
-	private int profile = 1;
-	
-	private double xValTarget = 0;
-	private double yValTarget = 0;
-	//private double zValTarget = 0;
+	private double rampRate = 27;
 	
 	/*private PIDController pidR_F = new PIDController(Kp, Ki, Kd, accel, RIGHT_MOTOR_F);
 	private PIDController pidR_B = new PIDController(Kp, Ki, Kd, gyro, RIGHT_MOTOR_B);
@@ -61,45 +59,46 @@ public class DrivabaseSubsystem extends Subsystem{
 		pidR_B.enable();
 		pidL_F.enable();
 		pidL_B.enable();*/
-	}
-	public void updatePIDVals(){
-		boolean isChanged = false;
-		
-		double xVal = accel.getX();
-		double yVal = accel.getY();
-		//double zVal = accel.getZ();
-		
-		double xError = xValTarget - xVal;
-		double yError = yValTarget - yVal;
-		//double zError = zValTarget - zVal;
-		
-		if(Math.abs(xError) > 0){
-			//p = error * p;			
-		} else if(Math.abs(yError) > 0){
-			
-		} /*else if(Math.abs(zError) > 0){
-			
-		}*/
-		
-		if(isChanged)
-			updatePID();
-		
+		RIGHT_MOTOR_F.setP(p);
+		RIGHT_MOTOR_F.setI(i);
+		RIGHT_MOTOR_F.setCloseLoopRampRate(rampRate);
+		RIGHT_MOTOR_B.setP(p);
+		RIGHT_MOTOR_B.setI(i);
+		RIGHT_MOTOR_B.setCloseLoopRampRate(rampRate);
+		LEFT_MOTOR_F.setP(p);
+		LEFT_MOTOR_F.setI(i);
+		LEFT_MOTOR_F.setCloseLoopRampRate(rampRate);
+		LEFT_MOTOR_B.setP(p);
+		LEFT_MOTOR_B.setI(i);
+		LEFT_MOTOR_B.setCloseLoopRampRate(rampRate);
 		
 	}
+	
 
+	/**
+	 * Sets the drivebase motors to move to values that the thumbsticks on the XBOX controller provide
+	 */
 	public void move(){
-		RIGHT_MOTOR_F.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.RIGHT_STICK_Y));
-		RIGHT_MOTOR_B.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.RIGHT_STICK_Y));
 		
-		LEFT_MOTOR_F.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.LEFT_STICK_Y));
-		LEFT_MOTOR_B.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.LEFT_STICK_Y));
+		updatePIDVals(stickVals[RIGHT_STICK_IND],
+				stickVals[LEFT_STICK_IND]);
+		
+		
+		RIGHT_MOTOR_F.set(-stickVals[RIGHT_STICK_IND]);
+		RIGHT_MOTOR_B.set(-stickVals[RIGHT_STICK_IND]);
+		
+		LEFT_MOTOR_F.set(-stickVals[LEFT_STICK_IND]);
+		LEFT_MOTOR_B.set(-stickVals[LEFT_STICK_IND]);
 	}
 	
 	/**
 	 * 
-	 * @param time time for the robot to move in seconds
-	 * @param degrees direction of the move in degrees with forward being 0, right being 90
-	 * @param speed speed with which to move 0 - 100
+	 * @param time 
+	 * 			time for the robot to move in seconds
+	 * @param degrees
+	 * 			direction of the move in degrees with forward being 0, right being 90
+	 * @param speed
+	 * 			speed with which to move 0 - 100
 	 */
 	public void timedMove(int time, int angle, int speed){
 		timer.start();
@@ -117,14 +116,59 @@ public class DrivabaseSubsystem extends Subsystem{
 		}
 		
 	}
+
+	/**
+	 * Assumes perfect precision in the joystick
+	 * TODO add thresholds for activation by the 
+	 * @param rightTarget
+	 * 			The target values for the right side of the drivebase
+	 * @param leftTarget
+	 * 			The target values for the left side of the drivebase
+	 */
+	private void updatePIDVals(double rightTarget, double leftTarget){
+		boolean isChanged = false;
+		//TODO check if actually negative on the left
+		double xVal = accel.getX()/4; //make out of one (max is 4)
+		double dirAvg = (-rightTarget + leftTarget)/2;
+		double error = dirAvg - xVal;
 	
-	private void updatePID(){
-		RIGHT_MOTOR_F.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
-		RIGHT_MOTOR_B.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
-		LEFT_MOTOR_F.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
-		LEFT_MOTOR_B.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
+		if(error > 0.2){ //TODO calibrate error threshold
+			//http://teamducttape.com/2008/11/gyro-vs-accelerometer-and-how-to-use-pid-control/
+			p = error * Kp;
+			i = error + i * Ki;
+			isChanged = true;
+		}
+		if(isChanged){
+			RIGHT_MOTOR_F.setP(p);
+			RIGHT_MOTOR_F.setI(i);
+			RIGHT_MOTOR_B.setP(p);
+			RIGHT_MOTOR_B.setI(i);
+			LEFT_MOTOR_F.setP(p);
+			LEFT_MOTOR_F.setI(i);
+			LEFT_MOTOR_B.setP(p);
+			LEFT_MOTOR_B.setI(i);
+		}
 	}
 	
-	private void setAccelTargets(int xAxis, int yAxis){
+	/**
+	 * Puts a threshold of 0.2 on the thumbsticks on the controller.
+	 * Below that number, the values are 0.
+	 * @return
+	 * 		Thresholded stick values. Index 0: left, Index 1: right.
+	 */
+	private double[] getThreshSticks(){
+		
+		double[] stickVals = new double[2];
+		if(Robot.oi.CONTROLLER.getRawAxis(Robot.oi.LEFT_STICK_Y) < 0.2)
+			stickVals[LEFT_STICK_IND] = 0;
+		else 
+			stickVals[LEFT_STICK_IND] = Robot.oi.CONTROLLER.getRawAxis(Robot.oi.LEFT_STICK_Y);
+		
+		if(Robot.oi.CONTROLLER.getRawAxis(Robot.oi.RIGHT_STICK_Y) < 0.2)
+			stickVals[RIGHT_STICK_IND] = 0;
+		else 
+			stickVals[RIGHT_STICK_IND] = Robot.oi.CONTROLLER.getRawAxis(Robot.oi.RIGHT_STICK_Y);
+		
+		return stickVals;
 	}
 }
