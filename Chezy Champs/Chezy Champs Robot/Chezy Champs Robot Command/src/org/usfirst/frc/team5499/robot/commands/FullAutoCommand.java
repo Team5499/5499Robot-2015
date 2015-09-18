@@ -23,7 +23,7 @@ public class FullAutoCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivebaseSubsystem.timedMove(50, 0, 70);
+    	//Robot.drivebaseSubsystem.timedMove(50, 0, 70);
     	Robot.grabberSubsystemConveyor.startStopConveyor(true, -1);
     	Robot.elevatorSubsystem.moveSetAmt(5, 30);
     	Robot.grabberSubsystemConveyor.startStopConveyor(true, 1);

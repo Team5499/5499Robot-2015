@@ -37,12 +37,13 @@ public class OI {
 	public final Joystick CONTROLLER = new Joystick(1);
 	
 	//AXES
-	public final int LEFT_STICK_X = 1;
-	public final int LEFT_STICK_Y = 2;
+	//public final int LEFT_STICK_X = 1;
+	public final int LEFT_STICK_Y = 1;
 	
-	public final int TRIGGERS = 3;
+	public final int RIGHT_TRIGGER = 3;
+	public final int LEFT_TRIGGER = 2;
 	
-	public final int RIGHT_STICK_X = 4;
+	//public final int RIGHT_STICK_X = 4;
 	public final int RIGHT_STICK_Y = 5;
 	
 	public final int D_PAD = 6;

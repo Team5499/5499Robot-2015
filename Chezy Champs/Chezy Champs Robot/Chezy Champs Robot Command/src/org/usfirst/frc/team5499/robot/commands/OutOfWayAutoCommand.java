@@ -17,7 +17,7 @@ public class OutOfWayAutoCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivebaseSubsystem.timedMove(3, 0, 60);
+    	//Robot.drivebaseSubsystem.timedMove(3, 0, 60);
     }
 
     // Called repeatedly when this Command is scheduled to run

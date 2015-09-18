@@ -18,12 +18,12 @@ public class DrivabaseSubsystem extends Subsystem{
 	private final CANTalon LEFT_MOTOR_F = new CANTalon(RobotMap.LEFT_MOTOR_F_IND);
 	private final CANTalon LEFT_MOTOR_B = new CANTalon(RobotMap.LEFT_MOTOR_B_IND);
 	
-	private final int LEFT_STICK_IND = 0;
+	/*private final int LEFT_STICK_IND = 0;
 	private final int RIGHT_STICK_IND = 1;
 	
 	private double[] stickVals = getThreshSticks();
 	
-	private Timer timer = new Timer();
+	private Timer timer = new Timer();*/
 	
 	//private I2C gyroChannel = new I2C(Port.kOnboard, 110101);
 	
@@ -31,18 +31,18 @@ public class DrivabaseSubsystem extends Subsystem{
 	
 	//Implement correction based on the accelerometer for now since implementation is
 	//easier. Try implementing gyro afterwards.
-	Accelerometer accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);
+	/*Accelerometer accel = new BuiltInAccelerometer(Accelerometer.Range.k4G);*/
 	
 	//private final double KP = 0.03; //proportional gain
 	
-	private double Kp = 0.1;
+	/*private double Kp = 0.1;
 	private double Ki = 0.001;
 	
 	
 	//TODO do we need specify these for each side?
 	private double p;
 	private double i;
-	private double rampRate = 27;
+	private double rampRate = 27;*/
 	
 	/*private PIDController pidR_F = new PIDController(Kp, Ki, Kd, accel, RIGHT_MOTOR_F);
 	private PIDController pidR_B = new PIDController(Kp, Ki, Kd, gyro, RIGHT_MOTOR_B);
@@ -59,7 +59,7 @@ public class DrivabaseSubsystem extends Subsystem{
 		pidR_B.enable();
 		pidL_F.enable();
 		pidL_B.enable();*/
-		RIGHT_MOTOR_F.setP(p);
+		/*RIGHT_MOTOR_F.setP(p);
 		RIGHT_MOTOR_F.setI(i);
 		RIGHT_MOTOR_F.setCloseLoopRampRate(rampRate);
 		RIGHT_MOTOR_B.setP(p);
@@ -70,7 +70,7 @@ public class DrivabaseSubsystem extends Subsystem{
 		LEFT_MOTOR_F.setCloseLoopRampRate(rampRate);
 		LEFT_MOTOR_B.setP(p);
 		LEFT_MOTOR_B.setI(i);
-		LEFT_MOTOR_B.setCloseLoopRampRate(rampRate);
+		LEFT_MOTOR_B.setCloseLoopRampRate(rampRate);*/
 		
 	}
 	
@@ -80,15 +80,22 @@ public class DrivabaseSubsystem extends Subsystem{
 	 */
 	public void move(){
 		
-		updatePIDVals(stickVals[RIGHT_STICK_IND],
-				stickVals[LEFT_STICK_IND]);
+		/*updatePIDVals(stickVals[RIGHT_STICK_IND],
+				stickVals[LEFT_STICK_IND]);*/
 		
 		
-		RIGHT_MOTOR_F.set(-stickVals[RIGHT_STICK_IND]);
+		RIGHT_MOTOR_F.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.RIGHT_STICK_Y));
+		RIGHT_MOTOR_B.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.RIGHT_STICK_Y));
+		
+		LEFT_MOTOR_F.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.LEFT_STICK_Y));
+		LEFT_MOTOR_B.set(-Robot.oi.CONTROLLER.getRawAxis(Robot.oi.LEFT_STICK_Y));
+		
+		/*RIGHT_MOTOR_F.set(-stickVals[RIGHT_STICK_IND]);
 		RIGHT_MOTOR_B.set(-stickVals[RIGHT_STICK_IND]);
 		
 		LEFT_MOTOR_F.set(-stickVals[LEFT_STICK_IND]);
 		LEFT_MOTOR_B.set(-stickVals[LEFT_STICK_IND]);
+	}*/
 	}
 	
 	/**
@@ -99,7 +106,7 @@ public class DrivabaseSubsystem extends Subsystem{
 	 * 			direction of the move in degrees with forward being 0, right being 90
 	 * @param speed
 	 * 			speed with which to move 0 - 100
-	 */
+	 *//*
 	public void timedMove(int time, int angle, int speed){
 		timer.start();
 		
@@ -116,7 +123,7 @@ public class DrivabaseSubsystem extends Subsystem{
 		}
 		
 	}
-
+*/
 	/**
 	 * Assumes perfect precision in the joystick
 	 * TODO add thresholds for activation by the 
@@ -124,7 +131,7 @@ public class DrivabaseSubsystem extends Subsystem{
 	 * 			The target values for the right side of the drivebase
 	 * @param leftTarget
 	 * 			The target values for the left side of the drivebase
-	 */
+	 *//*
 	private void updatePIDVals(double rightTarget, double leftTarget){
 		boolean isChanged = false;
 		//TODO check if actually negative on the left
@@ -148,7 +155,7 @@ public class DrivabaseSubsystem extends Subsystem{
 			LEFT_MOTOR_B.setP(p);
 			LEFT_MOTOR_B.setI(i);
 		}
-	}
+	}*/
 	
 	/**
 	 * Puts a threshold of 0.2 on the thumbsticks on the controller.
@@ -156,7 +163,7 @@ public class DrivabaseSubsystem extends Subsystem{
 	 * @return
 	 * 		Thresholded stick values. Index 0: left, Index 1: right.
 	 */
-	private double[] getThreshSticks(){
+	/*private double[] getThreshSticks(){
 		
 		double[] stickVals = new double[2];
 		if(Robot.oi.CONTROLLER.getRawAxis(Robot.oi.LEFT_STICK_Y) < 0.2)
@@ -170,5 +177,5 @@ public class DrivabaseSubsystem extends Subsystem{
 			stickVals[RIGHT_STICK_IND] = Robot.oi.CONTROLLER.getRawAxis(Robot.oi.RIGHT_STICK_Y);
 		
 		return stickVals;
-	}
+	}*/
 }
