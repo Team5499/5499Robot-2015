@@ -5,9 +5,9 @@ package org.usfirst.frc.team5499.robot;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 
 /**
@@ -61,7 +61,9 @@ public class Robot extends SampleRobot {
   	private final double Ki = 0.001;
   	private final double RAMP_RATE = 12;
   	private Accelerometer accel = new BuiltInAccelerometer(Accelerometer.Range.k2G);
-  	private I2C gyro = new I2C(Port.kOnboard, 0x6B);
+  	private I2C_Gyro gyro = new I2C_Gyro(I2C.Port.kOnboard, 0x6B);
+  	
+  	private Timer timer = new Timer();
 
     public Robot() {
         stick = new Joystick(0);
@@ -81,21 +83,29 @@ public class Robot extends SampleRobot {
     }
 
     /**
-     * Drive left & right motors for 2 seconds then stop
+     * Simple Auto
      */
     public void autonomous() {
+    	timer.start();
+    	if(timer.get() < 3){
+    		leftMotorF.set(-0.8);
+        	leftMotorB.set(-0.8);
+        	rightMotorF.set(0.8);
+        	rightMotorB.set(0.8);
+    	}
     }
 
     /**
-     * Runs the motors with arcade steering. //Teleop
+     * Teleop
      */
     public void operatorControl() {
         while (isOperatorControl() && isEnabled()) {
-        	
+        	//drivetrain
         	leftMotorF.set(-1 * stick.getRawAxis(LEFT_STICK_Y));
         	leftMotorB.set(-1 * stick.getRawAxis(LEFT_STICK_Y));
         	rightMotorF.set(stick.getRawAxis(RIGHT_STICK_Y));
         	rightMotorB.set(stick.getRawAxis(RIGHT_STICK_Y));
+        	//elevator
         	if(stick.getRawAxis(LEFT_TRIGGER) > 0.1){
         		elevatorMotorF.set(-stick.getRawAxis(LEFT_TRIGGER));
         		elevatorMotorB.set(-stick.getRawAxis(LEFT_TRIGGER));
@@ -107,7 +117,7 @@ public class Robot extends SampleRobot {
         		elevatorMotorF.set(0.0);
         		elevatorMotorB.set(0.0);
         	}
-        		
+        	//conveyor
         	if(stick.getRawButton(RIGHT_BUMPER)){
         		conveyorMotorL.set(1);
         		conveyorMotorR.set(1);
@@ -139,13 +149,15 @@ public class Robot extends SampleRobot {
 		double p = 1;
 		double i = 1;
 		double error = 1;
-		if(useGyro){
+		if(!useGyro){
 			//TODO check if actually negative on the left
 			double xVal = accel.getX()/1.20577; //1.20577G is absolute max accel of robot (w/out load) 
 			double dirAvg = (-leftTarget + rightTarget)/2;
 			error = dirAvg - xVal;
 		} else{
-			
+			double zVal = gyro.getZ(); //1.20577G is absolute max accel of robot (w/out load) 
+			double dirAvg = (-leftTarget + rightTarget)/2;
+			error = dirAvg - zVal;
 		}
 		//TODO RIO IS NOT IN THE CENTER
 		
