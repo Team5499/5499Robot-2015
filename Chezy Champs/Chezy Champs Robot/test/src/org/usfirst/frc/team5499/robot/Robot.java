@@ -92,23 +92,23 @@ public class Robot extends SampleRobot {
     public void operatorControl() {
         while (isOperatorControl() && isEnabled()) {
         	
-        	leftMotorF.set(-1 * stick.getRawAxis(1));
-        	leftMotorB.set(-1 * stick.getRawAxis(1));
-        	rightMotorF.set(stick.getRawAxis(5));
-        	rightMotorB.set(stick.getRawAxis(5));
-        	if(stick.getRawAxis(2) > 0.1){
-        		elevatorMotorF.set(-stick.getRawAxis(2));
-        		elevatorMotorB.set(-stick.getRawAxis(2));
+        	leftMotorF.set(-1 * stick.getRawAxis(LEFT_STICK_Y));
+        	leftMotorB.set(-1 * stick.getRawAxis(LEFT_STICK_Y));
+        	rightMotorF.set(stick.getRawAxis(RIGHT_STICK_Y));
+        	rightMotorB.set(stick.getRawAxis(RIGHT_STICK_Y));
+        	if(stick.getRawAxis(LEFT_TRIGGER) > 0.1){
+        		elevatorMotorF.set(-stick.getRawAxis(LEFT_TRIGGER));
+        		elevatorMotorB.set(-stick.getRawAxis(LEFT_TRIGGER));
         	}
-        	else if(stick.getRawAxis(3) > 0.1){
-        		elevatorMotorF.set(stick.getRawAxis(3));
-        		elevatorMotorB.set(stick.getRawAxis(3));
+        	else if(stick.getRawAxis(RIGHT_TRIGGER) > 0.1){
+        		elevatorMotorF.set(stick.getRawAxis(RIGHT_TRIGGER));
+        		elevatorMotorB.set(stick.getRawAxis(RIGHT_TRIGGER));
         	} else{
         		elevatorMotorF.set(0.0);
         		elevatorMotorB.set(0.0);
         	}
         		
-        	if(stick.getRawButton(3)){
+        	if(stick.getRawButton(RIGHT_BUMPER)){
         		conveyorMotorL.set(1);
         		conveyorMotorR.set(1);
         	} else{
@@ -147,7 +147,6 @@ public class Robot extends SampleRobot {
 		} else{
 			
 		}
-	
 		//TODO RIO IS NOT IN THE CENTER
 		
 		if(Math.abs(error) > 0.2){ //TODO calibrate error threshold
