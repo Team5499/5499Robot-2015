@@ -1,0 +1,46 @@
+package org.usfirst.frc.team5499.robot;
+
+import edu.wpi.first.wpilibj.I2C;
+
+
+public class I2C_Gyro {
+	private I2C.Port port;
+	private int address;
+	
+	/**
+	 * Create a new gyro for use with the I2C port on the roboRio
+	 * @param port
+	 * 			Which I2C port is the gyro plugged into. If none specified, kOnBoard with be used
+	 * @param address
+	 * 			The I2C address of your gyro. If not specified, 0x6B will be used
+	 */
+	public I2C_Gyro(I2C.Port port, int address){
+		this.port = port;
+		this.address = address;
+	}
+	/**
+	 * Create a new gyro for use with the I2C port on the roboRio
+	 * @param port
+	 * 			Which I2C port is the gyro plugged into. If none specified, kOnBoard with be used
+	 */
+	public I2C_Gyro(I2C.Port port){
+		this.port = port;
+		this.address = 0x6B;
+	}
+	/**
+	 * Create a new gyro for use with the I2C port on the roboRio
+	 * @param address
+	 * 			The I2C address of your gyro. If not specified, 0x6B will be used
+	 */
+	public I2C_Gyro(int address){
+		this.port = I2C.Port.kOnboard;
+		this.address = address;
+	}
+	/**
+	 * Create a new gyro for use with the I2C port on the roboRio
+	 */
+	public I2C_Gyro(){
+		this.port = I2C.Port.kOnboard;
+		this.address = 0x6B;
+	}
+}

@@ -1,0 +1,31 @@
+package org.usfirst.frc.team5499.robot;
+
+import edu.wpi.first.wpilibj.I2C;
+
+/**
+ * Custom gyro class for use with I2C gyros on the roboRio
+ * 
+ *
+ */
+public class I2C_Gyro {
+	private I2C.Port port;
+	private int address;
+	
+	/**
+	 * Create a new gyro fo
+	 * @param port
+	 * 			Which I2C port is the gyro plugged into
+	 * @param address
+	 * 			The I2C address of your gyro. If not specified, 0x6B will be used
+	 */
+	public Gyro(I2C.Port port, int address){
+		this.port = port;
+		this.address = address;
+	}
+	
+	
+	public Gyro(I2C.Port port){
+		this.port = port;
+		this.address = 0x6B;
+	}
+}
