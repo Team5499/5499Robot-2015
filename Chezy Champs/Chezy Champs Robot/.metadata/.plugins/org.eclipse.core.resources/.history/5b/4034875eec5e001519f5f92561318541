@@ -12,7 +12,7 @@ public class I2C_Gyro {
 	private I2C gyro = new I2C(port, address);
 	
 	/**
-	 * Create a new gyro to use with the I2C port
+	 * 
 	 * @param port
 	 * 			The port on the roboRio to which the gyro is connected 
 	 * @param address
@@ -107,7 +107,7 @@ public class I2C_Gyro {
 	}
 	
 	/**
-	 * Set the sensitivity of the gyro
+	 * 
 	 * @param range
 	 * 			The desired sensitivity of the gyro. Use the Ranges Enum in the I2C_Gyro class
 	 */

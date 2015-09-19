@@ -12,7 +12,7 @@ public class I2C_Gyro {
 	private I2C gyro = new I2C(port, address);
 	
 	/**
-	 * Create a new gyro to use with the I2C port
+	 * 
 	 * @param port
 	 * 			The port on the roboRio to which the gyro is connected 
 	 * @param address
@@ -23,10 +23,6 @@ public class I2C_Gyro {
 		this.port = port; //kOnBoard
 	}
 	
-	/**
-	 * Addresses of the registers on the gyro
-	 *
-	 */
 	private enum RegisterAddresses{
 		L3GD20_REGISTER_WHO_AM_I            (0x0F),   // 11010100   r 
 		L3GD20_REGISTER_CTRL_REG1           (0x20),   // 00000111   rw 
@@ -53,7 +49,7 @@ public class I2C_Gyro {
 		L3GD20_REGISTER_TSH_YL              (0x35),   // 00000000   rw 
 		L3GD20_REGISTER_TSH_ZH              (0x36),   // 00000000   rw 
 		L3GD20_REGISTER_TSH_ZL              (0x37),   // 00000000   rw 
-		L3GD20_REGISTER_INT1_DURATION       (0x38);   // 00000000   rw 
+		L3GD20_REGISTER_INT1_DURATION       (0x38);    // 00000000   rw 
 		
 		private final int address;
 		private RegisterAddresses(int address){
@@ -89,11 +85,6 @@ public class I2C_Gyro {
 		gyro.write(RegisterAddresses.L3GD20_REGISTER_CTRL_REG1.getValue(), 0x0f);
 	}
 	
-	/**
-	 * TODO is this in degs?
-	 * @return
-	 * 		The z reading of the gyro, in an int, compensated for the range
-	 */
 	public int getZ(){
 		gyro.write(RegisterAddresses.L3GD20_REGISTER_OUT_Z_L.getValue(), 0x80);
 		gyro.read(RegisterAddresses.L3GD20_REGISTER_OUT_Z_L.getValue(), 2, dataBuffer);
@@ -106,11 +97,6 @@ public class I2C_Gyro {
 		return zCompens;
 	}
 	
-	/**
-	 * Set the sensitivity of the gyro
-	 * @param range
-	 * 			The desired sensitivity of the gyro. Use the Ranges Enum in the I2C_Gyro class
-	 */
 	public void setRange(Ranges range){
 		gyro.write(RegisterAddresses.L3GD20_REGISTER_CTRL_REG4.getValue(), range.getValue());
 		currRange = range;
