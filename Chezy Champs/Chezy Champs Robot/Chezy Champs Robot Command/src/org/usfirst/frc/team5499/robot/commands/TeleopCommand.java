@@ -3,18 +3,21 @@ package org.usfirst.frc.team5499.robot.commands;
 
 import org.usfirst.frc.team5499.robot.Robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class TeleopCommand extends Command {
-
+	
     public TeleopCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivebaseSubsystem);
         requires(Robot.elevatorSubsystem);
         requires(Robot.grabberSubsystemConveyor);
+
     }
 
     // Called just before this Command runs the first time
@@ -23,6 +26,12 @@ public class TeleopCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	/*//Pneumatics
+    	comp.setClosedLoopControl(true);
+    	if(Robot.stick)
+    	sol.set(DoubleSolenoid.Value.kReverse);
+    	//Pneumatics
+*/    	
     	Robot.drivebaseSubsystem.move();
     	Robot.elevatorSubsystem.move();
     	Robot.grabberSubsystemConveyor.startStopConveyor(Robot.oi.CONTROLLER.getRawButton(Robot.oi.A), 1);

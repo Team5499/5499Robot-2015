@@ -4,6 +4,8 @@ package org.usfirst.frc.team5499.robot;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
@@ -39,6 +41,7 @@ public class Robot extends SampleRobot {
     private final CANTalon conveyorMotorR;
     //STICK CONTROLL
     private Joystick stick;
+
     //axes
   	private final int LEFT_STICK_Y = 1;
   	private final int RIGHT_STICK_Y = 5;
@@ -76,6 +79,7 @@ public class Robot extends SampleRobot {
         conveyorMotorL = new CANTalon(2);
         conveyorMotorR = new CANTalon(4);
         
+
         leftMotorF.setCloseLoopRampRate(RAMP_RATE);
         leftMotorB.setCloseLoopRampRate(RAMP_RATE);
         rightMotorF.setCloseLoopRampRate(RAMP_RATE);
@@ -124,7 +128,9 @@ public class Robot extends SampleRobot {
         	} else{
         		conveyorMotorL.set(0.0);
         		conveyorMotorR.set(0.0);
-        	}        	
+        	}
+        	
+        	
         }
     }
 

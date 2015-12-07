@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.TalonSRX"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Joystick"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Joystick.AxisType"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DoubleSolenoid.Value"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.PIDSource.PIDSourceParameter"/>
 <fullyQualifiedTypeName name="java.time.zone.ZoneOffsetTransitionRule.TimeDefinition"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team5499.robot.Robot"/>
@@ -19,4 +18,6 @@
 <fullyQualifiedTypeName name="org.usfirst.frc.team5499.robot.I2C_Gyro.RegisterAddresses"/>
 <fullyQualifiedTypeName name="java.nio.ByteOrder"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Timer"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DoubleSolenoid"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DoubleSolenoid.Value"/>
 </qualifiedTypeNameHistroy>
